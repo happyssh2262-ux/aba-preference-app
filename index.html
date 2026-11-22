@@ -340,7 +340,7 @@
                     3. 시행 기반 평가
                 </div>
                 <div class="py-2.5 px-2 rounded-xl bg-purple-50/60 border border-purple-100 text-xs sm:text-sm font-extrabold text-purple-800">
-                    4. 종합 분석 리포트
+                    4. 종합 결과 리포트
                 </div>
             </div>
 
@@ -548,7 +548,7 @@
                 </div>
                 <button onclick="selectEvaluationMethod('tab-report')" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 shadow-xs transition">
                     <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                    <span>종합 분석 리포트 바로보기</span>
+                    <span>종합 결과 리포트 바로보기</span>
                 </button>
             </div>
 
@@ -609,250 +609,220 @@
                 </span>
                 <button onclick="selectEvaluationMethod('tab-report')" id="btn-quick-report" class="px-3.5 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition">
                     <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                    <span>종합 분석 리포트 보기</span>
+                    <span>종합 결과 리포트 보기</span>
                 </button>
             </div>
         </nav>
 
         <!-- ===================================================================== -->
-        <!-- 탭 1: 질문하기 (질문하기 + 중도 장애인을 위한 평가 RAISD 통합)           -->
+        <!-- 탭 1: 질문하기 & 중도 장애인을 위한 강화제 평가 (RAISD)                   -->
         <!-- ===================================================================== -->
         <section id="tab-question" class="tab-content hidden space-y-5">
-            <!-- 질문하기 유형 전환 서브 바 -->
-            <div class="bg-white rounded-2xl p-3 shadow-xs border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-2 no-print">
+            <!-- 서브 모드 전환 바 -->
+            <div class="bg-white rounded-2xl p-2 shadow-xs border border-slate-200 grid grid-cols-2 gap-2 no-print">
                 <button onclick="switchQuestionSubMode('general')" id="btn-qmode-general" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-xs text-center leading-snug">
-                    <i data-lucide="users" class="w-4 h-4 shrink-0"></i>
-                    <span>질문하기<br class="sm:hidden"><span class="hidden sm:inline"> </span>(학생 · 부모 · 교사 · 의미 있는 타인)</span>
+                    <span>질문하기<span class="block sm:inline sm:ml-1 font-bold opacity-90">(학생 · 부모 · 교사 · 의미 있는 타인)</span></span>
                 </button>
                 <button onclick="switchQuestionSubMode('raisd')" id="btn-qmode-raisd" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 text-center leading-snug">
-                    <i data-lucide="clipboard-list" class="w-4 h-4 shrink-0"></i>
-                    <span>중도 장애인을 위한 강화제 평가<br class="sm:hidden"><span class="hidden sm:inline"> </span>(RAISD)</span>
+                    <span>중도 장애인을 위한 강화제 평가<span class="block sm:inline sm:ml-1 font-bold opacity-90">(RAISD)</span></span>
                 </button>
             </div>
 
-            <!-- [서브 A] 질문하기 영역 -->
+            <!-- [1-A] 질문하기 -->
             <div id="q-sub-general" class="space-y-5">
                 <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
                         <div>
-                            <h3 class="font-extrabold text-slate-800 text-base">질문하기 (간접 평가)</h3>
-                            <p class="text-xs text-slate-500 mt-0.5">학생, 부모, 교사, 의미 있는 타인에게 개방형 질문·5점 척도 평정·순위형 선택을 실시합니다.</p>
+                            <h3 class="font-extrabold text-slate-800 text-base">질문하기 (개방형 질문 · 순위매기기 · 5점 평정)</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">강화제 유형별 자극 목록을 설정하고, 선택된 응답자별 면담 결과를 기록합니다.</p>
                         </div>
-                        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
-                            <span class="text-xs font-bold text-slate-600">기준 면담일:</span>
-                            <input type="date" id="q-base-date" onchange="updateQuestionBaseDate(this.value)" class="bg-white px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-slate-500">면담 기준일:</span>
+                            <input type="date" id="q-base-date" onchange="updateQuestionBaseDate(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-extrabold text-indigo-700">
                         </div>
                     </div>
 
-                    <div class="space-y-1.5">
-                        <label class="block text-xs font-bold text-slate-600">강화제 유형 선택</label>
+                    <!-- 강화제 유형 선택 -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1.5">1. 강화제 유형 선택</label>
                         <div id="q-category-selector" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
                     </div>
 
-                    <div class="space-y-2 pt-2 border-t border-slate-100">
-                        <label class="block text-xs font-bold text-slate-600">질문 대상자 선택 (복수 선택 가능)</label>
+                    <!-- 질문 대상자 선택 -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-slate-500">2. 면담(질문) 대상자 선택 (복수 선택 가능)</label>
                         <div id="q-respondent-toggles" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
                         <div id="q-other-relation-box" class="hidden pt-1">
-                            <input type="text" id="q-other-relation-input" oninput="updateOtherRelationLabel(this.value)" placeholder="의미 있는 타인의 관계 기입 (예: 활동지원사, 조부모, 언어치료사)" class="w-full sm:w-96 px-3 py-1.5 rounded-xl border border-indigo-300 bg-indigo-50/40 text-xs font-bold">
+                            <input type="text" id="q-other-relation-input" oninput="updateOtherRelationLabel(this.value)" placeholder="의미 있는 타인의 관계 입력 (예: 활동지원사, 조부모, 형제 등)" class="w-full sm:w-80 px-3 py-1.5 rounded-xl border border-indigo-300 bg-indigo-50/40 text-xs font-bold">
                         </div>
                     </div>
 
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5 no-print">
-                        <div id="q-stimuli-list-title" class="text-xs font-extrabold text-slate-700">평가 자극 목록</div>
-                        <div class="flex gap-2">
-                            <input type="text" id="q-new-stimulus" onkeypress="if(event.key==='Enter') addQuestionStimulus()" placeholder="새 자극 추가 후 Enter" class="flex-1 px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm">
-                            <button onclick="addQuestionStimulus()" class="px-4 py-2 rounded-xl bg-slate-800 text-white text-xs sm:text-sm font-bold hover:bg-slate-900 transition">+ 추가</button>
+                    <!-- 평가 자극 목록 관리 -->
+                    <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200 space-y-2.5">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span id="q-stimuli-list-title" class="text-xs font-extrabold text-slate-700">평가 자극 목록</span>
+                            <div class="flex items-center gap-1.5">
+                                <input type="text" id="q-new-stimulus" onkeydown="if(event.key==='Enter') addQuestionStimulus()" placeholder="새 자극 추가" class="px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs font-bold bg-white">
+                                <button onclick="addQuestionStimulus()" class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-xs font-extrabold hover:bg-indigo-700">추가</button>
+                            </div>
                         </div>
-                        <div id="q-stimuli-tags" class="flex flex-wrap gap-2"></div>
+                        <div id="q-stimuli-tags" class="flex flex-wrap gap-1.5"></div>
                     </div>
                 </div>
 
-                <div id="q-respondent-cards" class="space-y-5"></div>
+                <!-- 선택된 응답자별 면담 카드 -->
+                <div id="q-respondent-cards" class="space-y-4"></div>
             </div>
 
-            <!-- [서브 B] 중도 장애인을 위한 강화제 평가 (RAISD) 영역 -->
-            <div id="q-sub-raisd" class="hidden space-y-5">
-                <div class="flex flex-wrap items-center justify-between gap-3 bg-purple-50 border border-purple-200 rounded-2xl p-4 no-print">
-                    <div class="text-xs sm:text-sm text-purple-950">
-                        <strong class="font-extrabold">중도 장애인을 위한 강화제 평가 (RAISD: Reinforcer Assessment for Individuals with Severe Disabilities)</strong> · Fisher et al.(1996) 양식을 기반으로 감각·활동 영역별 잠재적 강화제를 구조화된 면담으로 도출합니다.
+            <!-- [1-B] 중도 장애인을 위한 강화제 평가 (RAISD) -->
+            <div id="q-sub-raisd" class="hidden bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-5 print-card">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                    <div>
+                        <span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[11px] font-extrabold">구조화된 보호자·교사 면담지</span>
+                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg mt-1">중도 장애인을 위한 강화제 평가 (RAISD)</h3>
                     </div>
-                    <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-purple-700 hover:bg-purple-800 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-xs shrink-0">
+                    <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-purple-700 hover:bg-purple-800 text-white text-xs font-extrabold flex items-center gap-1.5 no-print">
                         <i data-lucide="printer" class="w-4 h-4"></i>
-                        <span>RAISD 평가 기록지 인쇄</span>
+                        <span>RAISD 기록지 인쇄</span>
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border-2 border-slate-300 space-y-6 print-card">
-                    <div class="border-b-2 border-slate-800 pb-4 text-center space-y-1">
-                        <div class="text-xs font-bold text-purple-700">ABA Special Edu Lab by 신</div>
-                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">중도 장애인을 위한 강화제 평가 (RAISD)</h2>
-                        <p class="text-xs text-slate-600">※ 본 평가는 실제 강화 효과를 검증하는 것이 아니라, 잠재적인 강화제 후보를 확인하고 선호 위계를 도출하기 위한 구조화된 평가입니다.</p>
+                <!-- 기본 인적사항 -->
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 bg-purple-50/50 p-3.5 rounded-xl border border-purple-100 text-xs">
+                    <div>
+                        <span class="block font-bold text-slate-500 mb-1">대상 학생</span>
+                        <div id="raisd-disp-name" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 font-extrabold text-slate-800">신길동</div>
                     </div>
+                    <div>
+                        <label class="block font-bold text-slate-500 mb-1">면담 일자</label>
+                        <input type="date" id="raisd-date" onchange="updateRaisdField('date', this.value)" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white font-bold">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-500 mb-1">면담자 (평가자)</label>
+                        <input type="text" id="raisd-interviewer" oninput="updateRaisdField('interviewer', this.value)" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white font-bold">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-500 mb-1">정보 제공자 (관계)</label>
+                        <input type="text" id="raisd-informant" oninput="updateRaisdField('informant', this.value)" placeholder="예: 어머니, 담임교사" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white font-bold">
+                    </div>
+                </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-300 text-xs sm:text-sm">
-                        <div>
-                            <label class="block text-[11px] font-extrabold text-slate-500 mb-1">대상 학생 이름</label>
-                            <div id="raisd-disp-name" class="font-extrabold text-slate-900 py-1">신길동</div>
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-extrabold text-slate-500 mb-1">평가 날짜</label>
-                            <input type="date" id="raisd-date" onchange="updateRaisdField('date', this.value)" class="w-full px-2.5 py-1 rounded-lg border border-slate-300 bg-white text-xs font-bold">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-extrabold text-slate-500 mb-1">면담자 (평가자)</label>
-                            <input type="text" id="raisd-interviewer" oninput="updateRaisdField('interviewer', this.value)" placeholder="예: 특수교사 신OO" class="w-full px-2.5 py-1 rounded-lg border border-slate-300 bg-white text-xs font-bold">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-extrabold text-slate-500 mb-1">보고자 (성명 / 학생과의 관계)</label>
-                            <input type="text" id="raisd-informant" oninput="updateRaisdField('informant', this.value)" placeholder="예: 어머니 / 활동지원사" class="w-full px-2.5 py-1 rounded-lg border border-slate-300 bg-white text-xs font-bold">
-                        </div>
-                    </div>
+                <!-- Ⅰ. 감각 및 활동 영역별 10개 문항 -->
+                <div class="space-y-2">
+                    <h4 class="font-extrabold text-purple-900 text-sm">Ⅰ. 감각 및 활동 영역별 선호 자극 탐색</h4>
+                    <div id="raisd-questions-list" class="divide-y divide-slate-200 border border-slate-300 rounded-xl overflow-hidden"></div>
+                </div>
 
-                    <div class="space-y-2.5">
-                        <div class="bg-slate-800 text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold">
-                            Ⅰ. 영역별 선호 자극 확인 질문 ("학생이 좋아하는 구체적인 사물이나 활동을 말씀해 주십시오.")
+                <!-- Ⅱ. 자극 제시 조건 및 환경적 고려사항 -->
+                <div class="space-y-2.5 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h4 class="font-extrabold text-purple-900 text-sm">Ⅱ. 자극 제시 조건 및 환경적 고려사항</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">1. 특별한 제시 조건이 필요한 자극</label>
+                            <textarea rows="2" id="raisd-cond-special" oninput="updateRaisdField('condSpecial', this.value)" placeholder="예: 비눗방울은 교사가 직접 불어주어야 함" class="w-full p-2 rounded-lg border border-slate-300 bg-white"></textarea>
                         </div>
-                        <div id="raisd-questions-list" class="divide-y divide-slate-200 border border-slate-300 rounded-xl overflow-hidden"></div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">2. 접근 제한·주의가 필요한 자극</label>
+                            <textarea rows="2" id="raisd-cond-limit" oninput="updateRaisdField('condLimit', this.value)" placeholder="예: 과일 젤리는 하루 3개 이하로 제한" class="w-full p-2 rounded-lg border border-slate-300 bg-white"></textarea>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">3. 후속 선호도 평가에 포함할 활동·사물</label>
+                            <textarea rows="2" id="raisd-cond-include" oninput="updateRaisdField('condInclude', this.value)" placeholder="예: 비눗방울, 동요 멜로디, 과일 젤리" class="w-full p-2 rounded-lg border border-slate-300 bg-white"></textarea>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="space-y-2.5">
-                        <div class="bg-slate-800 text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold">
-                            Ⅱ. 자극 제시 조건 및 제한 사항 확인
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-300 text-xs sm:text-sm">
-                            <div>
-                                <label class="block font-extrabold text-slate-800 mb-1">1. 특별한 제시 조건이 필요한 자극이 있습니까?</label>
-                                <p class="text-[11px] text-slate-500 mb-1.5">(예: 특정 사람이 함께 놀아주어야 함, 특정 장소·시간에만 좋아함 등)</p>
-                                <textarea id="raisd-cond-special" oninput="updateRaisdField('condSpecial', this.value)" rows="2" placeholder="특정 조건이나 상황 기입" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-xs"></textarea>
-                            </div>
-                            <div>
-                                <label class="block font-extrabold text-slate-800 mb-1">2. 포만감(쉽게 질림)이나 제공 횟수·시간 제한이 필요한 자극이 있습니까?</label>
-                                <p class="text-[11px] text-slate-500 mb-1.5">(예: 젤리는 하루 3개 이하, 영상은 1회 30초 이내 등 안전·건강상 제한)</p>
-                                <textarea id="raisd-cond-limit" oninput="updateRaisdField('condLimit', this.value)" rows="2" placeholder="제한 기준 및 주의사항 기입" class="w-full p-2.5 rounded-lg border border-slate-300 bg-white text-xs"></textarea>
-                            </div>
-                            <div class="md:col-span-2">
-                                <label class="block font-extrabold text-slate-800 mb-1">3. 선호도 평가(시행 기반 평가)에 반드시 포함하거나 제외해야 할 자극은 무엇입니까?</label>
-                                <input type="text" id="raisd-cond-include" oninput="updateRaisdField('condInclude', this.value)" placeholder="예: 비눗방울, 과일 젤리, 멜로디 장난감, 손 박수 놀이는 반드시 포함 / 유리 구슬은 제외" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs">
-                            </div>
-                        </div>
+                <!-- Ⅲ. 우선순위 선정 및 선호도 평가 진행 여부 -->
+                <div class="space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-extrabold text-purple-900 text-sm">Ⅲ. 선호 자극 우선순위 및 후속 선호도 평가 진행 여부</h4>
+                        <button onclick="addRaisdRankRow()" class="px-3 py-1.5 rounded-lg bg-purple-100 text-purple-800 hover:bg-purple-200 text-xs font-extrabold no-print">+ 순위 행 추가</button>
                     </div>
-
-                    <div class="space-y-2.5">
-                        <div class="flex flex-wrap items-center justify-between gap-2 bg-slate-800 text-white px-4 py-2.5 rounded-xl">
-                            <span class="text-xs sm:text-sm font-extrabold">Ⅲ. 도출된 선호 자극 우선순위 정리 및 선호도 평가 진행 여부</span>
-                            <button onclick="addRaisdRankRow()" class="px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white text-xs font-bold no-print">+ 순위 행 추가</button>
-                        </div>
-                        <!-- 모바일 세로 글자 깨짐 방지를 위한 반응형 리스트(모바일 카드형 + 태블릿/PC 표형) -->
-                        <div id="raisd-ranks-mobile-list" class="space-y-2.5 sm:hidden"></div>
-                        <div class="hidden sm:block overflow-x-auto">
-                            <table class="w-full text-xs sm:text-sm border-collapse border border-slate-400">
-                                <thead>
-                                    <tr class="bg-slate-100 text-slate-800 font-extrabold">
-                                        <th class="border border-slate-400 py-2 px-2 text-center w-16 whitespace-nowrap">순위</th>
-                                        <th class="border border-slate-400 py-2 px-3 text-left whitespace-nowrap">선호 자극명 (구체적 사물/활동)</th>
-                                        <th class="border border-slate-400 py-2 px-3 text-left whitespace-nowrap">강화제 유형 / 제시 조건 메모</th>
-                                        <th class="border border-slate-400 py-2 px-2 text-center w-36 whitespace-nowrap">선호도 평가 진행 여부</th>
-                                        <th class="border border-slate-400 py-2 px-1 text-center w-12 whitespace-nowrap no-print">삭제</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="raisd-ranks-tbody"></tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <!-- 모바일 카드형 레이아웃 -->
+                    <div id="raisd-ranks-mobile-list" class="sm:hidden space-y-2.5"></div>
+                    <!-- PC / 인쇄용 가로 표 -->
+                    <table class="hidden sm:table w-full border-collapse border border-slate-400 text-xs">
+                        <thead class="bg-purple-50 text-purple-950 font-extrabold">
+                            <tr>
+                                <th class="border border-slate-400 py-2 px-2 w-16">순위</th>
+                                <th class="border border-slate-400 py-2 px-2">선호 자극명</th>
+                                <th class="border border-slate-400 py-2 px-2">강화제 유형 / 제시 조건 메모</th>
+                                <th class="border border-slate-400 py-2 px-2 w-28">선호도 평가 진행</th>
+                                <th class="border border-slate-400 py-2 px-1 w-14 no-print">관리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="raisd-ranks-tbody"></tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
         <!-- ===================================================================== -->
-        <!-- 탭 2: 관찰하기 (통합 자유 작동 관찰)                                   -->
+        <!-- 탭 2: 관찰하기 (자유 작동 관찰 스톱워치)                                 -->
         <!-- ===================================================================== -->
         <section id="tab-observe" class="tab-content hidden space-y-5">
             <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
                     <div>
-                        <h3 class="font-extrabold text-slate-800 text-base">관찰하기 (자유 작동 관찰)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">자극을 제거하지 않고 학생이 자발적으로 몰두하거나 가지고 노는 지속시간을 동시 측정합니다.</p>
-                    </div>
-                    <div class="flex items-center gap-2 bg-emerald-50 px-3.5 py-2 rounded-xl border border-emerald-200">
-                        <i data-lucide="calendar" class="w-4 h-4 text-emerald-700"></i>
-                        <span class="text-xs font-bold text-emerald-900">관찰 평가일:</span>
-                        <input type="date" id="obs-date" onchange="updateObsField('date', this.value)" class="bg-white px-2.5 py-1 rounded-lg border border-emerald-300 text-xs font-bold text-slate-800">
-                    </div>
-                </div>
-
-                <!-- 관찰 방식 선택 & 목표 관찰시간(분) 설정 -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
-                    <div class="lg:col-span-7 space-y-1.5">
-                        <label class="block text-xs font-bold text-slate-500">관찰 방식 선택</label>
-                        <div class="grid grid-cols-2 gap-2.5">
-                            <button onclick="setObserveMode('contrived')" id="btn-obs-contrived" class="p-3 rounded-xl border text-left transition">
-                                <div class="font-bold text-sm">고안된 자유 작동 관찰</div>
-                                <div class="text-xs opacity-80 mt-0.5">사전에 자극을 배치하고 접촉 시간 기록</div>
-                            </button>
-                            <button onclick="setObserveMode('natural')" id="btn-obs-natural" class="p-3 rounded-xl border text-left transition">
-                                <div class="font-bold text-sm">자연적인 자유 작동 관찰</div>
-                                <div class="text-xs opacity-80 mt-0.5">인위적 배치 없이 일상 환경 몰두 시간 기록</div>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <label class="text-xs font-extrabold text-slate-700">목표 관찰시간 설정 (기준 총시간)</label>
-                            <div class="flex items-center gap-1.5">
-                                <input type="number" id="obs-target-min-input" min="1" max="180" oninput="updateObsTargetMin(this.value)" class="w-16 px-2 py-1 rounded-lg border border-slate-300 bg-white text-center text-sm font-extrabold text-indigo-700">
-                                <span class="text-xs font-bold text-slate-600">분</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-wrap gap-1.5">
-                            <button onclick="updateObsTargetMin(3)" class="obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white hover:bg-indigo-50" data-min="3">3분</button>
-                            <button onclick="updateObsTargetMin(5)" class="obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white hover:bg-indigo-50" data-min="5">5분</button>
-                            <button onclick="updateObsTargetMin(10)" class="obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white hover:bg-indigo-50" data-min="10">10분</button>
-                            <button onclick="updateObsTargetMin(15)" class="obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white hover:bg-indigo-50" data-min="15">15분</button>
-                            <button onclick="updateObsTargetMin(20)" class="obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white hover:bg-indigo-50" data-min="20">20분</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 자극 추가 및 일괄 제어 바 -->
-                <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-slate-100 no-print">
-                    <div class="flex flex-1 min-w-[240px] gap-2">
-                        <input type="text" id="obs-new-item" onkeypress="if(event.key==='Enter') addObsItem()" placeholder="새 관찰 자극 입력 후 Enter" class="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 text-sm">
-                        <button onclick="addObsItem()" class="px-4 py-2 rounded-xl bg-slate-800 text-white text-sm font-bold hover:bg-slate-900 transition">+ 항목 추가</button>
+                        <h3 class="font-extrabold text-slate-800 text-base">관찰하기 (자유 작동 환경 지속시간 측정)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">학생이 자발적으로 다가가 조작하거나 몰두하는 시간을 자극별 타이머로 동시에 기록합니다.</p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button onclick="importStimuliToObserve()" class="px-3 py-2 rounded-xl bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold hover:bg-indigo-100 transition">
-                            질문하기 자극 불러오기
-                        </button>
-                        <button onclick="pauseAllObsTimers()" class="px-3 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200 transition">
-                            모든 측정 일시정지
-                        </button>
+                        <span class="text-xs font-bold text-slate-500">관찰 일자:</span>
+                        <input type="date" id="obs-date" onchange="updateObsField('date', this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-extrabold text-emerald-700">
+                    </div>
+                </div>
+
+                <!-- 관찰 환경 유형 선택 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <button onclick="setObserveMode('contrived')" id="btn-obs-contrived" class="p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-emerald-950 text-left transition">
+                        <div class="text-xs sm:text-sm font-extrabold">① 고안된 자유 작동 관찰 (Contrived Free Operant)</div>
+                        <div class="text-[11px] opacity-80 mt-0.5">선정된 여러 자극을 일정 공간에 미리 배치해 두고 자발적 접근 시간을 측정</div>
+                    </button>
+                    <button onclick="setObserveMode('natural')" id="btn-obs-natural" class="p-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-left hover:bg-slate-50 transition">
+                        <div class="text-xs sm:text-sm font-extrabold">② 자연적 자유 작동 관찰 (Naturalistic Free Operant)</div>
+                        <div class="text-[11px] opacity-80 mt-0.5">교실·가정 등 일상 환경에서 자유롭게 선택하는 활동과 사물 시간을 측정</div>
+                    </button>
+                </div>
+
+                <!-- 목표 관찰 시간 및 자극 추가 바 -->
+                <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200 no-print">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-extrabold text-slate-700">총 관찰 시간(분):</span>
+                        <input type="number" id="obs-target-min-input" min="1" max="180" value="5" onchange="updateObsTargetMin(this.value)" class="w-16 px-2 py-1 rounded-lg border border-slate-300 text-center text-xs font-extrabold bg-white">
+                        <div class="flex gap-1">
+                            <button onclick="updateObsTargetMin(5)" data-min="5" class="obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white">5분</button>
+                            <button onclick="updateObsTargetMin(10)" data-min="10" class="obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white">10분</button>
+                            <button onclick="updateObsTargetMin(15)" data-min="15" class="obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white">15분</button>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <input type="text" id="obs-new-item" onkeydown="if(event.key==='Enter') addObsItem()" placeholder="관찰할 자극 이름" class="px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs font-bold bg-white">
+                        <button onclick="addObsItem()" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-extrabold hover:bg-emerald-700">+ 자극 추가</button>
+                        <button onclick="importStimuliToObserve()" class="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-extrabold hover:bg-indigo-100">질문하기 자극 불러오기</button>
+                        <button onclick="pauseAllObsTimers()" class="px-3 py-1.5 rounded-lg bg-amber-100 text-amber-900 text-xs font-extrabold hover:bg-amber-200">전체 일시정지</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 자극별 동시 측정 스톱워치 카드 그리드 -->
+            <!-- 자극별 동시 스톱워치 카드 그리드 -->
             <div id="obs-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
-            <!-- 목표 관찰시간 대비 총시간 및 점유율 요약 -->
-            <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 print-card">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                    <h4 class="font-extrabold text-slate-800 text-sm">
-                        관찰 결과 요약 (목표 관찰시간 <span id="obs-summary-target-label" class="text-indigo-600">5분</span> 기준 총 몰두시간 및 점유율)
-                    </h4>
-                    <span id="obs-total-recorded-badge" class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-700">
-                        전체 누적 측정: 00:00
-                    </span>
+            <!-- 관찰 지속시간 순위 요약표 -->
+            <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-3 print-card">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <h4 class="font-extrabold text-slate-800 text-sm">자극별 몰두 지속시간 및 비율 요약 (기준 관찰 시간: <span id="obs-summary-target-label" class="text-emerald-700">5분</span>)</h4>
+                    <span id="obs-total-recorded-badge" class="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200">전체 누적 측정: 00:00</span>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
+                    <table class="w-full text-xs border-collapse">
                         <thead>
-                            <tr class="bg-slate-50 border-y border-slate-200 text-slate-600 text-xs">
-                                <th class="py-2.5 px-3 text-center w-16">순위</th>
+                            <tr class="bg-slate-50 border-y border-slate-200 text-slate-600 font-extrabold">
+                                <th class="py-2.5 px-3 w-16">순위</th>
                                 <th class="py-2.5 px-3 text-left">자극명</th>
-                                <th class="py-2.5 px-3 text-center">총 몰두 시간</th>
-                                <th class="py-2.5 px-3 text-center">목표시간 대비 비율(%)</th>
-                                <th class="py-2.5 px-3 text-left w-1/3">시각화</th>
+                                <th class="py-2.5 px-3 w-36">누적 몰두 시간</th>
+                                <th class="py-2.5 px-3 w-24">점유 비율</th>
+                                <th class="py-2.5 px-3">시각화 막대</th>
                             </tr>
                         </thead>
                         <tbody id="obs-summary-tbody" class="divide-y divide-slate-100"></tbody>
@@ -862,122 +832,95 @@
         </section>
 
         <!-- ===================================================================== -->
-        <!-- 탭 3: 시행 기반 평가 (강화제 유형별 분리 + 4가지 평가 방식)            -->
+        <!-- 탭 3: 시행 기반 평가 (단일 자극 · 짝 자극 · MSW · MSWO)                  -->
         <!-- ===================================================================== -->
         <section id="tab-trial" class="tab-content hidden space-y-5">
-            <!-- 강화제 유형 선택 및 핵심 측정치 안내 -->
-            <div class="bg-white rounded-2xl p-4 shadow-xs border border-slate-200 space-y-3">
-                <div class="space-y-1.5">
-                    <label class="block text-xs font-bold text-slate-600">시행 기반 평가 대상 강화제 유형 선택 (유형별로 섞이지 않게 분리하여 평가 진행)</label>
+            <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4 no-print">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1.5">1. 평가할 강화제 유형 선택</label>
                     <div id="trial-category-selector" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
                 </div>
-                <div class="text-xs font-bold text-slate-500 pt-2 border-t border-slate-100 flex items-center gap-1.5">
-                    <i data-lucide="eye" class="w-4 h-4 text-indigo-600"></i>
-                    시행 기반 평가 핵심 측정치 3가지 기준
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                    <div class="p-3 rounded-xl bg-blue-50/70 border border-blue-100">
-                        <span class="font-extrabold text-blue-800">① 접근하기 (Approach):</span>
-                        <span class="text-slate-600">제시된 자극을 응시하거나, 손을 뻗고, 몸을 기울이거나 다가가기</span>
-                    </div>
-                    <div class="p-3 rounded-xl bg-emerald-50/70 border border-emerald-100">
-                        <span class="font-extrabold text-emerald-800">② 접촉하기 (Contact):</span>
-                        <span class="text-slate-600">신체(손 등)가 자극에 실제로 닿거나 집어 드는 행동 (% of trials)</span>
-                    </div>
-                    <div class="p-3 rounded-xl bg-amber-50/70 border border-amber-100">
-                        <span class="font-extrabold text-amber-800">③ 관여/참여하기 (Engagement):</span>
-                        <span class="text-slate-600">집어 든 후 적절히 가지고 노는 지속시간(초) 또는 구간 비율</span>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1.5">2. 시행 기반 자극 선호도 평가 절차 선택</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+                        <button onclick="switchTrialSubTab('sub-single')" id="btn-sub-single" class="trial-sub-btn p-3 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-indigo-950 text-xs sm:text-sm font-extrabold text-left transition">
+                            <div>① 단일 자극 제시 (SS)</div>
+                            <div class="text-[11px] font-medium opacity-75 mt-0.5">자극을 하나씩 제시해 접촉 여부·시간 측정</div>
+                        </button>
+                        <button onclick="switchTrialSubTab('sub-paired')" id="btn-sub-paired" class="trial-sub-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-xs sm:text-sm font-bold text-left hover:bg-slate-50 transition">
+                            <div>② 짝 자극 제시 (PS)</div>
+                            <div class="text-[11px] font-medium opacity-75 mt-0.5">두 자극을 1:1 대진표로 짝지어 선택 비교</div>
+                        </button>
+                        <button onclick="switchTrialSubTab('sub-msw')" id="btn-sub-msw" class="trial-sub-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-xs sm:text-sm font-bold text-left hover:bg-slate-50 transition">
+                            <div>③ 중다 자극 대체 있음 (MSW)</div>
+                            <div class="text-[11px] font-medium opacity-75 mt-0.5">선택된 자극 유지 + 나머지 새 자극 교체</div>
+                        </button>
+                        <button onclick="switchTrialSubTab('sub-mswo')" id="btn-sub-mswo" class="trial-sub-btn p-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-xs sm:text-sm font-bold text-left hover:bg-slate-50 transition">
+                            <div>④ 중다 자극 대체 없음 (MSWO)</div>
+                            <div class="text-[11px] font-medium opacity-75 mt-0.5">선택된 자극을 제외하며 선호 순위 도출</div>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- 시행 기반 평가 4종 서브 내비게이션 -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 no-print">
-                <button onclick="switchTrialSubTab('sub-single')" id="btn-sub-single" class="trial-sub-btn p-3 rounded-xl border text-xs sm:text-sm font-bold text-left transition">
-                    <div class="text-[11px] opacity-75">방법 1</div>
-                    <div>단일 자극 제시 선택</div>
-                </button>
-                <button onclick="switchTrialSubTab('sub-paired')" id="btn-sub-paired" class="trial-sub-btn p-3 rounded-xl border text-xs sm:text-sm font-bold text-left transition">
-                    <div class="text-[11px] opacity-75">방법 2</div>
-                    <div>짝 자극 제시 선택</div>
-                </button>
-                <button onclick="switchTrialSubTab('sub-msw')" id="btn-sub-msw" class="trial-sub-btn p-3 rounded-xl border text-xs sm:text-sm font-bold text-left transition">
-                    <div class="text-[11px] opacity-75">방법 3 (MSW)</div>
-                    <div>자극 대체 있는 중다 자극 제시 선택</div>
-                </button>
-                <button onclick="switchTrialSubTab('sub-mswo')" id="btn-sub-mswo" class="trial-sub-btn p-3 rounded-xl border text-xs sm:text-sm font-bold text-left transition">
-                    <div class="text-[11px] opacity-75">방법 4 (MSWO)</div>
-                    <div>자극 대체 없는 중다 자극 제시 선택</div>
-                </button>
-            </div>
-
-            <!-- [3-1] 단일 자극 제시 선택 -->
-            <div id="sub-single" class="trial-sub-content space-y-4">
-                <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
-                        <div>
-                            <h3 class="font-extrabold text-slate-800 text-base">단일 자극 제시 선택 (Single Stimulus Preference Assessment)</h3>
-                            <p class="text-xs text-slate-500 mt-0.5">한 번에 한 가지 자극을 무작위 순서로 반복 제시하고 접근/접촉 여부(O/X)와 관여 지속시간(초)을 기록합니다.</p>
-                        </div>
-                        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
-                            <span class="text-xs font-bold text-slate-600">평가 날짜:</span>
-                            <input type="date" id="ss-date" onchange="updateSSDate(this.value)" class="bg-white px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold">
-                        </div>
+            <!-- [3-1] 단일 자극 제시 (Single Stimulus) -->
+            <div id="sub-single" class="trial-sub-content bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 text-base">단일 자극 제시 선택 (Single Stimulus Preference Assessment)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">한 번에 한 가지 자극만 제시하고 접근(O)/비접근(X) 여부 및 상호작용 지속시간(초)을 기록합니다.</p>
                     </div>
-
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3 no-print">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="text-xs font-bold text-slate-700">평가 자극 관리 (자극 이름을 클릭하면 즉시 수정 가능)</span>
-                            <button onclick="importStimuliToSS()" class="px-2.5 py-1 rounded-lg bg-white border border-indigo-200 text-indigo-700 text-xs font-bold hover:bg-indigo-50 transition">
-                                동일 유형 질문 자극 가져오기
-                            </button>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <input type="text" id="ss-new-item" onkeypress="if(event.key==='Enter') addSSItem()" placeholder="새 평가 자극 추가 후 Enter" class="flex-1 min-w-[180px] px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white">
-                            <button onclick="addSSItem()" class="px-4 py-2 rounded-xl bg-slate-800 text-white text-sm font-bold hover:bg-slate-900 transition">+ 추가</button>
-                            <div class="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-xl border border-slate-300">
-                                <span class="text-xs font-bold text-slate-600">자극당 제시 횟수:</span>
-                                <select id="ss-repeat-count" onchange="updateSSRepeat(this.value)" class="text-xs font-extrabold text-indigo-700 bg-transparent">
-                                    <option value="2">2회</option>
-                                    <option value="3" selected>3회</option>
-                                    <option value="4">4회</option>
-                                    <option value="5">5회</option>
-                                </select>
-                            </div>
-                            <button onclick="generateSSTrials()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 transition">
-                                무작위 시행표 생성
-                            </button>
-                        </div>
-                        <div id="ss-items-tags" class="flex flex-wrap gap-2"></div>
-                    </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="bg-slate-50 border-y border-slate-200 text-xs text-slate-600">
-                                    <th class="py-2.5 px-3 text-center w-16">회기</th>
-                                    <th class="py-2.5 px-3 text-left">제시 자극</th>
-                                    <th class="py-2.5 px-3 text-center">접근 / 접촉 여부 (O / X)</th>
-                                    <th class="py-2.5 px-3 text-center">관여 지속시간 (초)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ss-trials-tbody" class="divide-y divide-slate-100"></tbody>
-                        </table>
+                    <div class="flex items-center gap-2">
+                        <input type="date" id="ss-date" onchange="updateSSDate(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-extrabold">
+                        <select id="ss-repeat-count" onchange="updateSSRepeat(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-bold">
+                            <option value="2">자극당 2회 제시</option>
+                            <option value="3" selected>자극당 3회 제시</option>
+                            <option value="5">자극당 5회 제시</option>
+                        </select>
+                        <button onclick="generateSSTrials()" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold">무작위 시행표 생성</button>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 print-card">
-                    <h4 class="font-extrabold text-slate-800 text-sm mb-3">단일 자극 제시 선택 결과 집계</h4>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm">
-                            <thead>
-                                <tr class="bg-slate-50 border-y border-slate-200 text-xs text-slate-600">
-                                    <th class="py-2 px-3 text-center w-16">순위</th>
-                                    <th class="py-2 px-3 text-left">자극명</th>
-                                    <th class="py-2 px-3 text-center">총 제시</th>
-                                    <th class="py-2 px-3 text-center">접근/접촉률 (%)</th>
-                                    <th class="py-2 px-3 text-center">평균 관여시간</th>
-                                    <th class="py-2 px-3 text-center">총 관여시간</th>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 no-print">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-extrabold text-slate-700">제시 자극 항목 (클릭하여 이름 수정 가능)</span>
+                        <div class="flex items-center gap-1.5">
+                            <input type="text" id="ss-new-item" onkeydown="if(event.key==='Enter') addSSItem()" placeholder="새 자극 추가" class="px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold bg-white">
+                            <button onclick="addSSItem()" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white text-xs font-bold">추가</button>
+                            <button onclick="importStimuliToSS()" class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold">질문하기 불러오기</button>
+                        </div>
+                    </div>
+                    <div id="ss-items-tags" class="flex flex-wrap gap-1.5"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-slate-100 px-3 py-2 text-xs font-extrabold text-slate-700">회기별 시행 기록표</div>
+                        <div class="max-h-96 overflow-y-auto">
+                            <table class="w-full text-xs border-collapse">
+                                <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold sticky top-0">
+                                    <tr>
+                                        <th class="py-2 px-3 w-14">회기</th>
+                                        <th class="py-2 px-3 text-left">제시 자극</th>
+                                        <th class="py-2 px-3 w-28">접근 여부</th>
+                                        <th class="py-2 px-3 w-24">시간(초)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ss-trials-tbody" class="divide-y divide-slate-100"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl overflow-hidden">
+                        <div class="bg-indigo-50 px-3 py-2 text-xs font-extrabold text-indigo-900">단일 자극 결과 요약</div>
+                        <table class="w-full text-xs border-collapse">
+                            <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold">
+                                <tr>
+                                    <th class="py-2 px-2 w-14">순위</th>
+                                    <th class="py-2 px-2 text-left">자극명</th>
+                                    <th class="py-2 px-2 w-16">제시</th>
+                                    <th class="py-2 px-2 w-16">접근률</th>
+                                    <th class="py-2 px-2 w-16">평균</th>
+                                    <th class="py-2 px-2 w-16">총시간</th>
                                 </tr>
                             </thead>
                             <tbody id="ss-summary-tbody" class="divide-y divide-slate-100"></tbody>
@@ -986,220 +929,175 @@
                 </div>
             </div>
 
-            <!-- [3-2] 짝 자극 제시 선택 -->
-            <div id="sub-paired" class="trial-sub-content hidden space-y-5">
-                <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
-                        <div>
-                            <h3 class="font-extrabold text-slate-800 text-base">짝 자극 제시 선택 (Paired Stimulus Preference Assessment)</h3>
-                            <p class="text-xs text-slate-500 mt-0.5">두 가지 자극을 한 쌍씩 제시하여 선택 반응을 기록합니다. 잘못 누른 지난 회기는 다시 클릭해 언제든 변경/해제할 수 있습니다.</p>
-                        </div>
-                        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
-                            <span class="text-xs font-bold text-slate-600">평가 날짜:</span>
-                            <input type="date" id="ps-date" onchange="updatePSDate(this.value)" class="bg-white px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold">
-                        </div>
+            <!-- [3-2] 짝 자극 제시 (Paired Stimulus) -->
+            <div id="sub-paired" class="trial-sub-content hidden bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 text-base">짝 자극 제시 선택 (Paired-Stimulus Preference Assessment)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">모든 자극 쌍을 1:1로 짝지어 제시하고 학생이 선택한 자극 버튼을 터치해 승률을 산출합니다.</p>
                     </div>
-
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="text-xs font-bold text-slate-700">▣ 강화제 종류 관리 (기본 6개 · 2~10개 자유 증감 · 이름 입력 시 대진표와 결과표 즉시 연동)</span>
-                            <div class="flex items-center gap-2 no-print">
-                                <button onclick="importStimuliToPS()" class="px-2.5 py-1 rounded-lg bg-white border border-indigo-200 text-indigo-700 text-xs font-bold hover:bg-indigo-50 transition">
-                                    동일 유형 질문 자극 가져오기
-                                </button>
-                                <button onclick="addPSItem()" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white text-xs font-bold hover:bg-slate-900 transition">
-                                    + 강화제 추가
-                                </button>
-                            </div>
-                        </div>
-                        <div id="ps-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5"></div>
-                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-200 no-print">
-                            <button onclick="generatePSPairs(false)" class="px-3.5 py-2 rounded-xl bg-slate-700 text-white text-xs font-bold hover:bg-slate-800 transition">
-                                1-2, 1-3 순서대로 대진표 초기화
-                            </button>
-                            <button onclick="generatePSPairs(true)" class="px-3.5 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition">
-                                무작위 순서로 섞기 (위치 편향 방지)
-                            </button>
-                        </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <input type="date" id="ps-date" onchange="updatePSDate(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-extrabold">
+                        <button onclick="generatePSPairs(false)" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-extrabold">순서대로 대진표</button>
+                        <button onclick="generatePSPairs(true)" class="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold">무작위 섞기</button>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-                    <div class="lg:col-span-7 bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <h4 class="font-extrabold text-slate-800 text-sm">짝 자극 제시 기록표 (선택한 자극 버튼 클릭 · 재클릭 시 수정/해제)</h4>
-                            <span id="ps-progress-badge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700">0 / 0 완료</span>
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 no-print">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-extrabold text-slate-700">비교할 자극 항목 (2~10개)</span>
+                        <div class="flex gap-1.5">
+                            <button onclick="addPSItem()" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white text-xs font-bold">+ 항목 추가</button>
+                            <button onclick="importStimuliToPS()" class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold">질문하기 불러오기</button>
                         </div>
-                        <div id="ps-pairs-list" class="space-y-2.5 max-h-[560px] overflow-y-auto pr-1"></div>
                     </div>
+                    <div id="ps-items-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2"></div>
+                </div>
 
-                    <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-xs border border-slate-200 print-card space-y-3">
-                        <div class="border-b border-slate-200 pb-2.5">
-                            <h4 class="font-extrabold text-slate-800 text-sm">▣ 강화제 선호도 평가의 결과 ▣</h4>
-                            <p class="text-[11px] text-slate-500 mt-0.5">선택 비율 <strong>75% 이상</strong>이면 고선호 잠재적 강화제로 평가합니다.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <div class="lg:col-span-2 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold text-slate-700">1:1 대진 선택 기록 (선택한 자극 클릭)</span>
+                            <span id="ps-progress-badge" class="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700">0 / 0 완료</span>
                         </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-xs sm:text-sm">
-                                <thead>
-                                    <tr class="bg-slate-100 border-y border-slate-300 text-slate-700">
-                                        <th class="py-2 px-2 text-center">순위</th>
-                                        <th class="py-2 px-2 text-left">강화제 번호 / 이름</th>
-                                        <th class="py-2 px-2 text-center">선택/총시도</th>
-                                        <th class="py-2 px-2 text-center">%</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="ps-result-tbody" class="divide-y divide-slate-200"></tbody>
-                            </table>
-                        </div>
+                        <div id="ps-pairs-list" class="max-h-96 overflow-y-auto space-y-2 pr-1"></div>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl overflow-hidden self-start">
+                        <div class="bg-emerald-50 px-3 py-2 text-xs font-extrabold text-emerald-900">짝 자극 선택 비율 순위</div>
+                        <table class="w-full text-xs border-collapse">
+                            <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold">
+                                <tr>
+                                    <th class="py-2 px-2 w-14">순위</th>
+                                    <th class="py-2 px-2 text-left">자극명</th>
+                                    <th class="py-2 px-2 w-16">선택수</th>
+                                    <th class="py-2 px-2 w-16">선택률</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ps-result-tbody" class="divide-y divide-slate-100"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <!-- [3-3] 자극 대체 있는 중다 자극 제시 선택 (MSW) -->
-            <div id="sub-msw" class="trial-sub-content hidden space-y-4">
-                <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
-                        <div>
-                            <h3 class="font-extrabold text-slate-800 text-base">자극 대체 있는 중다 자극 제시 선택 (MSW)</h3>
-                            <p class="text-xs text-slate-500 mt-0.5">대상 학생이 <strong>선택한 항목은 다음 회기에도 유지</strong>하고, 선택하지 않은 항목들은 예비 자극 풀의 새로운 항목으로 대체합니다.</p>
-                        </div>
-                        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
-                            <span class="text-xs font-bold text-slate-600">평가 날짜:</span>
-                            <input type="date" id="msw-date" onchange="updateMSWDate(this.value)" class="bg-white px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold">
+            <!-- [3-3] 중다 자극 대체 있음 (MSW) -->
+            <div id="sub-msw" class="trial-sub-content hidden bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 text-base">자극 대체 있는 중다 자극 제시 선택 (MSW)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">선택된 자극은 다음 회기에도 유지하고, 선택되지 않은 자극은 예비 풀의 새 자극으로 교체하여 제시합니다.</p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <input type="date" id="msw-date" onchange="updateMSWDate(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-extrabold">
+                        <select id="msw-array-size" onchange="updateMSWArraySize(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-bold">
+                            <option value="3" selected>동시 3개 제시</option>
+                            <option value="4">동시 4개 제시</option>
+                            <option value="5">동시 5개 제시</option>
+                        </select>
+                        <button onclick="resetMSWSession()" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold">회기 초기화</button>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 no-print">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-extrabold text-slate-700">전체 자극 예비 풀 (클릭하여 이름 수정 가능)</span>
+                        <div class="flex items-center gap-1.5">
+                            <input type="text" id="msw-new-item" onkeydown="if(event.key==='Enter') addMSWPoolItem()" placeholder="새 예비 자극" class="px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold bg-white">
+                            <button onclick="addMSWPoolItem()" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white text-xs font-bold">추가</button>
+                            <button onclick="importStimuliToMSW()" class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold">질문하기 불러오기</button>
                         </div>
                     </div>
+                    <div id="msw-pool-tags" class="flex flex-wrap gap-1.5"></div>
+                </div>
 
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3 no-print">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-                                <i data-lucide="package-plus" class="w-4 h-4 text-emerald-600"></i>
-                                전체 자극 풀(Pool) 사전 등록 · 새로운 대체 항목들을 미리 여러 개 추가해 두세요 (이름 클릭 시 즉시 수정)
-                            </span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="importStimuliToMSW()" class="px-2.5 py-1 rounded-lg bg-white border border-indigo-200 text-indigo-700 text-xs font-bold hover:bg-indigo-50 transition">
-                                    동일 유형 질문 자극 가져오기
-                                </button>
-                                <span class="text-xs font-bold text-slate-600">동시 제시 수:</span>
-                                <select id="msw-array-size" onchange="updateMSWArraySize(this.value)" class="px-2 py-1 rounded-lg border border-slate-300 text-xs font-bold bg-white">
-                                    <option value="3" selected>3개씩</option>
-                                    <option value="4">4개씩</option>
-                                    <option value="5">5개씩</option>
-                                </select>
-                            </div>
+                <div class="bg-indigo-50/60 p-4 rounded-2xl border border-indigo-200 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span id="msw-trial-badge" class="px-3 py-1 rounded-full bg-indigo-600 text-white text-xs font-extrabold">1회기 제시 중</span>
+                            <span id="msw-remaining-pool-badge" class="text-xs font-bold text-slate-600">남은 대체 예비 항목: 0개</span>
                         </div>
-
-                        <div class="flex gap-2">
-                            <input type="text" id="msw-new-item" onkeypress="if(event.key==='Enter') addMSWPoolItem()" placeholder="새 자극명 입력 후 Enter (예비 풀에 즉시 등록)" class="flex-1 px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white">
-                            <button onclick="addMSWPoolItem()" class="px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm font-bold hover:bg-emerald-700 transition">+ 풀에 추가</button>
-                            <button onclick="resetMSWSession()" class="px-3.5 py-2 rounded-xl bg-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-300 transition">회기 처음부터</button>
-                        </div>
-
-                        <div id="msw-pool-tags" class="flex flex-wrap gap-2"></div>
+                        <button onclick="undoLastMSWTrial()" id="btn-msw-undo" class="px-3 py-1 rounded-lg bg-white border border-slate-300 text-xs font-bold text-slate-700 disabled:opacity-40">직전 회기 되돌리기</button>
                     </div>
+                    <div id="msw-current-cards" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+                </div>
 
-                    <div class="bg-indigo-50/60 border border-indigo-100 rounded-2xl p-5 space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-2">
-                                <span id="msw-trial-badge" class="text-xs font-extrabold px-3 py-1 rounded-full bg-indigo-600 text-white">1회기 제시 중</span>
-                                <span id="msw-remaining-pool-badge" class="text-xs font-bold text-slate-600">남은 대체 예비 항목: 0개</span>
-                            </div>
-                            <button onclick="undoLastMSWTrial()" id="btn-msw-undo" class="px-3 py-1.5 rounded-xl bg-white border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-100 transition disabled:opacity-40">
-                                ↩ 직전 회기 되돌리기
-                            </button>
-                        </div>
-                        <p class="text-xs text-slate-600">학생이 선택한 항목 카드를 터치하세요. (직전 회기 유지 항목은 배지로 표시됩니다)</p>
-                        <div id="msw-current-cards" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+                <div class="space-y-2">
+                    <h4 class="text-xs font-extrabold text-slate-700">회기별 선택 이력 (클릭하여 선택 항목 수정 가능)</h4>
+                    <div id="msw-history-list" class="space-y-1.5"></div>
+                </div>
+            </div>
+
+            <!-- [3-4] 중다 자극 대체 없음 (MSWO) -->
+            <div id="sub-mswo" class="trial-sub-content hidden bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                    <div>
+                        <h3 class="font-extrabold text-slate-800 text-base">자극 대체 없는 중다 자극 제시 선택 (MSWO)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">선택된 자극을 배열에서 제거하고 남은 자극들의 위치를 재배열하여 1순위부터 마지막 순위까지 연속으로 도출합니다.</p>
                     </div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <input type="date" id="mswo-date" onchange="updateMSWODate(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-extrabold">
+                        <button onclick="startNewMSWORound()" class="px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold">새 라운드 시작</button>
+                        <button onclick="clearMSWORounds()" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold">전체 라운드 초기화</button>
+                    </div>
+                </div>
 
+                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 no-print">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-extrabold text-slate-700">평가 자극 배열 항목 (클릭하여 이름 수정 가능)</span>
+                        <div class="flex items-center gap-1.5">
+                            <input type="text" id="mswo-new-item" onkeydown="if(event.key==='Enter') addMSWOItem()" placeholder="새 자극 추가" class="px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold bg-white">
+                            <button onclick="addMSWOItem()" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white text-xs font-bold">추가</button>
+                            <button onclick="importStimuliToMSWO()" class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold">질문하기 불러오기</button>
+                        </div>
+                    </div>
+                    <div id="mswo-base-tags" class="flex flex-wrap gap-1.5"></div>
+                </div>
+
+                <div class="bg-amber-50/70 p-4 rounded-2xl border border-amber-200 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span id="mswo-step-badge" class="px-3 py-1 rounded-full bg-amber-600 text-white text-xs font-extrabold">1라운드 진행 중 (1순위 선택 차례)</span>
+                        <button onclick="undoLastMSWOPick()" id="btn-mswo-undo" class="px-3 py-1 rounded-lg bg-white border border-slate-300 text-xs font-bold text-slate-700 disabled:opacity-40">방금 선택 취소</button>
+                    </div>
+                    <div id="mswo-picked-order" class="text-xs font-extrabold text-amber-900">현재 선택 순서: 없음</div>
+                    <div id="mswo-active-cards" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <h4 class="font-extrabold text-slate-800 text-sm">시행 진행 히스토리 (잘못 기입한 회기는 카드를 클릭해 선택 항목을 바로 수정 가능)</h4>
-                        </div>
-                        <div id="msw-history-list" class="space-y-2"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- [3-4] 자극 대체 없는 중다 자극 제시 선택 (MSWO) -->
-            <div id="sub-mswo" class="trial-sub-content hidden space-y-4">
-                <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
-                        <div>
-                            <h3 class="font-extrabold text-slate-800 text-base">자극 대체 없는 중다 자극 제시 선택 (MSWO)</h3>
-                            <p class="text-xs text-slate-500 mt-0.5">선택한 항목은 <strong>제거</strong>하고 남은 항목들의 위치/순서를 무작위로 <strong>재배열</strong>하여 선호 위계를 빠르게 산출합니다.</p>
-                        </div>
-                        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
-                            <span class="text-xs font-bold text-slate-600">평가 날짜:</span>
-                            <input type="date" id="mswo-date" onchange="updateMSWODate(this.value)" class="bg-white px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold">
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3 no-print">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="text-xs font-bold text-slate-700">MSWO 평가 자극 관리 (자극 이름을 클릭해 즉시 수정 가능)</span>
-                            <button onclick="importStimuliToMSWO()" class="px-2.5 py-1 rounded-lg bg-white border border-indigo-200 text-indigo-700 text-xs font-bold hover:bg-indigo-50 transition">
-                                동일 유형 질문 자극 가져오기
-                            </button>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <input type="text" id="mswo-new-item" onkeypress="if(event.key==='Enter') addMSWOItem()" placeholder="새 자극 추가 후 Enter" class="flex-1 min-w-[180px] px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white">
-                            <button onclick="addMSWOItem()" class="px-4 py-2 rounded-xl bg-slate-800 text-white text-sm font-bold hover:bg-slate-900 transition">+ 추가</button>
-                            <button onclick="startNewMSWORound()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 transition">새 라운드 시작</button>
-                        </div>
-                        <div id="mswo-base-tags" class="flex flex-wrap gap-2"></div>
-                    </div>
-
-                    <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-5 space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span id="mswo-step-badge" class="text-xs font-extrabold px-3 py-1 rounded-full bg-amber-600 text-white">라운드 진행 중</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="undoLastMSWOPick()" id="btn-mswo-undo" class="px-3 py-1.5 rounded-xl bg-white border border-amber-300 text-xs font-bold text-amber-900 hover:bg-amber-100 transition disabled:opacity-40">
-                                    ↩ 직전 선택 취소 (복구)
-                                </button>
-                                <span id="mswo-picked-order" class="text-xs font-bold text-slate-700">현재 선택 순서: 없음</span>
-                            </div>
-                        </div>
-                        <div id="mswo-active-cards" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3"></div>
-                    </div>
-
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <h4 class="font-extrabold text-slate-800 text-sm">라운드별 순위 기록 및 종합 평균 순위 (완료된 라운드의 순위 드롭다운 수정 가능)</h4>
-                            <button onclick="clearMSWORounds()" class="text-xs text-rose-600 font-bold hover:underline no-print">라운드 기록 초기화</button>
-                        </div>
+                        <h4 class="text-xs font-extrabold text-slate-700">완료된 라운드별 순위 기록 (드롭다운으로 순위 수정 가능)</h4>
                         <div id="mswo-rounds-list" class="space-y-2"></div>
-                        <div class="overflow-x-auto pt-2">
-                            <table class="w-full text-sm">
-                                <thead>
-                                    <tr class="bg-slate-50 border-y border-slate-200 text-xs text-slate-600">
-                                        <th class="py-2 px-3 text-center w-16">최종순위</th>
-                                        <th class="py-2 px-3 text-left">자극명</th>
-                                        <th class="py-2 px-3 text-center">평균 선택 순위 (낮을수록 고선호)</th>
-                                        <th class="py-2 px-3 text-center">1순위 선택 횟수</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="mswo-summary-tbody" class="divide-y divide-slate-100"></tbody>
-                            </table>
-                        </div>
+                    </div>
+                    <div class="border border-slate-200 rounded-xl overflow-hidden self-start">
+                        <div class="bg-amber-50 px-3 py-2 text-xs font-extrabold text-amber-900">MSWO 통합 평균 순위 요약</div>
+                        <table class="w-full text-xs border-collapse">
+                            <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold">
+                                <tr>
+                                    <th class="py-2 px-3 w-16">최종순위</th>
+                                    <th class="py-2 px-3 text-left">자극명</th>
+                                    <th class="py-2 px-3 w-24">평균 순위</th>
+                                    <th class="py-2 px-3 w-24">1위 횟수</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mswo-summary-tbody" class="divide-y divide-slate-100"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- ===================================================================== -->
-        <!-- 탭 4: 종합 분석 리포트                                                  -->
+        <!-- 탭 4: 종합 결과 리포트                                                  -->
         <!-- ===================================================================== -->
         <section id="tab-report" class="tab-content hidden space-y-5">
             <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3">
                 <div class="flex items-start gap-2.5">
                     <i data-lucide="info" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
                     <div class="text-xs sm:text-sm text-amber-950 leading-relaxed">
-                        <strong>※ 중요 안내 (자극 선호도 평가 vs 강화제 평가):</strong> 본 리포트는 실제 강화 효과를 검증하는 평가가 아니라 <strong>잠재적인 강화제 후보</strong>를 도출한 결과입니다. 시간·상황·동기에 따라 선호도는 변하므로 주기적으로 재평가하고, 실제 제공 시 <strong>표적행동이 증가하는지 확인</strong>해야 합니다.
+                        <strong>※ 중요 안내 (자극 선호도 평가 vs 강화제 평가):</strong> 본 종합 결과 리포트는 실제 강화 효과를 검증하는 평가가 아니라 <strong>잠재적인 강화제 후보</strong>를 도출한 결과입니다. 시간·상황·동기에 따라 선호도는 변하므로 주기적으로 재평가하고, 실제 제공 시 <strong>표적행동이 증가하는지 확인</strong>해야 합니다.
                     </div>
                 </div>
                 <button onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition shadow-xs no-print shrink-0">
                     <i data-lucide="printer" class="w-4 h-4"></i>
-                    <span>평가 결과 인쇄 / PDF 저장</span>
+                    <span>종합 결과 리포트 인쇄 / PDF 저장</span>
                 </button>
             </div>
 
@@ -1207,8 +1105,8 @@
             <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-3 print-card">
                 <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
                     <div>
-                        <h3 class="font-extrabold text-slate-800 text-base">상위 잠재적 강화제 종합 도출 결과 (평가 방법별 근거 포함)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">선택된 날짜 회차의 질문하기, 관찰하기, 시행 기반 평가에서 상위를 차지한 잠재적 강화제와 평가 방법을 함께 표시합니다.</p>
+                        <h3 class="font-extrabold text-slate-800 text-base">상위 잠재적 강화제 종합 결과 (평가 방법별 결과 요약)</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">선택된 날짜 회차의 질문하기, 관찰하기, 시행 기반 평가에서 도출된 상위 잠재적 강화제와 각 평가별 실제 측정 결과입니다.</p>
                     </div>
                     <span id="report-session-badge" class="text-xs font-extrabold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200"></span>
                 </div>
@@ -2262,7 +2160,7 @@
                 'tab-question': '질문하기 진행 중',
                 'tab-observe': '관찰하기 진행 중',
                 'tab-trial': '시행 기반 평가 진행 중',
-                'tab-report': '종합 분석 리포트 조회 중'
+                'tab-report': '종합 결과 리포트 조회 중'
             };
             if (titleBadge) titleBadge.textContent = labels[tabId] || '';
             if (quickReportBtn) quickReportBtn.classList.toggle('hidden', tabId === 'tab-report');
@@ -3594,19 +3492,19 @@
             const topContainer = document.getElementById('report-top-stimuli-list');
             if (topContainer) {
                 if (topList.length === 0) {
-                    topContainer.innerHTML = `<div class="col-span-full py-6 text-center text-xs text-slate-400">아직 기록된 평가 점수가 없습니다. 질문하기·관찰하기·시행 기반 평가를 먼저 진행해 주세요.</div>`;
+                    topContainer.innerHTML = `<div class="col-span-full py-6 text-center text-xs text-slate-400">아직 기록된 평가 결과가 없습니다. 질문하기·관찰하기·시행 기반 평가를 먼저 진행해 주세요.</div>`;
                 } else {
                     topContainer.innerHTML = topList.map((item, idx) => `
-                        <div class="p-3.5 rounded-2xl border ${idx === 0 ? 'bg-indigo-50/80 border-indigo-300' : 'bg-slate-50 border-slate-200'} space-y-1.5">
-                            <div class="flex items-center justify-between">
+                        <div class="p-4 rounded-2xl border ${idx === 0 ? 'bg-indigo-50/80 border-indigo-300' : 'bg-slate-50 border-slate-200'} space-y-2">
+                            <div class="flex items-center justify-between gap-2">
                                 <div class="flex items-center gap-2">
-                                    <span class="px-2 py-0.5 rounded-lg ${idx === 0 ? 'bg-indigo-600 text-white' : 'bg-slate-700 text-white'} text-xs font-extrabold">${idx + 1}순위</span>
-                                    <span class="text-sm font-black text-slate-900">${escapeHtml(item.name)}</span>
+                                    <span class="px-2.5 py-0.5 rounded-lg ${idx === 0 ? 'bg-indigo-600 text-white' : 'bg-slate-700 text-white'} text-xs font-extrabold">${idx + 1}순위 후보</span>
+                                    <span class="text-base font-black text-slate-900">${escapeHtml(item.name)}</span>
                                 </div>
-                                <span class="text-xs font-extrabold text-indigo-700">종합점수 ${item.score}점</span>
+                                <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-white border border-slate-200 text-slate-600">${item.sources.length}개 평가 일치</span>
                             </div>
-                            <div class="flex flex-wrap gap-1 pt-0.5">
-                                ${item.sources.map(src => `<span class="text-[11px] font-bold px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-600">${escapeHtml(src)}</span>`).join('')}
+                            <div class="flex flex-wrap gap-1.5 pt-0.5">
+                                ${item.sources.map(src => `<span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-white border border-indigo-100 text-indigo-900">${escapeHtml(src)}</span>`).join('')}
                             </div>
                         </div>
                     `).join('');
