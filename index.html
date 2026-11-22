@@ -157,7 +157,14 @@
                 <button onclick="closeQRModal()" class="text-slate-400 hover:text-slate-700 font-bold text-lg">&times;</button>
             </div>
             <div id="qrcode-canvas-box" class="mx-auto w-52 h-52 p-3 bg-white rounded-2xl border-2 border-slate-200 flex items-center justify-center"></div>
-            <p class="text-xs text-slate-600 leading-relaxed">스마트폰이나 태블릿 카메라로 QR 코드를 스캔하면 현장 기록 화면을 바로 열 수 있습니다.</p>
+            <p class="text-xs text-slate-600 leading-relaxed">스마트폰이나 태블릿 카메라로 QR 코드를 스캔하거나 아래 링크를 복사해 공유하세요.</p>
+            <div class="flex items-center gap-1.5 bg-slate-50 p-2 rounded-xl border border-slate-200">
+                <input type="text" id="qr-share-url-input" readonly class="flex-1 bg-transparent text-[11px] font-bold text-slate-600 px-1.5 focus:outline-hidden truncate">
+                <button onclick="copyShareUrl()" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold shrink-0 transition flex items-center gap-1">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                    <span>링크 복사</span>
+                </button>
+            </div>
             <button onclick="closeQRModal()" class="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-extrabold hover:bg-slate-800 transition">닫기</button>
         </div>
     </div>
@@ -165,57 +172,62 @@
     <!-- 첫 화면 (랜딩 / 시작하기 화면) -->
     <div id="welcome-screen" class="fixed inset-0 z-40 bg-slate-50 flex flex-col items-center justify-start sm:justify-center p-3 sm:p-5 overflow-y-auto no-print">
         <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-8 shadow-xl border border-slate-200/90 text-center space-y-5 my-auto">
-            <!-- 상단 ABA Special Edu Lab by 신 로고 (첨부 이미지 동일 구현) -->
-            <div class="mx-auto w-40 h-40 sm:w-48 sm:h-48 rounded-[30px] overflow-hidden shadow-md border-[6px] border-[#ece6f8] bg-[#d8c8f0] flex items-center justify-center">
-                <svg viewBox="0 0 400 400" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <!-- 상단 ABA Special Edu Lab by 신 로고 (캡처 이미지와 동일한 비율 및 곡선 리본·아이들 일러스트) -->
+            <div class="mx-auto w-44 h-44 rounded-[30px] overflow-hidden shadow-md border-[6px] border-[#ece6f8] bg-[#d9caf2] flex items-center justify-center">
+                <svg viewBox="0 0 400 400" class="w-full h-full block" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="pastelPurpleBg" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#e3d5f7"/>
-                            <stop offset="55%" stop-color="#d7c4f0"/>
-                            <stop offset="100%" stop-color="#cbb4ea"/>
+                            <stop offset="0%" stop-color="#e4d6f8"/>
+                            <stop offset="55%" stop-color="#d8c6f2"/>
+                            <stop offset="100%" stop-color="#ccb6eb"/>
                         </linearGradient>
+                        <!-- Special Edu Lab 곡선 텍스트 경로 -->
+                        <path id="ribbonTextArc" d="M 96 303 Q 200 282 324 302" />
+                        <path id="ribbonUnderlineArc" d="M 118 310 Q 200 295 306 309" />
                     </defs>
                     <rect width="400" height="400" fill="url(#pastelPurpleBg)"/>
 
                     <!-- 무지개 (5중 아치) -->
-                    <path d="M 122 92 A 78 72 0 0 1 278 92" fill="none" stroke="#ee837e" stroke-width="7.2" stroke-linecap="round"/>
-                    <path d="M 129 92 A 71 65 0 0 1 271 92" fill="none" stroke="#f5a855" stroke-width="7.2" stroke-linecap="round"/>
-                    <path d="M 136 92 A 64 58 0 0 1 264 92" fill="none" stroke="#f9d478" stroke-width="7.2" stroke-linecap="round"/>
-                    <path d="M 143 92 A 57 51 0 0 1 257 92" fill="none" stroke="#85cc96" stroke-width="7.2" stroke-linecap="round"/>
-                    <path d="M 150 92 A 50 44 0 0 1 250 92" fill="none" stroke="#7da4f2" stroke-width="7.2" stroke-linecap="round"/>
+                    <path d="M 120 92 A 80 74 0 0 1 280 92" fill="none" stroke="#ee837e" stroke-width="7.2" stroke-linecap="round"/>
+                    <path d="M 127 92 A 73 67 0 0 1 273 92" fill="none" stroke="#f5a855" stroke-width="7.2" stroke-linecap="round"/>
+                    <path d="M 134 92 A 66 60 0 0 1 266 92" fill="none" stroke="#f9d478" stroke-width="7.2" stroke-linecap="round"/>
+                    <path d="M 141 92 A 59 53 0 0 1 259 92" fill="none" stroke="#85cc96" stroke-width="7.2" stroke-linecap="round"/>
+                    <path d="M 148 92 A 52 46 0 0 1 252 92" fill="none" stroke="#7da4f2" stroke-width="7.2" stroke-linecap="round"/>
 
-                    <!-- 왼쪽 남자아이 (귀, 얼굴, 앞머리, 표정, 티셔츠) -->
-                    <circle cx="101" cy="144" r="8" fill="#f3c1a2"/>
-                    <circle cx="179" cy="144" r="8" fill="#f3c1a2"/>
-                    <circle cx="140" cy="142" r="36" fill="#f6ccb0"/>
-                    <path d="M 104 139 C 106 112, 174 112, 176 139 C 166 132, 156 139, 148 134 C 141 139, 132 132, 122 138 C 114 133, 108 136, 104 139 Z" fill="#7a4925"/>
-                    <circle cx="127" cy="144" r="3.8" fill="#472a16"/>
-                    <circle cx="153" cy="144" r="3.8" fill="#472a16"/>
-                    <circle cx="117" cy="152" r="6.5" fill="#f28b82" opacity="0.72"/>
-                    <circle cx="163" cy="152" r="6.5" fill="#f28b82" opacity="0.72"/>
-                    <path d="M 131 156 Q 140 165 149 156" fill="none" stroke="#472a16" stroke-width="3.2" stroke-linecap="round"/>
-                    <path d="M 106 178 Q 140 168 174 178 L 174 195 L 106 195 Z" fill="#239688"/>
+                    <!-- 왼쪽 남자아이 (가로로 통통한 둥근 얼굴형) -->
+                    <circle cx="95" cy="145" r="8.5" fill="#f3c1a2"/>
+                    <circle cx="185" cy="145" r="8.5" fill="#f3c1a2"/>
+                    <ellipse cx="140" cy="144" rx="41" ry="34" fill="#f6ccb0"/>
+                    <!-- 남자아이 앞머리 -->
+                    <path d="M 99 138 C 103 111, 177 111, 181 138 C 170 130, 159 138, 149 132 C 141 138, 131 131, 119 137 C 110 132, 104 135, 99 138 Z" fill="#7a4925"/>
+                    <circle cx="125" cy="144" r="4" fill="#472a16"/>
+                    <circle cx="155" cy="144" r="4" fill="#472a16"/>
+                    <circle cx="113" cy="152" r="7" fill="#f28b82" opacity="0.72"/>
+                    <circle cx="167" cy="152" r="7" fill="#f28b82" opacity="0.72"/>
+                    <path d="M 130 156 Q 140 165 150 156" fill="none" stroke="#472a16" stroke-width="3.2" stroke-linecap="round"/>
+                    <path d="M 105 178 Q 140 168 175 178 L 175 196 L 105 196 Z" fill="#239688"/>
 
-                    <!-- 오른쪽 여자아이 (귀, 양갈래 머리, 얼굴, 앞머리, 표정, 티셔츠) -->
-                    <ellipse cx="215" cy="158" rx="11" ry="16" transform="rotate(22 215 158)" fill="#7a4925"/>
-                    <ellipse cx="305" cy="158" rx="11" ry="16" transform="rotate(-22 305 158)" fill="#7a4925"/>
-                    <circle cx="221" cy="144" r="8" fill="#f3c1a2"/>
-                    <circle cx="299" cy="144" r="8" fill="#f3c1a2"/>
-                    <circle cx="260" cy="142" r="36" fill="#f6ccb0"/>
-                    <path d="M 224 139 C 226 112, 294 112, 296 139 C 282 128, 268 134, 260 135 C 252 134, 238 128, 224 139 Z" fill="#7a4925"/>
-                    <circle cx="247" cy="144" r="3.8" fill="#472a16"/>
-                    <circle cx="273" cy="144" r="3.8" fill="#472a16"/>
-                    <circle cx="237" cy="152" r="6.5" fill="#f28b82" opacity="0.72"/>
-                    <circle cx="283" cy="152" r="6.5" fill="#f28b82" opacity="0.72"/>
-                    <path d="M 251 156 Q 260 165 269 156" fill="none" stroke="#472a16" stroke-width="3.2" stroke-linecap="round"/>
-                    <path d="M 226 178 Q 260 168 294 178 L 294 195 L 226 195 Z" fill="#ee7b68"/>
+                    <!-- 오른쪽 여자아이 (가로로 통통한 둥근 얼굴형 및 양갈래 묶음머리) -->
+                    <circle cx="209" cy="166" r="14" fill="#7a4925"/>
+                    <circle cx="311" cy="166" r="14" fill="#7a4925"/>
+                    <circle cx="215" cy="145" r="8.5" fill="#f3c1a2"/>
+                    <circle cx="305" cy="145" r="8.5" fill="#f3c1a2"/>
+                    <ellipse cx="260" cy="144" rx="41" ry="34" fill="#f6ccb0"/>
+                    <!-- 여자아이 가르마 앞머리 -->
+                    <path d="M 219 138 C 223 111, 297 111, 301 138 C 284 126, 269 133, 260 134 C 251 133, 236 126, 219 138 Z" fill="#7a4925"/>
+                    <circle cx="245" cy="144" r="4" fill="#472a16"/>
+                    <circle cx="275" cy="144" r="4" fill="#472a16"/>
+                    <circle cx="233" cy="152" r="7" fill="#f28b82" opacity="0.72"/>
+                    <circle cx="287" cy="152" r="7" fill="#f28b82" opacity="0.72"/>
+                    <path d="M 250 156 Q 260 165 270 156" fill="none" stroke="#472a16" stroke-width="3.2" stroke-linecap="round"/>
+                    <path d="M 225 178 Q 260 168 295 178 L 295 196 L 225 196 Z" fill="#ee7b68"/>
 
-                    <!-- 뭉게구름 (아이들 머리 위 양쪽) -->
+                    <!-- 양쪽 뭉게구름 -->
                     <g fill="#aef0f7">
-                        <circle cx="111" cy="96" r="14"/><circle cx="127" cy="87" r="18"/><circle cx="145" cy="89" r="16"/><circle cx="160" cy="97" r="13"/>
-                        <rect x="111" y="92" width="49" height="16" rx="8"/>
-                        <circle cx="240" cy="97" r="13"/><circle cx="255" cy="89" r="16"/><circle cx="273" cy="87" r="18"/><circle cx="289" cy="96" r="14"/>
-                        <rect x="240" y="92" width="49" height="16" rx="8"/>
+                        <circle cx="109" cy="95" r="14"/><circle cx="126" cy="86" r="18"/><circle cx="144" cy="88" r="16"/><circle cx="159" cy="96" r="13"/>
+                        <rect x="109" y="91" width="50" height="16" rx="8"/>
+                        <circle cx="241" cy="96" r="13"/><circle cx="256" cy="88" r="16"/><circle cx="274" cy="86" r="18"/><circle cx="291" cy="95" r="14"/>
+                        <rect x="241" y="91" width="50" height="16" rx="8"/>
                     </g>
 
                     <!-- 상단 양옆 노란 강조선 -->
@@ -227,14 +239,14 @@
                     </g>
 
                     <!-- 펼쳐진 큰 책 -->
-                    <path d="M 76 188 Q 142 177 200 194 Q 258 177 324 188 L 338 280 Q 264 270 200 286 Q 136 270 62 280 Z" fill="#fdfbf2" stroke="#6c7ae0" stroke-width="4.8" stroke-linejoin="round"/>
-                    <line x1="200" y1="194" x2="200" y2="286" stroke="#c3cbf5" stroke-width="3"/>
+                    <path d="M 74 188 Q 142 177 200 194 Q 258 177 326 188 L 340 282 Q 264 271 200 288 Q 136 271 60 282 Z" fill="#fdfbf2" stroke="#6c7ae0" stroke-width="4.8" stroke-linejoin="round"/>
+                    <line x1="200" y1="194" x2="200" y2="288" stroke="#c3cbf5" stroke-width="3"/>
 
-                    <!-- 책 위를 잡은 아이들 손 -->
-                    <rect x="114" y="179" width="16" height="14" rx="7" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
-                    <rect x="150" y="179" width="16" height="14" rx="7" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
-                    <rect x="234" y="179" width="16" height="14" rx="7" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
-                    <rect x="270" y="179" width="16" height="14" rx="7" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
+                    <!-- 책 윗변을 잡은 아이들의 둥근 손 4개 -->
+                    <rect x="112" y="177" width="18" height="15" rx="7.5" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
+                    <rect x="148" y="177" width="18" height="15" rx="7.5" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
+                    <rect x="234" y="177" width="18" height="15" rx="7.5" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
+                    <rect x="270" y="177" width="18" height="15" rx="7.5" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
 
                     <!-- 왼쪽 파란색 직소 퍼즐 조각 -->
                     <g transform="translate(56, 244) rotate(-14)">
@@ -245,22 +257,26 @@
                         <path d="M -22 -22 L -6 -22 A 6.5 6.5 0 1 1 6 -22 L 22 -22 L 22 -6 A 6.5 6.5 0 1 0 22 6 L 22 22 L 6 22 A 6.5 6.5 0 1 1 -6 22 L -22 22 L -22 6 A 6.5 6.5 0 1 1 -22 -6 Z" fill="#67be60"/>
                     </g>
 
-                    <!-- A B A 알파벳 & 오른쪽 A 위 반짝임 -->
-                    <text x="126" y="263" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="900" font-size="68" fill="#1796a6" text-anchor="middle">A</text>
-                    <text x="200" y="263" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="900" font-size="68" fill="#f6ae22" text-anchor="middle">B</text>
-                    <text x="274" y="263" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="900" font-size="68" fill="#ef6837" text-anchor="middle">A</text>
+                    <!-- A B A 알파벳 -->
+                    <text x="126" y="261" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="900" font-size="68" fill="#1796a6" text-anchor="middle">A</text>
+                    <text x="200" y="261" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="900" font-size="68" fill="#f6ae22" text-anchor="middle">B</text>
+                    <text x="274" y="261" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="900" font-size="68" fill="#ef6837" text-anchor="middle">A</text>
                     <g stroke="#f6b324" stroke-width="4.5" stroke-linecap="round">
-                        <line x1="286" y1="199" x2="293" y2="188"/>
-                        <line x1="297" y1="208" x2="310" y2="202"/>
+                        <line x1="286" y1="198" x2="293" y2="187"/>
+                        <line x1="297" y1="207" x2="310" y2="201"/>
                     </g>
 
-                    <!-- Special Edu Lab 둥근 리본 배너 & 새싹 -->
-                    <rect x="42" y="280" width="316" height="50" rx="25" fill="#fdfbf2" stroke="#7b68ee" stroke-width="4.5"/>
-                    <path d="M 73 317 Q 73 301 84 297" fill="none" stroke="#52b788" stroke-width="3.5" stroke-linecap="round"/>
-                    <ellipse cx="64" cy="300" rx="10" ry="6" transform="rotate(24 64 300)" fill="#74c69d"/>
-                    <ellipse cx="85" cy="298" rx="10" ry="6" transform="rotate(-24 85 298)" fill="#52b788"/>
-                    <text x="216" y="312" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="800" font-size="25.5" fill="#284896" text-anchor="middle">Special Edu Lab</text>
-                    <line x1="120" y1="321" x2="308" y2="321" stroke="#f6b324" stroke-width="3" stroke-linecap="round"/>
+                    <!-- 위로 살짝 휘어진 곡선 리본 배너 (Special Edu Lab) -->
+                    <path d="M 65 278 Q 200 255 335 278 A 25 25 0 0 1 335 328 Q 200 305 65 328 A 25 25 0 0 1 65 278 Z" fill="#fdfbf2" stroke="#7b68ee" stroke-width="4.5" stroke-linejoin="round"/>
+                    <!-- 리본 왼쪽 새싹 -->
+                    <path d="M 73 314 Q 73 297 84 293" fill="none" stroke="#52b788" stroke-width="3.5" stroke-linecap="round"/>
+                    <ellipse cx="64" cy="296" rx="10" ry="6" transform="rotate(24 64 296)" fill="#74c69d"/>
+                    <ellipse cx="85" cy="294" rx="10" ry="6" transform="rotate(-24 85 294)" fill="#52b788"/>
+                    <!-- 곡선을 따라 휘어진 Special Edu Lab 텍스트 및 노란 밑줄 -->
+                    <text font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="800" font-size="25.5" fill="#284896">
+                        <textPath href="#ribbonTextArc" startOffset="50%" text-anchor="middle">Special Edu Lab</textPath>
+                    </text>
+                    <use href="#ribbonUnderlineArc" fill="none" stroke="#f6b324" stroke-width="3" stroke-linecap="round"/>
 
                     <!-- 하단 슬로건 및 by 신 배지 -->
                     <line x1="48" y1="348" x2="74" y2="348" stroke="#6c5b8c" stroke-width="1.8" stroke-linecap="round"/>
@@ -1859,9 +1875,11 @@
         function openQRModal() {
             const modal = document.getElementById('qr-modal');
             const box = document.getElementById('qrcode-canvas-box');
+            const urlInput = document.getElementById('qr-share-url-input');
             if (!modal || !box) return;
             box.innerHTML = '';
             const currentUrl = window.location.href;
+            if (urlInput) urlInput.value = currentUrl;
             if (window.QRCode) {
                 new QRCode(box, {
                     text: currentUrl,
@@ -1876,13 +1894,19 @@
             }
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+            if (window.lucide) lucide.createIcons();
         }
 
-        function closeQRModal() {
-            const modal = document.getElementById('qr-modal');
-            if (modal) {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
+        function copyShareUrl() {
+            const urlInput = document.getElementById('qr-share-url-input');
+            if (!urlInput) return;
+            urlInput.select();
+            urlInput.setSelectionRange(0, 99999);
+            try {
+                document.execCommand('copy');
+                showToast('접속 링크가 클립보드에 복사되었습니다!', 'success');
+            } catch (err) {
+                showToast('링크 복사에 실패했습니다. 주소창을 직접 복사해 주세요.', 'error');
             }
         }
 
