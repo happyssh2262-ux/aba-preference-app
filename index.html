@@ -526,99 +526,145 @@
                     <span class="text-[11px] font-bold text-slate-500">현재 회차 날짜:</span>
                     <input type="date" id="current-session-date-input" onchange="updateCurrentSessionDate(this.value)" class="text-xs font-extrabold text-indigo-700 focus:outline-hidden">
                 </div>
+                <button onclick="confirmDeleteCurrentSession()" id="btn-delete-current-session" title="현재 선택된 평가 회차 삭제" class="px-3 py-2 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 hover:bg-rose-100 text-xs font-extrabold flex items-center gap-1 transition">
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    <span>현재 회차 삭제</span>
+                </button>
                 <button onclick="createNewDateSession()" class="px-3 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold flex items-center gap-1 transition shadow-xs">
                     <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i>
                     <span>+ 새 날짜(재평가) 추가</span>
                 </button>
-                <button onclick="confirmDeleteCurrentSession()" title="현재 회차 삭제" class="p-2 rounded-xl bg-white border border-rose-200 text-rose-600 hover:bg-rose-50 transition">
-                    <i data-lucide="trash" class="w-3.5 h-3.5"></i>
+            </div>
+        </section>
+
+        <!-- 평가 방식 선택 허브 (초기 선택 화면 & 뒤로가기 복귀 화면) -->
+        <section id="method-hub-screen" class="bg-white rounded-3xl p-5 sm:p-7 shadow-xs border border-slate-200 space-y-5 no-print">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
+                <div>
+                    <h2 class="text-base sm:text-lg font-extrabold text-slate-900">시행할 자극 선호도 평가 방식을 선택하세요</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">원하는 평가 방식을 선택하면 해당 기록 화면만 깔끔하게 열립니다. (언제든 상단 버튼으로 다시 돌아올 수 있습니다)</p>
+                </div>
+                <button onclick="selectEvaluationMethod('tab-report')" class="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 shadow-xs transition">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                    <span>종합 분석 리포트 바로보기</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button onclick="selectEvaluationMethod('tab-question')" class="group p-5 rounded-2xl bg-indigo-50/70 hover:bg-indigo-600 border-2 border-indigo-200 hover:border-indigo-600 text-left transition shadow-xs space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <span class="w-10 h-10 rounded-xl bg-indigo-600 group-hover:bg-white text-white group-hover:text-indigo-600 flex items-center justify-center transition">
+                            <i data-lucide="message-square-text" class="w-5 h-5"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black text-indigo-950 group-hover:text-white transition">질문하기</h3>
+                        <p class="text-xs text-slate-600 group-hover:text-indigo-100 mt-1 leading-relaxed transition">
+                            학생·부모·교사·의미 있는 타인 면담 및 중도 장애인을 위한 강화제 평가(RAISD) 기록
+                        </p>
+                    </div>
+                </button>
+
+                <button onclick="selectEvaluationMethod('tab-observe')" class="group p-5 rounded-2xl bg-emerald-50/70 hover:bg-emerald-600 border-2 border-emerald-200 hover:border-emerald-600 text-left transition shadow-xs space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <span class="w-10 h-10 rounded-xl bg-emerald-600 group-hover:bg-white text-white group-hover:text-emerald-600 flex items-center justify-center transition">
+                            <i data-lucide="timer" class="w-5 h-5"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black text-emerald-950 group-hover:text-white transition">관찰하기</h3>
+                        <p class="text-xs text-slate-600 group-hover:text-emerald-100 mt-1 leading-relaxed transition">
+                            고안된·자연적 자유 작동 환경에서 자극별 자발적 몰두 지속시간 동시 스톱워치 측정
+                        </p>
+                    </div>
+                </button>
+
+                <button onclick="selectEvaluationMethod('tab-trial')" class="group p-5 rounded-2xl bg-amber-50/70 hover:bg-amber-600 border-2 border-amber-200 hover:border-amber-600 text-left transition shadow-xs space-y-2.5">
+                    <div class="flex items-center justify-between">
+                        <span class="w-10 h-10 rounded-xl bg-amber-600 group-hover:bg-white text-white group-hover:text-amber-600 flex items-center justify-center transition">
+                            <i data-lucide="layers" class="w-5 h-5"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black text-amber-950 group-hover:text-white transition">시행 기반 평가</h3>
+                        <p class="text-xs text-slate-600 group-hover:text-amber-100 mt-1 leading-relaxed transition">
+                            단일 자극 · 짝 자극 · 중다 자극(MSW / MSWO) 체계적 제시 및 선호 위계 산출
+                        </p>
+                    </div>
                 </button>
             </div>
         </section>
 
-        <!-- 메인 4개 내비게이션 탭 -->
-        <nav class="bg-white p-1.5 rounded-2xl shadow-xs border border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-1.5 no-print">
-            <button onclick="switchMainTab('tab-question')" id="btn-tab-question" class="main-tab-btn py-3 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition">
-                <i data-lucide="message-square-text" class="w-4 h-4"></i>
-                <span>1. 질문하기</span>
+        <!-- 활성화된 평가 상단 뒤로가기 / 빠른 전환 바 -->
+        <nav id="active-method-topbar" class="hidden bg-white p-2.5 rounded-2xl shadow-xs border border-slate-200 flex-wrap items-center justify-between gap-2 no-print">
+            <button onclick="returnToMethodHub()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>평가 방식 다시 선택</span>
             </button>
-            <button onclick="switchMainTab('tab-observe')" id="btn-tab-observe" class="main-tab-btn py-3 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition">
-                <i data-lucide="timer" class="w-4 h-4"></i>
-                <span>2. 관찰하기</span>
-            </button>
-            <button onclick="switchMainTab('tab-trial')" id="btn-tab-trial" class="main-tab-btn py-3 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition">
-                <i data-lucide="layers" class="w-4 h-4"></i>
-                <span>3. 시행 기반 평가</span>
-            </button>
-            <button onclick="switchMainTab('tab-report')" id="btn-tab-report" class="main-tab-btn py-3 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition">
-                <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                <span>4. 종합 분석 리포트</span>
-            </button>
+            <div class="flex flex-wrap items-center gap-1.5">
+                <span id="active-method-title-badge" class="px-3 py-1.5 rounded-xl bg-indigo-50 text-indigo-800 border border-indigo-200 text-xs sm:text-sm font-black">
+                    질문하기 진행 중
+                </span>
+                <button onclick="selectEvaluationMethod('tab-report')" id="btn-quick-report" class="px-3.5 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                    <span>종합 분석 리포트 보기</span>
+                </button>
+            </div>
         </nav>
 
         <!-- ===================================================================== -->
-        <!-- 탭 1: 질문하기 (일반 질문하기 + 중도 장애인을 위한 평가 RAISD 통합)     -->
+        <!-- 탭 1: 질문하기 (질문하기 + 중도 장애인을 위한 평가 RAISD 통합)           -->
         <!-- ===================================================================== -->
-        <section id="tab-question" class="tab-content space-y-5">
-            <!-- 질문하기 서브 모드 전환 -->
-            <div class="bg-white p-2 rounded-2xl shadow-xs border border-slate-200 grid grid-cols-2 gap-2 no-print">
-                <button onclick="switchQuestionSubMode('general')" id="btn-qmode-general" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2">
+        <section id="tab-question" class="tab-content hidden space-y-5">
+            <!-- 질문하기 유형 전환 서브 바 -->
+            <div class="bg-white rounded-2xl p-3 shadow-xs border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-2 no-print">
+                <button onclick="switchQuestionSubMode('general')" id="btn-qmode-general" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-xs">
                     <i data-lucide="users" class="w-4 h-4"></i>
-                    <span>질문하기</span>
+                    <span>질문하기 (학생 · 부모 · 교사 · 의미 있는 타인)</span>
                 </button>
-                <button onclick="switchQuestionSubMode('raisd')" id="btn-qmode-raisd" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2">
+                <button onclick="switchQuestionSubMode('raisd')" id="btn-qmode-raisd" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200">
                     <i data-lucide="clipboard-list" class="w-4 h-4"></i>
                     <span>중도 장애인을 위한 강화제 평가 (RAISD)</span>
                 </button>
             </div>
 
-            <!-- [서브 A] 일반 질문하기 영역 -->
+            <!-- [서브 A] 질문하기 영역 -->
             <div id="q-sub-general" class="space-y-5">
                 <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
                     <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
                         <div>
-                            <h3 class="font-extrabold text-slate-800 text-base">질문하기</h3>
-                            <p class="text-xs text-slate-500 mt-0.5">음식·유형 및 활동·사회적·감각 강화제를 섞지 않고 <strong>강화제 유형별로 분리</strong>하여 대상자별 5점 척도와 순위를 기록합니다.</p>
+                            <h3 class="font-extrabold text-slate-800 text-base">질문하기 (간접 평가)</h3>
+                            <p class="text-xs text-slate-500 mt-0.5">학생, 부모, 교사, 의미 있는 타인에게 개방형 질문·5점 척도 평정·순위형 선택을 실시합니다.</p>
                         </div>
-                        <div class="flex items-center gap-2 bg-indigo-50 px-3.5 py-2 rounded-xl border border-indigo-100">
-                            <i data-lucide="calendar" class="w-4 h-4 text-indigo-600"></i>
-                            <span class="text-xs font-bold text-indigo-900">기본 기준일:</span>
-                            <input type="date" id="q-base-date" onchange="updateQuestionBaseDate(this.value)" class="bg-white px-2.5 py-1 rounded-lg border border-indigo-200 text-xs font-bold text-slate-800">
+                        <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+                            <span class="text-xs font-bold text-slate-600">기준 면담일:</span>
+                            <input type="date" id="q-base-date" onchange="updateQuestionBaseDate(this.value)" class="bg-white px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold">
                         </div>
                     </div>
 
-                    <!-- 강화제 유형 선택 바 -->
                     <div class="space-y-1.5">
-                        <label class="block text-xs font-bold text-slate-600">평가할 강화제 유형 선택 (유형별로 자극을 분리하여 조사합니다)</label>
+                        <label class="block text-xs font-bold text-slate-600">강화제 유형 선택</label>
                         <div id="q-category-selector" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
                     </div>
 
-                    <!-- 대상자 중복 선택 -->
-                    <div class="space-y-2">
-                        <label class="block text-xs font-bold text-slate-600">질문 대상자 선택 (중복 선택 가능 · 체크 시 하단에 대상자별 기록지 생성)</label>
+                    <div class="space-y-2 pt-2 border-t border-slate-100">
+                        <label class="block text-xs font-bold text-slate-600">질문 대상자 선택 (복수 선택 가능)</label>
                         <div id="q-respondent-toggles" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
-                    </div>
-
-                    <!-- 의미 있는 타인 직접 기입란 -->
-                    <div id="q-other-relation-box" class="hidden bg-amber-50/80 border border-amber-200 rounded-xl p-3 flex flex-wrap items-center gap-3">
-                        <span class="text-xs font-extrabold text-amber-900">의미 있는 타인 관계 / 성함 직접 기입:</span>
-                        <input type="text" id="q-other-relation-input" oninput="updateOtherRelationLabel(this.value)" placeholder="예: 활동지원사 김민수, 언어치료사 박OO, 조부모 등" class="flex-1 min-w-[220px] px-3 py-1.5 rounded-lg border border-amber-300 bg-white text-xs font-bold">
-                    </div>
-
-                    <!-- 선택된 유형의 평가 자극 목록 관리 -->
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span id="q-stimuli-list-title" class="text-xs font-bold text-slate-700">선택된 유형의 평가 자극 목록 (이름 클릭 시 즉시 수정)</span>
+                        <div id="q-other-relation-box" class="hidden pt-1">
+                            <input type="text" id="q-other-relation-input" oninput="updateOtherRelationLabel(this.value)" placeholder="의미 있는 타인의 관계 기입 (예: 활동지원사, 조부모, 언어치료사)" class="w-full sm:w-96 px-3 py-1.5 rounded-xl border border-indigo-300 bg-indigo-50/40 text-xs font-bold">
                         </div>
-                        <div class="flex gap-2 no-print">
-                            <input type="text" id="q-new-stimulus" onkeypress="if(event.key==='Enter') addQuestionStimulus()" placeholder="현재 선택된 강화제 유형에 새 자극 추가 후 Enter" class="flex-1 px-3 py-2 rounded-xl border border-slate-300 text-sm bg-white">
-                            <button onclick="addQuestionStimulus()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 transition">+ 자극 추가</button>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2.5 no-print">
+                        <div id="q-stimuli-list-title" class="text-xs font-extrabold text-slate-700">평가 자극 목록</div>
+                        <div class="flex gap-2">
+                            <input type="text" id="q-new-stimulus" onkeypress="if(event.key==='Enter') addQuestionStimulus()" placeholder="새 자극 추가 후 Enter" class="flex-1 px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm">
+                            <button onclick="addQuestionStimulus()" class="px-4 py-2 rounded-xl bg-slate-800 text-white text-xs sm:text-sm font-bold hover:bg-slate-900 transition">+ 추가</button>
                         </div>
                         <div id="q-stimuli-tags" class="flex flex-wrap gap-2"></div>
                     </div>
                 </div>
 
-                <!-- 대상자별 개별 기록 카드 컨테이너 -->
                 <div id="q-respondent-cards" class="space-y-5"></div>
             </div>
 
@@ -694,15 +740,17 @@
                             <span class="text-xs sm:text-sm font-extrabold">Ⅲ. 도출된 선호 자극 우선순위 정리 및 선호도 평가 진행 여부</span>
                             <button onclick="addRaisdRankRow()" class="px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white text-xs font-bold no-print">+ 순위 행 추가</button>
                         </div>
-                        <div class="overflow-x-auto">
+                        <!-- 모바일 세로 글자 깨짐 방지를 위한 반응형 리스트(모바일 카드형 + 태블릿/PC 표형) -->
+                        <div id="raisd-ranks-mobile-list" class="space-y-2.5 sm:hidden"></div>
+                        <div class="hidden sm:block overflow-x-auto">
                             <table class="w-full text-xs sm:text-sm border-collapse border border-slate-400">
                                 <thead>
                                     <tr class="bg-slate-100 text-slate-800 font-extrabold">
-                                        <th class="border border-slate-400 py-2 px-2 text-center w-16">순위</th>
-                                        <th class="border border-slate-400 py-2 px-3 text-left">선호 자극명 (구체적 사물/활동)</th>
-                                        <th class="border border-slate-400 py-2 px-3 text-left">강화제 유형 / 제시 조건 메모</th>
-                                        <th class="border border-slate-400 py-2 px-2 text-center w-36">선호도 평가 진행 여부</th>
-                                        <th class="border border-slate-400 py-2 px-1 text-center w-10 no-print">삭제</th>
+                                        <th class="border border-slate-400 py-2 px-2 text-center w-16 whitespace-nowrap">순위</th>
+                                        <th class="border border-slate-400 py-2 px-3 text-left whitespace-nowrap">선호 자극명 (구체적 사물/활동)</th>
+                                        <th class="border border-slate-400 py-2 px-3 text-left whitespace-nowrap">강화제 유형 / 제시 조건 메모</th>
+                                        <th class="border border-slate-400 py-2 px-2 text-center w-36 whitespace-nowrap">선호도 평가 진행 여부</th>
+                                        <th class="border border-slate-400 py-2 px-1 text-center w-12 whitespace-nowrap no-print">삭제</th>
                                     </tr>
                                 </thead>
                                 <tbody id="raisd-ranks-tbody"></tbody>
@@ -1398,7 +1446,7 @@
             googleUser: null,
             students: {}
         };
-        let activeMainTab = 'tab-question';
+        let activeMainTab = null;
         let activeQuestionSubMode = 'general';
         let activeTrialSubTab = 'sub-single';
         let obsTickInterval = null;
@@ -1406,6 +1454,7 @@
         let activeSSTrialTimerId = null;
         let studentInfoExpanded = true;
         let cloudSaveTimer = null;
+        let isLocalDeletingSession = false;
         let deferredInstallPrompt = null;
 
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -1427,23 +1476,34 @@
                 deferredInstallPrompt = null;
                 return;
             }
-            const ua = navigator.userAgent || '';
-            const isInApp = /KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line/i.test(ua);
-            if (isInApp) {
-                openCustomModal(
-                    '외부 브라우저(크롬·사파리)에서 열어주세요',
-                    '현재 카카오톡/네이버 내부 창에서 열려 있어 설치 버튼이 제한됩니다. 오른쪽 위(또는 아래) 점 3개(⋮) 메뉴를 눌러 [다른 브라우저로 열기]를 선택한 뒤 다시 눌러주세요!'
-                );
-            } else if (/iPhone|iPad|iPod/i.test(ua)) {
-                openCustomModal(
-                    '아이폰 · 아이패드 앱 설치 방법',
-                    'Safari 화면 맨 아래 가운데 [공유(⬆️)] 버튼을 누른 뒤, 아래로 내려 [홈 화면에 추가]를 누르시면 단독 앱으로 설치됩니다.'
-                );
-            } else {
-                openCustomModal(
-                    '브라우저 메뉴에서 앱 설치하기',
-                    '브라우저 오른쪽 위 점 3개(⋮) 또는 줄 3개(≡) 메뉴를 누른 뒤 [앱 설치] 또는 [홈 화면에 추가]를 선택해 주세요.'
-                );
+            showToast('브라우저 메뉴(⋮ 또는 공유 버튼)에서 [앱 설치] 또는 [홈 화면에 추가]를 선택해 주세요.');
+        }
+
+        function closeQRModal() {
+            const modal = document.getElementById('qr-modal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function saveState(immediate = false) {
+            if (!appState.googleUser || !appState.googleUser.uid) return;
+            const uid = appState.googleUser.uid;
+            const curStu = getCurrentStudent();
+            if (window.cloudAuthBridge && window.cloudAuthBridge.isConfigured()) {
+                if (cloudSaveTimer) clearTimeout(cloudSaveTimer);
+                if (immediate) {
+                    window.cloudAuthBridge.saveStudentToCloud(uid, curStu).catch((e) => {
+                        console.warn('클라우드 즉시 저장 오류:', e);
+                    });
+                } else {
+                    cloudSaveTimer = setTimeout(() => {
+                        window.cloudAuthBridge.saveStudentToCloud(uid, curStu).catch((e) => {
+                            console.warn('클라우드 저장 지연:', e);
+                        });
+                    }, 400);
+                }
             }
         }
 
@@ -1720,20 +1780,6 @@
         // =========================================================================
         // 2. 저장/불러오기, 모달, 토스트, 화면 전환 (클라우드 개인 격리 동기화)
         // =========================================================================
-        function saveState() {
-            if (!appState.googleUser || !appState.googleUser.uid) return;
-            const uid = appState.googleUser.uid;
-            const curStu = getCurrentStudent();
-            if (window.cloudAuthBridge && window.cloudAuthBridge.isConfigured()) {
-                if (cloudSaveTimer) clearTimeout(cloudSaveTimer);
-                cloudSaveTimer = setTimeout(() => {
-                    window.cloudAuthBridge.saveStudentToCloud(uid, curStu).catch((e) => {
-                        console.warn('클라우드 저장 지연:', e);
-                    });
-                }, 400);
-            }
-        }
-
         function loadState() {
             const defaultId = 'stu_default_1';
             appState.students[defaultId] = createEmptyStudent(defaultId, '신길동', '특수교사 신OO');
@@ -1766,6 +1812,7 @@
         };
 
         window.syncStudentsFromCloud = function(cloudStudentsMap) {
+            if (isLocalDeletingSession) return;
             const keys = Object.keys(cloudStudentsMap || {});
             if (keys.length === 0) {
                 // 첫 로그인 사용자의 경우 기본 학생 템플릿을 본인 클라우드 경로에 초기 생성
@@ -1777,7 +1824,7 @@
                 );
                 appState.students = { [defaultId]: initStu };
                 appState.currentStudentId = defaultId;
-                saveState();
+                saveState(true);
             } else {
                 appState.students = cloudStudentsMap;
                 if (!appState.currentStudentId || !appState.students[appState.currentStudentId]) {
@@ -1956,6 +2003,168 @@
         // =========================================================================
         // 3. 학생 관리 및 탭 전환 함수
         // =========================================================================
+        function toggleStudentInfoCard() {
+            studentInfoExpanded = !studentInfoExpanded;
+            const body = document.getElementById('student-info-body');
+            const label = document.getElementById('toggle-student-info-label');
+            const icon = document.getElementById('toggle-student-info-icon');
+            if (body) body.classList.toggle('hidden', !studentInfoExpanded);
+            if (label) label.textContent = studentInfoExpanded ? '학생 정보 접기' : '학생 정보 펼치기';
+            if (icon) icon.style.transform = studentInfoExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+            updateStudentSummaryBadge();
+        }
+
+        function updateStudentSummaryBadge() {
+            const stu = getCurrentStudent();
+            const badge = document.getElementById('student-info-summary-badge');
+            if (!badge) return;
+            const parts = [stu.meta.name || '이름 없음'];
+            if (stu.meta.age) parts.push(stu.meta.age);
+            badge.textContent = parts.join(' · ');
+            badge.classList.toggle('hidden', studentInfoExpanded);
+        }
+
+        function updateStudentMeta(field, val) {
+            const stu = getCurrentStudent();
+            stu.meta[field] = val;
+            if (field === 'name') {
+                renderStudentSelector();
+                const raisdName = document.getElementById('raisd-disp-name');
+                if (raisdName) raisdName.textContent = val || '신길동';
+            }
+            updateStudentSummaryBadge();
+            saveState();
+        }
+
+        function updateStudentFactor(field, val) {
+            const stu = getCurrentStudent();
+            stu.factors[field] = val;
+            saveState();
+        }
+
+        function switchStudent(studentId) {
+            if (!appState.students[studentId]) return;
+            pauseAllObsTimers();
+            stopSSTrialTimer();
+            appState.currentStudentId = studentId;
+            renderAll();
+        }
+
+        function createNewStudent() {
+            const newId = 'stu_' + Date.now();
+            const count = Object.keys(appState.students).length + 1;
+            const curEvaluator = getCurrentStudent().meta.evaluator || '특수교사 신OO';
+            appState.students[newId] = createEmptyStudent(newId, `새 학생 ${count}`, curEvaluator);
+            appState.currentStudentId = newId;
+            saveState(true);
+            renderAll();
+            showToast('새 학생 프로필이 추가되었습니다.', 'success');
+        }
+
+        function confirmDeleteStudent() {
+            const ids = Object.keys(appState.students);
+            if (ids.length <= 1) {
+                showToast('최소 1명의 학생 프로필은 유지되어야 합니다.', 'error');
+                return;
+            }
+            const stu = getCurrentStudent();
+            openCustomModal('학생 프로필 삭제', `[${stu.meta.name}] 학생의 모든 평가 기록을 삭제하시겠습니까?`, () => {
+                delete appState.students[stu.id];
+                appState.currentStudentId = Object.keys(appState.students)[0];
+                renderAll();
+                showToast('학생 프로필이 삭제되었습니다.');
+            });
+        }
+
+        function switchDateSession(sessionId) {
+            const stu = getCurrentStudent();
+            if (!stu.sessions[sessionId]) return;
+            pauseAllObsTimers();
+            stopSSTrialTimer();
+            stu.currentSessionId = sessionId;
+            saveState();
+            renderAll();
+        }
+
+        function updateCurrentSessionDate(newDate) {
+            if (!newDate) return;
+            const sess = getCurrentSession();
+            sess.date = newDate;
+            sess.question.baseDate = newDate;
+            sess.observe.date = newDate;
+            sess.raisd.date = newDate;
+            Object.values(sess.trial.byCat).forEach(catData => {
+                catData.singleStimulus.date = newDate;
+                catData.pairedStimulus.date = newDate;
+                catData.msw.date = newDate;
+                catData.mswo.date = newDate;
+            });
+            saveState();
+            renderAll();
+        }
+
+        function createNewDateSession() {
+            const stu = getCurrentStudent();
+            const nextNum = Object.keys(stu.sessions).length + 1;
+            const newId = `sess_${nextNum}_${Date.now()}`;
+            const today = getTodayStr();
+            stu.sessions[newId] = createSessionPayload(newId, today, `${nextNum}차 평가`, stu.meta.evaluator);
+            stu.currentSessionId = newId;
+            saveState(true);
+            renderAll();
+            showToast(`${nextNum}차 날짜 평가 회차가 추가되었습니다.`, 'success');
+        }
+
+        function loadSampleData() {
+            const stu = getCurrentStudent();
+            const sess = getCurrentSession(stu);
+            stu.meta.name = '신길동';
+            stu.meta.age = '만 9세 (초3)';
+            stu.factors = {
+                exp: '비눗방울과 멜로디 장난감에 즉각적인 미소와 접근 반응을 보임',
+                req: '평소 교실 내 자유놀이 시간이 제한되어 감각 자극 요구가 높음',
+                sus: '과일 젤리는 포만감 예방을 위해 소량씩 나누어 제공 필요',
+                note: '작은 소품의 구강 탐색 경향이 있어 안전 크기 확인 필수'
+            };
+
+            const qCat = sess.question.recordsByCat.sensory;
+            if (qCat && qCat.parent && qCat.teacher) {
+                qCat.parent.openAnswer = '집에서 비눗방울 불어주기와 동요 멜로디 버튼을 누르며 10분 이상 즐겁게 놉니다.';
+                qCat.parent.ratings = { '비눗방울': 5, '촉각 탱탱볼': 4, '동요 멜로디': 5, '반짝이 팽이': 3, '모래/슬라임 촉감': 2, 'LED 라이트 볼': 4 };
+                qCat.parent.ranks = { r1: '비눗방울', r2: '동요 멜로디', r3: '촉각 탱탱볼', r4: '', r5: '' };
+
+                qCat.teacher.openAnswer = '쉬는 시간에 비눗방울과 LED 라이트 볼을 가장 먼저 집어 들고 시선을 고정합니다.';
+                qCat.teacher.ratings = { '비눗방울': 5, '촉각 탱탱볼': 3, '동요 멜로디': 4, '반짝이 팽이': 4, '모래/슬라임 촉감': 2, 'LED 라이트 볼': 5 };
+                qCat.teacher.ranks = { r1: '비눗방울', r2: 'LED 라이트 볼', r3: '동요 멜로디', r4: '', r5: '' };
+            }
+
+            sess.observe.targetMin = 5;
+            sess.observe.items = [
+                { id: 'obs_s1', name: '비눗방울', elapsedSec: 135, isRunning: false, lastTick: null },
+                { id: 'obs_s2', name: '동요 멜로디', elapsedSec: 82, isRunning: false, lastTick: null },
+                { id: 'obs_s3', name: 'LED 라이트 볼', elapsedSec: 54, isRunning: false, lastTick: null },
+                { id: 'obs_s4', name: '자석 블록', elapsedSec: 21, isRunning: false, lastTick: null }
+            ];
+
+            const mswo = sess.trial.byCat.sensory.mswo;
+            mswo.rounds = [
+                { roundNum: 1, order: ['비눗방울', 'LED 라이트 볼', '동요 멜로디', '촉각 탱탱볼', '반짝이 팽이', '모래/슬라임 촉감'] },
+                { roundNum: 2, order: ['비눗방울', '동요 멜로디', 'LED 라이트 볼', '반짝이 팽이', '촉각 탱탱볼', '모래/슬라임 촉감'] }
+            ];
+
+            sess.report = {
+                catEdible: '과일 젤리, 미니 크래커',
+                catTangible: '자석 블록, 스티커북',
+                catSocial: '하이파이브, 밝은 언어적 칭찬',
+                catSensory: '비눗방울, 동요 멜로디, LED 라이트 볼',
+                memo: '1순위 잠재적 강화제인 [비눗방울]과 [동요 멜로디]를 과제 완료 직후 15초간 제공하여 표적행동(착석 및 과제 수행) 빈도가 실제로 증가하는지 강화제 평가를 진행함.'
+            };
+
+            saveState(true);
+            renderAll();
+            showToast('예시 평가 데이터가 채워졌습니다!', 'success');
+        }
+
         function renderStudentSelector() {
             const sel = document.getElementById('student-selector');
             if (!sel) return;
@@ -1976,203 +2185,104 @@
             listEl.innerHTML = sessions.map((s, idx) => {
                 const isActive = s.id === stu.currentSessionId;
                 return `
-                    <button onclick="switchDateSession('${s.id}')" class="px-3 py-1.5 rounded-xl text-xs font-extrabold transition flex items-center gap-1.5 ${isActive ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-700 border border-indigo-200 hover:bg-indigo-100'}">
-                        <span>${idx + 1}차 (${escapeHtml(s.date || '날짜미정')})</span>
-                    </button>
+                    <div class="inline-flex items-center rounded-xl overflow-hidden border ${isActive ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs' : 'bg-white text-slate-700 border-indigo-200'}">
+                        <button onclick="switchDateSession('${s.id}')" class="px-3 py-1.5 text-xs font-extrabold transition ${isActive ? 'hover:bg-indigo-700' : 'hover:bg-indigo-50'}">
+                            ${idx + 1}차 (${escapeHtml(s.date || '날짜미정')})
+                        </button>
+                        ${sessions.length > 1 ? `
+                            <button onclick="confirmDeleteSessionById('${s.id}')" title="이 회차 삭제" class="px-2 py-1.5 text-xs font-black transition border-l ${isActive ? 'border-indigo-500 hover:bg-rose-600 text-indigo-100 hover:text-white' : 'border-indigo-100 hover:bg-rose-50 text-slate-400 hover:text-rose-600'}">
+                                &times;
+                            </button>
+                        ` : ''}
+                    </div>
                 `;
             }).join('');
 
             const dateInput = document.getElementById('current-session-date-input');
             if (dateInput) dateInput.value = curSess.date || getTodayStr();
-        }
 
-        function switchDateSession(sessionId) {
-            const stu = getCurrentStudent();
-            if (!stu.sessions[sessionId]) return;
-            pauseAllObsTimers();
-            stopSSTrialTimer();
-            stu.currentSessionId = sessionId;
-            saveState();
-            renderAll();
-            const curSess = getCurrentSession(stu);
-            showToast(`${curSess.date} 평가 회차로 전환되었습니다.`);
-        }
-
-        function updateCurrentSessionDate(newDate) {
-            if (!newDate) return;
-            const stu = getCurrentStudent();
-            const sess = getCurrentSession(stu);
-            sess.date = newDate;
-            sess.question.baseDate = newDate;
-            sess.observe.date = newDate;
-            sess.raisd.date = newDate;
-            Object.values(sess.trial.byCat).forEach(catData => {
-                catData.singleStimulus.date = newDate;
-                catData.pairedStimulus.date = newDate;
-                catData.msw.date = newDate;
-                catData.mswo.date = newDate;
-            });
-            saveState();
-            renderAll();
-        }
-
-        function createNewDateSession() {
-            pauseAllObsTimers();
-            stopSSTrialTimer();
-            const stu = getCurrentStudent();
-            const prevSess = getCurrentSession(stu);
-            const nextNum = Object.keys(stu.sessions).length + 1;
-            const newId = 'sess_' + nextNum + '_' + Date.now();
-            const today = getTodayStr();
-            const newSess = createSessionPayload(newId, today, `${nextNum}차 재평가`, stu.meta.evaluator);
-
-            // 이전 회차에 등록해 둔 자극 항목 이름들을 그대로 승계하여 재평가 편의성 극대화
-            REINFORCER_CATEGORIES.forEach(cat => {
-                if (prevSess.question.stimuliByCat[cat.id]) {
-                    newSess.question.stimuliByCat[cat.id] = [...prevSess.question.stimuliByCat[cat.id]];
-                    newSess.question.stimuliByCat[cat.id].forEach(s => {
-                        Object.values(newSess.question.recordsByCat[cat.id]).forEach(r => { r.ratings[s] = 3; });
-                    });
-                }
-                const prevTrial = prevSess.trial.byCat[cat.id];
-                if (prevTrial) {
-                    newSess.trial.byCat[cat.id].singleStimulus.items = [...prevTrial.singleStimulus.items];
-                    newSess.trial.byCat[cat.id].pairedStimulus.items = [...prevTrial.pairedStimulus.items];
-                    newSess.trial.byCat[cat.id].pairedStimulus.pairs = buildPairsFromItems(prevTrial.pairedStimulus.items, false);
-                    newSess.trial.byCat[cat.id].msw.pool = [...prevTrial.msw.pool];
-                    newSess.trial.byCat[cat.id].msw.currentArray = prevTrial.msw.pool.slice(0, newSess.trial.byCat[cat.id].msw.arraySize);
-                    newSess.trial.byCat[cat.id].mswo.baseItems = [...prevTrial.mswo.baseItems];
-                    newSess.trial.byCat[cat.id].mswo.activeArray = [...prevTrial.mswo.baseItems];
-                }
-            });
-            if (prevSess.observe && prevSess.observe.items) {
-                newSess.observe.items = prevSess.observe.items.map((it, i) => ({
-                    id: `obs_re_${i}_${Date.now()}`,
-                    name: it.name,
-                    elapsedSec: 0,
-                    isRunning: false,
-                    lastTick: null
-                }));
+            const delBtn = document.getElementById('btn-delete-current-session');
+            if (delBtn) {
+                delBtn.classList.toggle('hidden', sessions.length <= 1);
             }
-
-            stu.sessions[newId] = newSess;
-            stu.currentSessionId = newId;
-            saveState();
-            renderAll();
-            showToast(`${nextNum}차 재평가 회차(${today})가 생성되었습니다. 상단에서 날짜를 변경할 수 있습니다.`, 'success');
         }
-
-        function confirmDeleteCurrentSession() {
+        function confirmDeleteSessionById(sessionId) {
             const stu = getCurrentStudent();
             const ids = Object.keys(stu.sessions);
             if (ids.length <= 1) {
                 showToast('최소 1개의 날짜 평가 회차는 유지되어야 합니다.', 'error');
                 return;
             }
-            const curSess = getCurrentSession(stu);
-            openCustomModal('평가 회차 삭제', `${curSess.date} 평가 회차 기록을 삭제하시겠습니까?`, () => {
-                delete stu.sessions[curSess.id];
-                stu.currentSessionId = Object.keys(stu.sessions)[0];
-                saveState();
+            const targetSess = stu.sessions[sessionId];
+            if (!targetSess) return;
+            openCustomModal('평가 회차 삭제', `[${targetSess.date}] 평가 회차 기록을 영구 삭제하시겠습니까?`, () => {
+                if (cloudSaveTimer) clearTimeout(cloudSaveTimer);
+                isLocalDeletingSession = true;
+                delete stu.sessions[sessionId];
+                if (stu.currentSessionId === sessionId) {
+                    stu.currentSessionId = Object.keys(stu.sessions)[0];
+                }
+                saveState(true);
                 renderAll();
-                showToast('해당 평가 회차가 삭제되었습니다.');
+                showToast(`[${targetSess.date}] 평가 회차가 삭제되었습니다.`);
+                setTimeout(() => { isLocalDeletingSession = false; }, 1500);
             });
         }
 
-        function switchStudent(stuId) {
-            if (!appState.students[stuId]) return;
-            pauseAllObsTimers();
-            stopSSTrialTimer();
-            appState.currentStudentId = stuId;
-            saveState();
-            renderAll();
-        }
-
-        function createNewStudent() {
-            pauseAllObsTimers();
-            stopSSTrialTimer();
-            const count = Object.keys(appState.students).length + 1;
-            const newId = 'stu_' + Date.now();
-            appState.students[newId] = createEmptyStudent(newId, `학생 ${count}`, '특수교사 신OO');
-            appState.currentStudentId = newId;
-            saveState();
-            renderAll();
-            showToast(`새 학생 기록지(학생 ${count})가 생성되었습니다.`, 'success');
-        }
-
-        function confirmDeleteStudent() {
-            const ids = Object.keys(appState.students);
-            if (ids.length <= 1) {
-                showToast('최소 1명의 학생 기록지는 유지되어야 합니다.', 'error');
-                return;
-            }
-            const cur = getCurrentStudent();
-            openCustomModal('학생 기록지 삭제', `'${cur.meta.name}' 학생의 모든 평가 기록을 삭제하시겠습니까?`, () => {
-                delete appState.students[cur.id];
-                appState.currentStudentId = Object.keys(appState.students)[0];
-                saveState();
-                renderAll();
-                showToast('삭제되었습니다.');
-            });
-        }
-
-        function updateStudentMeta(field, val) {
+        function confirmDeleteCurrentSession() {
             const stu = getCurrentStudent();
-            stu.meta[field] = val;
-            saveState();
-            updateStudentSummaryBadge();
-            if (field === 'name') {
-                renderStudentSelector();
-                const disp = document.getElementById('raisd-disp-name');
-                if (disp) disp.textContent = val || '이름 미입력';
-            }
+            confirmDeleteSessionById(stu.currentSessionId);
         }
-
-        function updateStudentFactor(field, val) {
-            getCurrentStudent().factors[field] = val;
-            saveState();
-        }
-
-        function updateStudentSummaryBadge() {
-            const stu = getCurrentStudent();
-            const badge = document.getElementById('student-info-summary-badge');
-            if (!badge) return;
-            const namePart = stu.meta.name || '이름 미입력';
-            const agePart = stu.meta.age ? ` · ${stu.meta.age}` : '';
-            badge.textContent = `${namePart}${agePart}`;
-        }
-
-        function toggleStudentInfoCard() {
-            studentInfoExpanded = !studentInfoExpanded;
-            const body = document.getElementById('student-info-body');
-            const label = document.getElementById('toggle-student-info-label');
-            const icon = document.getElementById('toggle-student-info-icon');
-            const badge = document.getElementById('student-info-summary-badge');
-
-            if (body) body.classList.toggle('hidden', !studentInfoExpanded);
-            if (label) label.textContent = studentInfoExpanded ? '학생 정보 접기' : '학생 정보 펼치기';
-            if (icon) icon.style.transform = studentInfoExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
-            if (badge) {
-                updateStudentSummaryBadge();
-                badge.classList.toggle('hidden', studentInfoExpanded);
-            }
-        }
-
-        function switchMainTab(tabId) {
+        function selectEvaluationMethod(tabId) {
             activeMainTab = tabId;
+            const hub = document.getElementById('method-hub-screen');
+            const topbar = document.getElementById('active-method-topbar');
+            const titleBadge = document.getElementById('active-method-title-badge');
+            const quickReportBtn = document.getElementById('btn-quick-report');
+
+            if (hub) hub.classList.add('hidden');
+            if (topbar) {
+                topbar.classList.remove('hidden');
+                topbar.classList.add('flex');
+            }
+
+            const labels = {
+                'tab-question': '질문하기 진행 중',
+                'tab-observe': '관찰하기 진행 중',
+                'tab-trial': '시행 기반 평가 진행 중',
+                'tab-report': '종합 분석 리포트 조회 중'
+            };
+            if (titleBadge) titleBadge.textContent = labels[tabId] || '';
+            if (quickReportBtn) quickReportBtn.classList.toggle('hidden', tabId === 'tab-report');
+
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             const target = document.getElementById(tabId);
             if (target) target.classList.remove('hidden');
 
-            document.querySelectorAll('.main-tab-btn').forEach(btn => {
-                const isSelected = btn.id === 'btn-' + tabId;
-                btn.className = isSelected
-                    ? 'main-tab-btn py-3 px-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-1.5 transition bg-indigo-600 text-white shadow-xs'
-                    : 'main-tab-btn py-3 px-3 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition text-slate-600 hover:bg-slate-100';
-            });
-
             if (tabId === 'tab-report') renderReportTab();
             if (tabId === 'tab-observe') renderObserveTab();
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function returnToMethodHub() {
+            activeMainTab = null;
+            const hub = document.getElementById('method-hub-screen');
+            const topbar = document.getElementById('active-method-topbar');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            if (topbar) {
+                topbar.classList.add('hidden');
+                topbar.classList.remove('flex');
+            }
+            if (hub) hub.classList.remove('hidden');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function switchMainTab(tabId) {
+            if (!tabId) {
+                returnToMethodHub();
+            } else {
+                selectEvaluationMethod(tabId);
+            }
         }
 
         function switchTrialSubTab(subId) {
@@ -2192,6 +2302,15 @@
         // =========================================================================
         // 4. 탭 1: 질문하기 & 중도 장애인을 위한 강화제 평가 (RAISD)
         // =========================================================================
+        function shuffleArray(arr) {
+            const copy = [...arr];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
         function switchQuestionSubMode(mode) {
             activeQuestionSubMode = mode;
             const genEl = document.getElementById('q-sub-general');
@@ -2214,25 +2333,33 @@
             }
         }
 
+        function updateQuestionBaseDate(val) {
+            const sess = getCurrentSession();
+            sess.question.baseDate = val;
+            saveState();
+        }
+
         function setQuestionCategory(catId) {
-            getCurrentSession().question.activeCategory = catId;
+            const sess = getCurrentSession();
+            sess.question.activeCategory = catId;
             saveState();
             renderQuestionTab();
         }
 
-        function updateQuestionBaseDate(val) {
-            getCurrentSession().question.baseDate = val;
-            saveState();
-        }
-
         function toggleRespondent(respId) {
-            const q = getCurrentSession().question;
-            const idx = q.selectedRespondents.indexOf(respId);
+            const sess = getCurrentSession();
+            const list = sess.question.selectedRespondents || [];
+            const idx = list.indexOf(respId);
             if (idx >= 0) {
-                q.selectedRespondents.splice(idx, 1);
+                if (list.length <= 1) {
+                    showToast('최소 1명의 질문 대상자는 선택되어야 합니다.', 'error');
+                    return;
+                }
+                list.splice(idx, 1);
             } else {
-                q.selectedRespondents.push(respId);
+                list.push(respId);
             }
+            sess.question.selectedRespondents = list;
             saveState();
             renderQuestionTab();
         }
@@ -2240,7 +2367,7 @@
         function updateOtherRelationLabel(val) {
             getCurrentSession().question.otherRelationLabel = val;
             saveState();
-            renderQuestionRespondentCards();
+            renderQuestionTab();
         }
 
         function addQuestionStimulus() {
@@ -2257,186 +2384,162 @@
             input.value = '';
         }
 
-        function renameQuestionStimulus(oldName, newName) {
-            const trimmed = newName.trim();
-            if (!trimmed || trimmed === oldName) return;
+        function removeQuestionStimulus(idx) {
             const { stimuli, records } = getActiveQCatData();
-            const idx = stimuli.indexOf(oldName);
-            if (idx >= 0) {
-                stimuli[idx] = trimmed;
-                Object.values(records).forEach(r => {
-                    if (r.ratings[oldName] !== undefined) {
-                        r.ratings[trimmed] = r.ratings[oldName];
-                        delete r.ratings[oldName];
-                    }
-                    ['r1', 'r2', 'r3', 'r4', 'r5'].forEach(rk => {
-                        if (r.ranks[rk] === oldName) r.ranks[rk] = trimmed;
-                    });
-                });
-                saveState();
-                renderQuestionTab();
-            }
-        }
-
-        function removeQuestionStimulus(name) {
-            const { catId, stimuli, records } = getActiveQCatData();
-            getCurrentSession().question.stimuliByCat[catId] = stimuli.filter(s => s !== name);
-            Object.values(records).forEach(r => { delete r.ratings[name]; });
+            const target = stimuli[idx];
+            stimuli.splice(idx, 1);
+            Object.values(records).forEach(r => { delete r.ratings[target]; });
             saveState();
             renderQuestionTab();
         }
 
-        function updateRespondentField(respId, field, val) {
+        function updateRespondentAnswer(respId, field, val) {
             const { records } = getActiveQCatData();
-            if (!records[respId]) records[respId] = createDefaultRespondentRecord(getTodayStr());
+            if (!records[respId]) records[respId] = createDefaultRespondentRecord();
             records[respId][field] = val;
             saveState();
         }
 
-        function setRespondentRating(respId, stimulus, score) {
+        function setRespondentRating(respId, stim, score) {
             const { records } = getActiveQCatData();
-            if (!records[respId]) records[respId] = createDefaultRespondentRecord(getTodayStr());
-            records[respId].ratings[stimulus] = score;
+            if (!records[respId]) records[respId] = createDefaultRespondentRecord();
+            records[respId].ratings[stim] = score;
             saveState();
-            renderQuestionRespondentCards();
+            renderQuestionTab();
         }
 
-        function setRespondentRank(respId, rankKey, val) {
+        function setRespondentRank(respId, rankKey, stimVal) {
             const { records } = getActiveQCatData();
-            if (!records[respId]) records[respId] = createDefaultRespondentRecord(getTodayStr());
-            records[respId].ranks[rankKey] = val;
+            if (!records[respId]) records[respId] = createDefaultRespondentRecord();
+            records[respId].ranks[rankKey] = stimVal;
             saveState();
         }
 
         function renderQuestionTab() {
-            const stu = getCurrentStudent();
-            const sess = getCurrentSession(stu);
-            const { catId, stimuli } = getActiveQCatData(stu);
+            const sess = getCurrentSession();
+            const { catId, stimuli, records } = getActiveQCatData();
             const catMeta = getCategoryMeta(catId);
 
-            document.getElementById('q-base-date').value = sess.question.baseDate || sess.date || getTodayStr();
+            const dateEl = document.getElementById('q-base-date');
+            if (dateEl) dateEl.value = sess.question.baseDate || sess.date || getTodayStr();
+
             renderCategoryButtons('q-category-selector', catId, 'setQuestionCategory');
 
-            document.getElementById('q-respondent-toggles').innerHTML = RESPONDENT_TYPES.map(rt => {
-                const checked = sess.question.selectedRespondents.includes(rt.id);
-                return `
-                    <button onclick="toggleRespondent('${rt.id}')" class="p-2.5 rounded-xl border text-xs font-extrabold flex items-center justify-center gap-2 transition ${checked ? 'bg-indigo-50 border-indigo-600 text-indigo-900' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}">
-                        <span>${checked ? '☑' : '☐'}</span>
-                        <span>${rt.label}</span>
-                    </button>
-                `;
-            }).join('');
+            const selected = sess.question.selectedRespondents || ['parent', 'teacher'];
+            const togglesEl = document.getElementById('q-respondent-toggles');
+            if (togglesEl) {
+                togglesEl.innerHTML = RESPONDENT_TYPES.map(rt => {
+                    const isOn = selected.includes(rt.id);
+                    return `
+                        <button onclick="toggleRespondent('${rt.id}')" class="py-2.5 px-3 rounded-xl border text-xs font-extrabold transition flex items-center justify-center gap-1.5 ${isOn ? 'bg-indigo-50 border-indigo-500 text-indigo-800' : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'}">
+                            <span>${isOn ? '☑' : '☐'} ${rt.label}</span>
+                        </button>
+                    `;
+                }).join('');
+            }
 
             const otherBox = document.getElementById('q-other-relation-box');
-            if (sess.question.selectedRespondents.includes('other')) {
-                otherBox.classList.remove('hidden');
-                document.getElementById('q-other-relation-input').value = sess.question.otherRelationLabel || '';
-            } else {
-                otherBox.classList.add('hidden');
+            const otherInput = document.getElementById('q-other-relation-input');
+            if (otherBox) otherBox.classList.toggle('hidden', !selected.includes('other'));
+            if (otherInput && document.activeElement !== otherInput) {
+                otherInput.value = sess.question.otherRelationLabel || '';
             }
 
-            document.getElementById('q-stimuli-list-title').textContent = `[${catMeta.label}] 평가 자극 목록 (이름 클릭 시 즉시 수정)`;
-            document.getElementById('q-stimuli-tags').innerHTML = stimuli.map(s => `
-                <div class="inline-flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700">
-                    <input type="text" value="${escapeHtml(s)}" onchange="renameQuestionStimulus('${escapeHtml(s)}', this.value)" class="bg-transparent w-24 focus:outline-hidden focus:text-indigo-700">
-                    <button onclick="removeQuestionStimulus('${escapeHtml(s)}')" class="text-slate-400 hover:text-rose-600 font-bold">&times;</button>
-                </div>
-            `).join('');
+            const listTitle = document.getElementById('q-stimuli-list-title');
+            if (listTitle) listTitle.textContent = `${catMeta.label} 평가 자극 목록`;
 
-            renderQuestionRespondentCards();
-        }
-
-        function renderQuestionRespondentCards() {
-            const stu = getCurrentStudent();
-            const sess = getCurrentSession(stu);
-            const { catId, stimuli, records } = getActiveQCatData(stu);
-            const catMeta = getCategoryMeta(catId);
-            const container = document.getElementById('q-respondent-cards');
-
-            if (sess.question.selectedRespondents.length === 0) {
-                container.innerHTML = `<div class="bg-white rounded-2xl p-8 text-center text-xs text-slate-400 border border-slate-200">상단에서 질문 대상자를 1명 이상 선택해 주세요.</div>`;
-                return;
+            const tagsEl = document.getElementById('q-stimuli-tags');
+            if (tagsEl) {
+                tagsEl.innerHTML = stimuli.map((s, idx) => `
+                    <span class="inline-flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-3 py-1 text-xs font-bold text-slate-700">
+                        ${escapeHtml(s)}
+                        <button onclick="removeQuestionStimulus(${idx})" class="text-slate-400 hover:text-rose-600 font-bold">&times;</button>
+                    </span>
+                `).join('');
             }
 
-            container.innerHTML = sess.question.selectedRespondents.map(respId => {
-                const rt = RESPONDENT_TYPES.find(x => x.id === respId);
-                let titleLabel = rt ? rt.label : respId;
-                if (respId === 'other' && sess.question.otherRelationLabel) {
-                    titleLabel = `의미 있는 타인 (${sess.question.otherRelationLabel})`;
-                }
-                const rec = records[respId] || createDefaultRespondentRecord(sess.question.baseDate);
+            const cardsEl = document.getElementById('q-respondent-cards');
+            if (cardsEl) {
+                cardsEl.innerHTML = selected.map(respId => {
+                    const meta = RESPONDENT_TYPES.find(r => r.id === respId) || { id: respId, label: respId };
+                    const titleLabel = (respId === 'other' && sess.question.otherRelationLabel)
+                        ? `의미 있는 타인 (${sess.question.otherRelationLabel})`
+                        : meta.label;
+                    const rec = records[respId] || createDefaultRespondentRecord();
 
-                return `
-                    <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4 print-card">
-                        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100">
-                            <div class="flex items-center gap-2">
-                                <span class="px-2.5 py-1 rounded-lg bg-indigo-600 text-white text-xs font-extrabold">${escapeHtml(titleLabel)}</span>
-                                <span class="text-xs font-bold text-slate-500">· ${catMeta.label} 질문 기록</span>
+                    return `
+                        <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                                <span class="text-sm font-extrabold text-indigo-900">📋 ${escapeHtml(titleLabel)} 면담 기록 (${catMeta.short})</span>
+                                <input type="date" value="${escapeHtml(rec.date || sess.question.baseDate || getTodayStr())}" onchange="updateRespondentAnswer('${respId}', 'date', this.value)" class="px-2.5 py-1 rounded-lg border border-slate-200 text-xs font-bold text-slate-600">
                             </div>
-                            <div class="flex items-center gap-2 text-xs">
-                                <span class="font-bold text-slate-500">면담 날짜:</span>
-                                <input type="date" value="${rec.date || getTodayStr()}" onchange="updateRespondentField('${respId}', 'date', this.value)" class="px-2.5 py-1 rounded-lg border border-slate-200 font-bold text-slate-700">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1">1. 개방형 질문 ("평소 학생이 가장 좋아하거나 자주 찾는 ${catMeta.short} 자극은 무엇인가요?")</label>
+                                <textarea rows="2" oninput="updateRespondentAnswer('${respId}', 'openAnswer', this.value)" placeholder="구체적인 선호 자극과 상황 기록" class="w-full p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm">${escapeHtml(rec.openAnswer || '')}</textarea>
                             </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 mb-1">개방형 질문 응답 (평소 가장 좋아하거나 자주 찾는 ${catMeta.short} 자극은?)</label>
-                            <textarea rows="2" oninput="updateRespondentField('${respId}', 'openAnswer', this.value)" placeholder="대상자가 직접 언급한 선호 자극과 선호 조건 기록" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs sm:text-sm">${escapeHtml(rec.openAnswer || '')}</textarea>
-                        </div>
-
-                        <div class="space-y-2">
-                            <div class="text-xs font-bold text-slate-600">5점 척도 선호도 평정 (1점: 전혀 안 좋아함 ~ 5점: 매우 강하게 선호함)</div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-                                ${stimuli.map(s => {
-                                    const curScore = rec.ratings[s] || 3;
-                                    return `
-                                        <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200">
-                                            <span class="text-xs sm:text-sm font-bold text-slate-800 truncate">${escapeHtml(s)}</span>
-                                            <div class="flex items-center gap-1 shrink-0">
-                                                ${[1, 2, 3, 4, 5].map(num => `
-                                                    <button onclick="setRespondentRating('${respId}', '${escapeHtml(s)}', ${num})" class="w-7 h-7 rounded-lg text-xs font-extrabold transition ${curScore === num ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white border border-slate-200 text-slate-600 hover:bg-indigo-50'}">
-                                                        ${num}
-                                                    </button>
-                                                `).join('')}
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold text-slate-600">2. 자극별 5점 선호도 평정 (1: 전혀 안 좋아함 ~ 5: 매우 좋아함)</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+                                    ${stimuli.map(stim => {
+                                        const curScore = rec.ratings?.[stim] || 3;
+                                        return `
+                                            <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
+                                                <span class="text-xs font-bold text-slate-800 truncate">${escapeHtml(stim)}</span>
+                                                <div class="flex gap-1 shrink-0">
+                                                    ${[1, 2, 3, 4, 5].map(n => `
+                                                        <button onclick="setRespondentRating('${respId}', '${escapeHtml(stim)}', ${n})" class="w-6 h-6 rounded-md text-[11px] font-extrabold transition ${curScore === n ? 'bg-indigo-600 text-white' : 'bg-white border border-slate-300 text-slate-600 hover:bg-indigo-50'}">${n}</button>
+                                                    `).join('')}
+                                                </div>
                                             </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-bold text-slate-600">3. 선호 순위 선택 (1순위 ~ 3순위)</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                    ${['r1', 'r2', 'r3'].map((rk, ri) => `
+                                        <div class="flex items-center gap-1.5 bg-indigo-50/50 p-2 rounded-xl border border-indigo-100">
+                                            <span class="text-xs font-extrabold text-indigo-700 shrink-0">${ri + 1}순위:</span>
+                                            <select onchange="setRespondentRank('${respId}', '${rk}', this.value)" class="flex-1 bg-white px-2 py-1 rounded-lg border border-slate-200 text-xs font-bold">
+                                                <option value="">선택 안함</option>
+                                                ${stimuli.map(s => `<option value="${escapeHtml(s)}" ${rec.ranks?.[rk] === s ? 'selected' : ''}>${escapeHtml(s)}</option>`).join('')}
+                                            </select>
                                         </div>
-                                    `;
-                                }).join('')}
+                                    `).join('')}
+                                </div>
                             </div>
                         </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2 border-t border-slate-100">
-                            ${['r1', 'r2', 'r3'].map((rk, i) => `
-                                <div>
-                                    <label class="block text-[11px] font-extrabold text-indigo-700 mb-1">순위형 선택 ${i + 1}순위</label>
-                                    <select onchange="setRespondentRank('${respId}', '${rk}', this.value)" class="w-full px-2.5 py-1.5 rounded-xl border border-slate-200 bg-white text-xs font-bold">
-                                        <option value="">-- 선택 --</option>
-                                        ${stimuli.map(s => `<option value="${escapeHtml(s)}" ${rec.ranks[rk] === s ? 'selected' : ''}>${escapeHtml(s)}</option>`).join('')}
-                                    </select>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            }).join('');
+                    `;
+                }).join('');
+            }
         }
 
-        // RAISD (중도 장애인을 위한 강화제 평가)
         function updateRaisdField(field, val) {
-            getCurrentSession().raisd[field] = val;
+            const sess = getCurrentSession();
+            sess.raisd[field] = val;
             saveState();
         }
 
         function updateRaisdAnswer(key, val) {
-            getCurrentSession().raisd.answers[key] = val;
+            const sess = getCurrentSession();
+            sess.raisd.answers[key] = val;
+            saveState();
+        }
+
+        function updateRaisdRankRow(idx, field, val) {
+            const sess = getCurrentSession();
+            if (!sess.raisd.ranks[idx]) return;
+            sess.raisd.ranks[idx][field] = val;
             saveState();
         }
 
         function addRaisdRankRow() {
-            const ranks = getCurrentSession().raisd.ranks;
-            ranks.push({
+            const sess = getCurrentSession();
+            const nextNum = sess.raisd.ranks.length + 1;
+            sess.raisd.ranks.push({
                 id: 'rr_' + Date.now(),
-                rank: ranks.length + 1,
+                rank: nextNum,
                 name: '',
                 note: '',
                 assess: 'O'
@@ -2445,64 +2548,94 @@
             renderRaisdTab();
         }
 
-        function updateRaisdRankRow(idx, field, val) {
-            const ranks = getCurrentSession().raisd.ranks;
-            if (!ranks[idx]) return;
-            ranks[idx][field] = val;
-            saveState();
-        }
-
         function removeRaisdRankRow(idx) {
-            const ranks = getCurrentSession().raisd.ranks;
-            ranks.splice(idx, 1);
-            ranks.forEach((r, i) => { r.rank = i + 1; });
+            const sess = getCurrentSession();
+            if (sess.raisd.ranks.length <= 1) return;
+            sess.raisd.ranks.splice(idx, 1);
+            sess.raisd.ranks.forEach((r, i) => { r.rank = i + 1; });
             saveState();
             renderRaisdTab();
         }
 
         function renderRaisdTab() {
             const stu = getCurrentStudent();
-            const raisd = getCurrentSession(stu).raisd;
-            document.getElementById('raisd-disp-name').textContent = stu.meta.name || '신길동';
-            document.getElementById('raisd-date').value = raisd.date || getTodayStr();
-            document.getElementById('raisd-interviewer').value = raisd.interviewer || '';
-            document.getElementById('raisd-informant').value = raisd.informant || '';
-            document.getElementById('raisd-cond-special').value = raisd.condSpecial || '';
-            document.getElementById('raisd-cond-limit').value = raisd.condLimit || '';
-            document.getElementById('raisd-cond-include').value = raisd.condInclude || '';
+            const sess = getCurrentSession(stu);
+            const raisd = sess.raisd;
 
-            document.getElementById('raisd-questions-list').innerHTML = RAISD_QUESTIONS.map(q => `
-                <div class="p-3.5 bg-white space-y-1.5">
-                    <div class="text-xs sm:text-sm font-extrabold text-slate-900">${q.title}</div>
-                    <div class="text-[11px] text-slate-500">${q.desc}</div>
-                    <input type="text" value="${escapeHtml(raisd.answers[q.key] || '')}" oninput="updateRaisdAnswer('${q.key}', this.value)" placeholder="구체적인 선호 사물·활동·상황 기입" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-medium focus:outline-hidden focus:border-purple-600">
-                </div>
-            `).join('');
+            const dispName = document.getElementById('raisd-disp-name');
+            if (dispName) dispName.textContent = stu.meta.name || '신길동';
+            const dateEl = document.getElementById('raisd-date');
+            if (dateEl) dateEl.value = raisd.date || sess.date || getTodayStr();
+            const intEl = document.getElementById('raisd-interviewer');
+            if (intEl) intEl.value = raisd.interviewer || '';
+            const infEl = document.getElementById('raisd-informant');
+            if (infEl) infEl.value = raisd.informant || '';
 
-            document.getElementById('raisd-ranks-tbody').innerHTML = raisd.ranks.map((row, idx) => `
-                <tr>
-                    <td class="border border-slate-400 py-1.5 px-2 text-center font-extrabold text-slate-800">${idx + 1}순위</td>
-                    <td class="border border-slate-400 py-1.5 px-2">
-                        <input type="text" value="${escapeHtml(row.name)}" oninput="updateRaisdRankRow(${idx}, 'name', this.value)" placeholder="선호 자극명 입력" class="w-full px-2 py-1 text-xs font-bold focus:outline-hidden">
-                    </td>
-                    <td class="border border-slate-400 py-1.5 px-2">
-                        <input type="text" value="${escapeHtml(row.note)}" oninput="updateRaisdRankRow(${idx}, 'note', this.value)" placeholder="강화제 유형 / 제시 조건" class="w-full px-2 py-1 text-xs focus:outline-hidden">
-                    </td>
-                    <td class="border border-slate-400 py-1.5 px-2 text-center">
-                        <select onchange="updateRaisdRankRow(${idx}, 'assess', this.value)" class="px-2 py-1 rounded-sm border border-slate-300 text-xs font-extrabold bg-white">
-                            <option value="O" ${row.assess === 'O' ? 'selected' : ''}>O (평가 진행)</option>
-                            <option value="X" ${row.assess === 'X' ? 'selected' : ''}>X (보류/제외)</option>
-                        </select>
-                    </td>
-                    <td class="border border-slate-400 py-1.5 px-1 text-center no-print">
-                        <button onclick="removeRaisdRankRow(${idx})" class="text-rose-600 font-bold text-xs">&times;</button>
-                    </td>
-                </tr>
-            `).join('');
+            const qListEl = document.getElementById('raisd-questions-list');
+            if (qListEl) {
+                qListEl.innerHTML = RAISD_QUESTIONS.map(q => `
+                    <div class="p-3.5 bg-white space-y-1.5">
+                        <div class="text-xs sm:text-sm font-extrabold text-slate-800">${q.title}</div>
+                        <div class="text-[11px] text-slate-500">${q.desc}</div>
+                        <input type="text" value="${escapeHtml(raisd.answers?.[q.key] || '')}" oninput="updateRaisdAnswer('${q.key}', this.value)" placeholder="구체적인 선호 자극 기입" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-medium">
+                    </div>
+                `).join('');
+            }
+
+            const condSpec = document.getElementById('raisd-cond-special');
+            if (condSpec) condSpec.value = raisd.condSpecial || '';
+            const condLim = document.getElementById('raisd-cond-limit');
+            if (condLim) condLim.value = raisd.condLimit || '';
+            const condInc = document.getElementById('raisd-cond-include');
+            if (condInc) condInc.value = raisd.condInclude || '';
+
+            const mobileList = document.getElementById('raisd-ranks-mobile-list');
+            if (mobileList) {
+                mobileList.innerHTML = raisd.ranks.map((row, idx) => `
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-300 space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-0.5 rounded-lg bg-purple-700 text-white text-xs font-extrabold">${idx + 1}순위</span>
+                            <div class="flex items-center gap-2">
+                                <select onchange="updateRaisdRankRow(${idx}, 'assess', this.value)" class="px-2.5 py-1 rounded-lg border border-slate-300 bg-white text-xs font-extrabold">
+                                    <option value="O" ${row.assess === 'O' ? 'selected' : ''}>평가 진행 (O)</option>
+                                    <option value="X" ${row.assess === 'X' ? 'selected' : ''}>제외/보류 (X)</option>
+                                </select>
+                                <button onclick="removeRaisdRankRow(${idx})" class="px-2 py-1 rounded-lg bg-rose-50 text-rose-600 text-xs font-bold">삭제</button>
+                            </div>
+                        </div>
+                        <input type="text" value="${escapeHtml(row.name)}" oninput="updateRaisdRankRow(${idx}, 'name', this.value)" placeholder="선호 자극명 입력" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs font-bold">
+                        <input type="text" value="${escapeHtml(row.note)}" oninput="updateRaisdRankRow(${idx}, 'note', this.value)" placeholder="강화제 유형 / 제시 조건 메모" class="w-full px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs">
+                    </div>
+                `).join('');
+            }
+
+            const tbody = document.getElementById('raisd-ranks-tbody');
+            if (tbody) {
+                tbody.innerHTML = raisd.ranks.map((row, idx) => `
+                    <tr>
+                        <td class="border border-slate-400 py-2 px-2 text-center font-extrabold text-purple-800">${idx + 1}순위</td>
+                        <td class="border border-slate-400 py-1.5 px-2">
+                            <input type="text" value="${escapeHtml(row.name)}" oninput="updateRaisdRankRow(${idx}, 'name', this.value)" placeholder="선호 자극명" class="w-full px-2 py-1 rounded-md border border-slate-200 text-xs font-bold">
+                        </td>
+                        <td class="border border-slate-400 py-1.5 px-2">
+                            <input type="text" value="${escapeHtml(row.note)}" oninput="updateRaisdRankRow(${idx}, 'note', this.value)" placeholder="강화제 유형 및 제시 조건" class="w-full px-2 py-1 rounded-md border border-slate-200 text-xs">
+                        </td>
+                        <td class="border border-slate-400 py-1.5 px-2 text-center">
+                            <select onchange="updateRaisdRankRow(${idx}, 'assess', this.value)" class="px-2 py-1 rounded-md border border-slate-300 text-xs font-extrabold">
+                                <option value="O" ${row.assess === 'O' ? 'selected' : ''}>진행 (O)</option>
+                                <option value="X" ${row.assess === 'X' ? 'selected' : ''}>제외 (X)</option>
+                            </select>
+                        </td>
+                        <td class="border border-slate-400 py-1.5 px-1 text-center no-print">
+                            <button onclick="removeRaisdRankRow(${idx})" class="text-rose-600 font-bold text-xs hover:underline">삭제</button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
         }
 
         // =========================================================================
-        // 5. 탭 2: 관찰하기 (통합 자유 작동 관찰 및 동시 다중 스톱워치)
+        // 5. 탭 2: 관찰하기 (자유 작동 관찰 스톱워치)
         // =========================================================================
         function updateObsField(field, val) {
             getActiveObsData()[field] = val;
@@ -2515,9 +2648,9 @@
             renderObserveTab();
         }
 
-        function updateObsTargetMin(val) {
-            const min = Math.max(1, parseInt(val, 10) || 5);
-            getActiveObsData().targetMin = min;
+        function updateObsTargetMin(minVal) {
+            const parsed = Math.max(1, Math.min(180, parseInt(minVal, 10) || 5));
+            getActiveObsData().targetMin = parsed;
             saveState();
             renderObserveTab();
         }
@@ -2539,98 +2672,98 @@
             renderObserveTab();
         }
 
-        function renameObsItem(itemId, newName) {
-            const trimmed = newName.trim();
-            if (!trimmed) return;
-            const item = getActiveObsData().items.find(i => i.id === itemId);
-            if (item) {
-                item.name = trimmed;
-                saveState();
-                renderObserveSummary();
-            }
-        }
-
         function removeObsItem(itemId) {
             const obs = getActiveObsData();
-            obs.items = obs.items.filter(i => i.id !== itemId);
+            obs.items = obs.items.filter(x => x.id !== itemId);
             saveState();
             renderObserveTab();
         }
 
         function importStimuliToObserve() {
-            const stu = getCurrentStudent();
-            const sess = getCurrentSession(stu);
-            const obs = getActiveObsData(stu);
-            const existing = new Set(obs.items.map(i => i.name));
-            let added = 0;
-            REINFORCER_CATEGORIES.forEach(cat => {
-                (sess.question.stimuliByCat[cat.id] || []).forEach(s => {
-                    if (!existing.has(s)) {
-                        existing.add(s);
+            const sess = getCurrentSession();
+            const obs = getActiveObsData();
+            const existingNames = new Set(obs.items.map(i => i.name));
+            Object.values(sess.question.stimuliByCat).forEach(list => {
+                list.slice(0, 2).forEach(name => {
+                    if (!existingNames.has(name)) {
+                        existingNames.add(name);
                         obs.items.push({
-                            id: 'obs_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-                            name: s,
+                            id: 'obs_imp_' + Math.random().toString(36).slice(2, 8),
+                            name,
                             elapsedSec: 0,
                             isRunning: false,
                             lastTick: null
                         });
-                        added++;
                     }
                 });
             });
             saveState();
             renderObserveTab();
-            showToast(added > 0 ? `질문하기의 자극 ${added}개를 불러왔습니다.` : '새로 추가할 질문하기 자극이 없습니다.');
+            showToast('질문하기 주요 자극을 관찰 목록에 불러왔습니다.');
         }
 
         function ensureObsTicker() {
             if (obsTickInterval) return;
             obsTickInterval = setInterval(() => {
                 const obs = getActiveObsData();
-                const now = Date.now();
                 let anyRunning = false;
+                const now = Date.now();
                 obs.items.forEach(item => {
                     if (item.isRunning) {
                         anyRunning = true;
-                        const delta = Math.floor((now - (item.lastTick || now)) / 1000);
-                        if (delta >= 1) {
-                            item.elapsedSec += delta;
-                            item.lastTick = now;
-                            const disp = document.getElementById(`obs-timer-disp-${item.id}`);
-                            if (disp) disp.textContent = formatSecToMinSec(item.elapsedSec);
-                        }
+                        const delta = item.lastTick ? (now - item.lastTick) / 1000 : 1;
+                        item.elapsedSec += delta;
+                        item.lastTick = now;
                     }
                 });
-                if (anyRunning) {
-                    renderObserveSummary();
-                } else {
+                if (!anyRunning) {
                     clearInterval(obsTickInterval);
                     obsTickInterval = null;
+                } else if (activeMainTab === 'tab-observe') {
+                    renderObserveTab();
                 }
-            }, 250);
+            }, 500);
         }
 
-        function toggleObsItemTimer(itemId) {
+        function toggleObsTimer(itemId) {
             const obs = getActiveObsData();
-            const item = obs.items.find(i => i.id === itemId);
-            if (!item) return;
-            if (item.isRunning) {
-                item.isRunning = false;
-                item.lastTick = null;
+            const target = obs.items.find(x => x.id === itemId);
+            if (!target) return;
+            if (target.isRunning) {
+                if (target.lastTick) {
+                    target.elapsedSec += (Date.now() - target.lastTick) / 1000;
+                }
+                target.isRunning = false;
+                target.lastTick = null;
             } else {
-                item.isRunning = true;
-                item.lastTick = Date.now();
+                target.isRunning = true;
+                target.lastTick = Date.now();
                 ensureObsTicker();
             }
             saveState();
             renderObserveTab();
         }
 
+        function resetObsTimer(itemId) {
+            const obs = getActiveObsData();
+            const target = obs.items.find(x => x.id === itemId);
+            if (!target) return;
+            target.elapsedSec = 0;
+            target.isRunning = false;
+            target.lastTick = null;
+            saveState();
+            renderObserveTab();
+        }
+
         function pauseAllObsTimers() {
             const obs = getActiveObsData();
+            const now = Date.now();
             obs.items.forEach(item => {
-                item.isRunning = false;
-                item.lastTick = null;
+                if (item.isRunning) {
+                    if (item.lastTick) item.elapsedSec += (now - item.lastTick) / 1000;
+                    item.isRunning = false;
+                    item.lastTick = null;
+                }
             });
             if (obsTickInterval) {
                 clearInterval(obsTickInterval);
@@ -2640,133 +2773,92 @@
             renderObserveTab();
         }
 
-        function adjustObsItemSec(itemId, deltaSec) {
-            const item = getActiveObsData().items.find(i => i.id === itemId);
-            if (!item) return;
-            item.elapsedSec = Math.max(0, (item.elapsedSec || 0) + deltaSec);
-            saveState();
-            renderObserveTab();
-        }
-
-        function resetObsItemTimer(itemId) {
-            const item = getActiveObsData().items.find(i => i.id === itemId);
-            if (!item) return;
-            item.isRunning = false;
-            item.lastTick = null;
-            item.elapsedSec = 0;
-            saveState();
-            renderObserveTab();
-        }
-
         function renderObserveTab() {
             const obs = getActiveObsData();
-            document.getElementById('obs-date').value = obs.date || getTodayStr();
-            document.getElementById('obs-target-min-input').value = obs.targetMin || 5;
+            const dateInput = document.getElementById('obs-date');
+            if (dateInput) dateInput.value = obs.date || getTodayStr();
 
-            const isContrived = obs.mode !== 'natural';
-            document.getElementById('btn-obs-contrived').className = isContrived
-                ? 'p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-emerald-950 text-left transition'
-                : 'p-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-left hover:bg-slate-50 transition';
-            document.getElementById('btn-obs-natural').className = !isContrived
-                ? 'p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-emerald-950 text-left transition'
-                : 'p-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-left hover:bg-slate-50 transition';
+            const btnContrived = document.getElementById('btn-obs-contrived');
+            const btnNatural = document.getElementById('btn-obs-natural');
+            if (btnContrived && btnNatural) {
+                btnContrived.className = obs.mode === 'contrived'
+                    ? 'p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-emerald-950 text-left transition'
+                    : 'p-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-left hover:bg-slate-50 transition';
+                btnNatural.className = obs.mode === 'natural'
+                    ? 'p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-emerald-950 text-left transition'
+                    : 'p-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-left hover:bg-slate-50 transition';
+            }
+
+            const targetMin = obs.targetMin || 5;
+            const minInput = document.getElementById('obs-target-min-input');
+            if (minInput) minInput.value = targetMin;
+            const targetLabel = document.getElementById('obs-summary-target-label');
+            if (targetLabel) targetLabel.textContent = `${targetMin}분`;
 
             document.querySelectorAll('.obs-preset-btn').forEach(btn => {
                 const m = parseInt(btn.dataset.min, 10);
-                btn.className = m === obs.targetMin
+                btn.className = m === targetMin
                     ? 'obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-extrabold border border-indigo-600 bg-indigo-600 text-white'
-                    : 'obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-indigo-50';
+                    : 'obs-preset-btn px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white hover:bg-indigo-50 text-slate-700';
             });
 
             const grid = document.getElementById('obs-items-grid');
-            if (obs.items.length === 0) {
-                grid.innerHTML = `<div class="sm:col-span-2 lg:col-span-3 bg-white rounded-2xl p-8 text-center text-xs text-slate-400 border border-slate-200">관찰할 자극 항목을 추가해 주세요.</div>`;
-            } else {
-                grid.innerHTML = obs.items.map(item => {
-                    const hasElapsed = (item.elapsedSec || 0) > 0;
-                    const btnLabel = item.isRunning
-                        ? '⏸ 일시정지'
-                        : (hasElapsed ? '▶ 이어서 측정' : '▶ 측정 시작');
-                    const btnColor = item.isRunning
-                        ? 'bg-amber-500 hover:bg-amber-600'
-                        : (hasElapsed ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-emerald-600 hover:bg-emerald-700');
-                    const statusText = item.isRunning
-                        ? '측정 중 (일시정지 가능)'
-                        : (hasElapsed ? '일시정지됨 · 이어서 측정 가능' : '대기 중 · 측정 시작 전');
-
-                    return `
-                        <div class="bg-white rounded-2xl p-4 shadow-xs border-2 ${item.isRunning ? 'border-emerald-500 pulse-ring' : (hasElapsed ? 'border-indigo-200' : 'border-slate-200')} space-y-3 transition">
-                            <div class="flex items-center justify-between gap-2">
-                                <input type="text" value="${escapeHtml(item.name)}" onchange="renameObsItem('${item.id}', this.value)" title="클릭하여 자극 이름 수정" class="font-extrabold text-slate-800 text-sm sm:text-base bg-transparent border-b border-transparent hover:border-slate-300 focus:border-indigo-600 focus:outline-hidden flex-1 min-w-0">
-                                <button onclick="removeObsItem('${item.id}')" class="text-slate-400 hover:text-rose-600 text-xs font-bold px-1.5 no-print">&times;</button>
-                            </div>
-                            <div class="flex items-center justify-between bg-slate-50 px-3.5 py-2.5 rounded-xl border border-slate-200">
-                                <div>
-                                    <span id="obs-timer-disp-${item.id}" class="block font-mono text-2xl font-black ${item.isRunning ? 'text-emerald-600' : 'text-slate-800'}">
-                                        ${formatSecToMinSec(item.elapsedSec)}
-                                    </span>
-                                    <span class="text-[10px] font-bold ${item.isRunning ? 'text-emerald-600' : (hasElapsed ? 'text-indigo-600' : 'text-slate-400')}">
-                                        ${statusText}
-                                    </span>
-                                </div>
-                                <button onclick="toggleObsItemTimer('${item.id}')" class="px-3.5 py-2.5 rounded-xl text-xs font-extrabold text-white transition shadow-xs ${btnColor}">
-                                    ${btnLabel}
-                                </button>
-                            </div>
-                            <div class="flex items-center justify-between gap-1 text-[11px] no-print">
-                                <div class="flex gap-1">
-                                    <button onclick="adjustObsItemSec('${item.id}', -10)" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-slate-700">-10초</button>
-                                    <button onclick="adjustObsItemSec('${item.id}', 10)" class="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-slate-700">+10초</button>
-                                </div>
-                                <button onclick="resetObsItemTimer('${item.id}')" class="px-2 py-1 rounded-lg text-slate-500 hover:text-rose-600 font-bold">초기화</button>
-                            </div>
+            if (grid) {
+                grid.innerHTML = obs.items.map(item => `
+                    <div class="bg-white rounded-2xl p-4 shadow-xs border-2 transition ${item.isRunning ? 'border-emerald-500 pulse-ring' : 'border-slate-200'}">
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="font-extrabold text-slate-800 text-sm truncate">${escapeHtml(item.name)}</span>
+                            <button onclick="removeObsItem('${item.id}')" class="text-slate-400 hover:text-rose-600 text-sm font-bold no-print">&times;</button>
                         </div>
-                    `;
-                }).join('');
+                        <div class="text-center py-3 rounded-xl bg-slate-50 border border-slate-100 mb-3">
+                            <div class="text-2xl font-black font-mono ${item.isRunning ? 'text-emerald-600' : 'text-slate-800'}">
+                                ${formatSecToMinSec(item.elapsedSec)}
+                            </div>
+                            <div class="text-[11px] font-bold text-slate-400 mt-0.5">${Math.floor(item.elapsedSec)}초 누적</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-1.5 no-print">
+                            <button onclick="toggleObsTimer('${item.id}')" class="col-span-2 py-2 rounded-xl text-xs font-extrabold text-white transition ${item.isRunning ? 'bg-amber-500 hover:bg-amber-600' : 'bg-emerald-600 hover:bg-emerald-700'}">
+                                ${item.isRunning ? '⏸ 일시정지' : '▶ 측정 시작'}
+                            </button>
+                            <button onclick="resetObsTimer('${item.id}')" class="py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
+                                초기화
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
             }
-            renderObserveSummary();
-            if (obs.items.some(i => i.isRunning)) ensureObsTicker();
-        }
 
-        function renderObserveSummary() {
-            const obs = getActiveObsData();
-            const targetMin = obs.targetMin || 5;
-            const targetSec = targetMin * 60;
-            const totalRecordedSec = obs.items.reduce((acc, it) => acc + (it.elapsedSec || 0), 0);
-
-            const targetLabelEl = document.getElementById('obs-summary-target-label');
-            if (targetLabelEl) targetLabelEl.textContent = `${targetMin}분`;
-            const totalBadgeEl = document.getElementById('obs-total-recorded-badge');
-            if (totalBadgeEl) totalBadgeEl.textContent = `전체 누적 측정: ${formatSecToMinSec(totalRecordedSec)}`;
+            const totalTargetSec = targetMin * 60;
+            const totalRecordedSec = obs.items.reduce((acc, i) => acc + (i.elapsedSec || 0), 0);
+            const totalBadge = document.getElementById('obs-total-recorded-badge');
+            if (totalBadge) totalBadge.textContent = `전체 누적 측정: ${formatSecToMinSec(totalRecordedSec)}`;
 
             const sorted = [...obs.items].sort((a, b) => (b.elapsedSec || 0) - (a.elapsedSec || 0));
             const tbody = document.getElementById('obs-summary-tbody');
-            if (!tbody) return;
-
-            tbody.innerHTML = sorted.map((item, idx) => {
-                const sec = item.elapsedSec || 0;
-                const pct = targetSec > 0 ? Math.min(100, Math.round((sec / targetSec) * 1000) / 10) : 0;
-                return `
-                    <tr>
-                        <td class="py-2.5 px-3 text-center font-extrabold text-indigo-700">${sec > 0 ? `${idx + 1}위` : '-'}</td>
-                        <td class="py-2.5 px-3 font-bold text-slate-800">${escapeHtml(item.name)}</td>
-                        <td class="py-2.5 px-3 text-center font-mono font-extrabold text-slate-700">${formatSecToMinSec(sec)} (${sec}초)</td>
-                        <td class="py-2.5 px-3 text-center font-extrabold text-emerald-700">${pct}%</td>
-                        <td class="py-2.5 px-3">
-                            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-                                <div class="bg-emerald-500 h-2.5 rounded-full transition-all" style="width: ${Math.min(100, pct)}%"></div>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
+            if (tbody) {
+                tbody.innerHTML = sorted.map((item, idx) => {
+                    const pct = totalTargetSec > 0 ? Math.min(100, Math.round(((item.elapsedSec || 0) / totalTargetSec) * 1000) / 10) : 0;
+                    return `
+                        <tr>
+                            <td class="py-2.5 px-3 text-center font-extrabold text-indigo-700">${idx + 1}위</td>
+                            <td class="py-2.5 px-3 font-bold text-slate-800">${escapeHtml(item.name)}</td>
+                            <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-700">${formatSecToMinSec(item.elapsedSec)} (${Math.floor(item.elapsedSec)}초)</td>
+                            <td class="py-2.5 px-3 text-center font-extrabold text-emerald-700">${pct}%</td>
+                            <td class="py-2.5 px-3">
+                                <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-emerald-500 rounded-full" style="width: ${pct}%"></div>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
         }
 
         // =========================================================================
-        // 6. 탭 3: 시행 기반 평가 공통 & 3-1 단일 자극 제시 선택
+        // 6. 탭 3: 시행 기반 평가 (단일 자극 · 짝 자극 · MSW · MSWO)
         // =========================================================================
         function setTrialCategory(catId) {
-            stopSSTrialTimer();
             getCurrentSession().trial.activeCategory = catId;
             saveState();
             renderTrialCategorySelector();
@@ -2781,13 +2873,9 @@
             renderCategoryButtons('trial-category-selector', activeCatId, 'setTrialCategory');
         }
 
+        // [3-1] 단일 자극 제시 선택 (Single Stimulus)
         function updateSSDate(val) {
             getActiveTrialCatData().singleStimulus.date = val;
-            saveState();
-        }
-
-        function updatePSDate(val) {
-            getActiveTrialCatData().pairedStimulus.date = val;
             saveState();
         }
 
@@ -2816,7 +2904,7 @@
             const oldName = ss.items[idx];
             if (!oldName || oldName === trimmed) return;
             ss.items[idx] = trimmed;
-            ss.trials.forEach(t => { if (t.stimulus === oldName) t.stimulus = trimmed; });
+            ss.trials.forEach(t => { if (t.item === oldName) t.item = trimmed; });
             saveState();
             renderSSTab();
         }
@@ -2829,78 +2917,76 @@
         }
 
         function importStimuliToSS() {
-            const stu = getCurrentStudent();
-            const sess = getCurrentSession(stu);
+            const sess = getCurrentSession();
             const catId = sess.trial.activeCategory || 'sensory';
-            const ss = getActiveTrialCatData(stu).singleStimulus;
+            const ss = getActiveTrialCatData().singleStimulus;
             ss.items = [...(sess.question.stimuliByCat[catId] || [])];
             saveState();
             renderSSTab();
-            showToast('동일 유형의 질문하기 자극 목록을 불러왔습니다.');
+            showToast('동일 유형의 질문하기 자극을 불러왔습니다.');
         }
 
         function generateSSTrials() {
-            stopSSTrialTimer();
             const ss = getActiveTrialCatData().singleStimulus;
-            const rep = ss.repeatCount || 3;
-            let pool = [];
+            const pool = [];
+            const repeat = ss.repeatCount || 3;
             ss.items.forEach(item => {
-                for (let r = 0; r < rep; r++) pool.push(item);
+                for (let r = 0; r < repeat; r++) pool.push(item);
             });
-            pool = shuffleArray(pool);
-            ss.trials = pool.map((stimulus, idx) => ({
+            const shuffled = shuffleArray(pool);
+            ss.trials = shuffled.map((item, idx) => ({
                 id: `sst_${idx}_${Date.now()}`,
                 trialNum: idx + 1,
-                stimulus,
-                selected: null,
+                item,
+                contact: null,
                 durationSec: 0
             }));
             saveState();
             renderSSTab();
-            showToast(`총 ${ss.trials.length}회기 무작위 단일 자극 시행표가 생성되었습니다.`);
+            showToast(`총 ${ss.trials.length}회기의 무작위 시행표가 생성되었습니다.`, 'success');
         }
 
-        function toggleSSTrialSelected(trialId, isSelected) {
+        function setSSTrialContact(trialIdx, val) {
             const ss = getActiveTrialCatData().singleStimulus;
-            const trial = ss.trials.find(t => t.id === trialId);
-            if (!trial) return;
-            trial.selected = (trial.selected === isSelected) ? null : isSelected;
-            if (trial.selected === false) trial.durationSec = 0;
+            if (!ss.trials[trialIdx]) return;
+            ss.trials[trialIdx].contact = ss.trials[trialIdx].contact === val ? null : val;
             saveState();
             renderSSTab();
         }
 
-        function updateSSTrialDuration(trialId, val) {
+        function setSSTrialDuration(trialIdx, val) {
             const ss = getActiveTrialCatData().singleStimulus;
-            const trial = ss.trials.find(t => t.id === trialId);
-            if (!trial) return;
-            trial.durationSec = Math.max(0, parseInt(val, 10) || 0);
-            if (trial.durationSec > 0 && trial.selected === null) trial.selected = true;
+            if (!ss.trials[trialIdx]) return;
+            ss.trials[trialIdx].durationSec = Math.max(0, parseInt(val, 10) || 0);
             saveState();
             renderSSSummary();
         }
 
-        function toggleSSTrialDurationTimer(trialId) {
-            if (activeSSTrialTimerId === trialId) {
-                stopSSTrialTimer();
-                renderSSTab();
-                return;
+        function renderSSSummary() {
+            const ss = getActiveTrialCatData().singleStimulus;
+            const stats = ss.items.map(item => {
+                const matched = ss.trials.filter(t => t.item === item);
+                const total = matched.length;
+                const yesCount = matched.filter(t => t.contact === 'O').length;
+                const pct = total > 0 ? Math.round((yesCount / total) * 100) : 0;
+                const totalDur = matched.reduce((acc, t) => acc + (t.durationSec || 0), 0);
+                const avgDur = total > 0 ? Math.round((totalDur / total) * 10) / 10 : 0;
+                return { item, total, pct, avgDur, totalDur };
+            }).sort((a, b) => b.pct - a.pct || b.totalDur - a.totalDur);
+
+            const tbody = document.getElementById('ss-summary-tbody');
+            if (tbody) {
+                tbody.innerHTML = stats.map((st, idx) => `
+                    <tr>
+                        <td class="py-2 px-3 text-center font-extrabold text-indigo-700">${st.total > 0 ? `${idx + 1}위` : '-'}</td>
+                        <td class="py-2 px-3 font-bold text-slate-800">${escapeHtml(st.item)}</td>
+                        <td class="py-2 px-3 text-center text-slate-600 font-semibold">${st.total}회</td>
+                        <td class="py-2 px-3 text-center font-extrabold text-emerald-700">${st.pct}%</td>
+                        <td class="py-2 px-3 text-center font-bold text-slate-700">${st.avgDur}초</td>
+                        <td class="py-2 px-3 text-center font-bold text-slate-700">${st.totalDur}초</td>
+                    </tr>
+                `).join('');
             }
-            stopSSTrialTimer();
-            activeSSTrialTimerId = trialId;
-            ssTickInterval = setInterval(() => {
-                const ss = getActiveTrialCatData().singleStimulus;
-                const trial = ss.trials.find(t => t.id === trialId);
-                if (!trial) {
-                    stopSSTrialTimer();
-                    return;
-                }
-                trial.durationSec = (trial.durationSec || 0) + 1;
-                if (trial.selected === null) trial.selected = true;
-                saveState();
-                renderSSTab();
-            }, 1000);
-            renderSSTab();
         }
 
         function renderSSTab() {
@@ -2917,315 +3003,37 @@
 
             const tbody = document.getElementById('ss-trials-tbody');
             if (ss.trials.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-xs text-slate-400">상단의 '무작위 시행표 생성' 버튼을 눌러 시행을 시작하세요.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-xs text-slate-400">상단의 [무작위 시행표 생성] 버튼을 눌러 회기를 시작하세요.</td></tr>`;
             } else {
-                tbody.innerHTML = ss.trials.map(t => {
-                    const isTiming = activeSSTrialTimerId === t.id;
-                    return `
-                        <tr class="hover:bg-slate-50/70">
-                            <td class="py-2.5 px-3 text-center font-extrabold text-slate-500">${t.trialNum}</td>
-                            <td class="py-2.5 px-3 font-extrabold text-slate-800">${escapeHtml(t.stimulus)}</td>
-                            <td class="py-2.5 px-3 text-center">
-                                <div class="inline-flex gap-1.5">
-                                    <button onclick="toggleSSTrialSelected('${t.id}', true)" class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition ${t.selected === true ? 'bg-emerald-600 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-emerald-50'}">O (접근/접촉)</button>
-                                    <button onclick="toggleSSTrialSelected('${t.id}', false)" class="px-3 py-1.5 rounded-lg text-xs font-extrabold transition ${t.selected === false ? 'bg-rose-600 text-white shadow-xs' : 'bg-slate-100 text-slate-600 hover:bg-rose-50'}">X (미선택)</button>
-                                </div>
-                            </td>
-                            <td class="py-2.5 px-3 text-center">
-                                <div class="inline-flex items-center gap-1.5">
-                                    <input type="number" min="0" value="${t.durationSec || 0}" onchange="updateSSTrialDuration('${t.id}', this.value)" class="w-16 px-2 py-1 rounded-lg border border-slate-300 text-center text-xs font-extrabold">
-                                    <span class="text-xs text-slate-500">초</span>
-                                    <button onclick="toggleSSTrialDurationTimer('${t.id}')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-white transition ${isTiming ? 'bg-amber-500' : 'bg-indigo-600 hover:bg-indigo-700'} no-print">
-                                        ${isTiming ? '⏸ 정지' : '▶ 초시계'}
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                }).join('');
+                tbody.innerHTML = ss.trials.map((t, idx) => `
+                    <tr>
+                        <td class="py-2 px-3 text-center font-extrabold text-slate-500">${t.trialNum}</td>
+                        <td class="py-2 px-3 font-bold text-slate-800">${escapeHtml(t.item)}</td>
+                        <td class="py-2 px-3 text-center">
+                            <div class="inline-flex gap-1.5">
+                                <button onclick="setSSTrialContact(${idx}, 'O')" class="w-9 h-8 rounded-lg text-xs font-extrabold border transition ${t.contact === 'O' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-600 border-slate-300 hover:bg-emerald-50'}">O</button>
+                                <button onclick="setSSTrialContact(${idx}, 'X')" class="w-9 h-8 rounded-lg text-xs font-extrabold border transition ${t.contact === 'X' ? 'bg-rose-600 text-white border-rose-600' : 'bg-white text-slate-600 border-slate-300 hover:bg-rose-50'}">X</button>
+                            </div>
+                        </td>
+                        <td class="py-2 px-3 text-center">
+                            <input type="number" min="0" value="${t.durationSec || 0}" oninput="setSSTrialDuration(${idx}, this.value)" class="w-20 px-2 py-1 rounded-lg border border-slate-300 text-center text-xs font-bold">
+                        </td>
+                    </tr>
+                `).join('');
             }
             renderSSSummary();
         }
 
-        function renderSSSummary() {
-            const ss = getActiveTrialCatData().singleStimulus;
-            const stats = ss.items.map(name => {
-                const trials = ss.trials.filter(t => t.stimulus === name && t.selected !== null);
-                const selectedCount = trials.filter(t => t.selected === true).length;
-                const totalDur = trials.reduce((acc, t) => acc + (t.durationSec || 0), 0);
-                const rate = trials.length > 0 ? Math.round((selectedCount / trials.length) * 100) : 0;
-                const avgDur = trials.length > 0 ? Math.round((totalDur / trials.length) * 10) / 10 : 0;
-                return { name, total: trials.length, selectedCount, rate, avgDur, totalDur };
-            }).sort((a, b) => b.rate - a.rate || b.avgDur - a.avgDur);
-
-            document.getElementById('ss-summary-tbody').innerHTML = stats.map((st, idx) => `
-                <tr>
-                    <td class="py-2 px-3 text-center font-extrabold text-indigo-700">${st.total > 0 ? `${idx + 1}위` : '-'}</td>
-                    <td class="py-2 px-3 font-bold text-slate-800">${escapeHtml(st.name)}</td>
-                    <td class="py-2 px-3 text-center text-xs font-semibold text-slate-600">${st.selectedCount} / ${st.total}회</td>
-                    <td class="py-2 px-3 text-center font-extrabold text-emerald-700">${st.rate}%</td>
-                    <td class="py-2 px-3 text-center font-bold text-slate-700">${st.avgDur}초</td>
-                    <td class="py-2 px-3 text-center font-bold text-slate-700">${st.totalDur}초</td>
-                </tr>
-            `).join('');
-        }
-
-        // =========================================================================
-        // 8-2. 탭 4: 종합 분석 리포트 & 날짜별 재평가 비교
-        // =========================================================================
-        function updateReportField(field, val) {
-            getCurrentSession().report[field] = val;
+        // [3-2] 짝 자극 제시 선택 (Paired Stimulus)
+        function updatePSDate(val) {
+            getActiveTrialCatData().pairedStimulus.date = val;
             saveState();
-        }
-
-        function summarizeSessionTopStimuli(sess) {
-            const map = {};
-            const addEvidence = (name, score, badge) => {
-                const clean = (name || '').trim();
-                if (!clean) return;
-                if (!map[clean]) map[clean] = { name: clean, score: 0, evidences: [] };
-                map[clean].score += score;
-                if (!map[clean].evidences.includes(badge)) map[clean].evidences.push(badge);
-            };
-
-            // 1. 질문하기 집계
-            REINFORCER_CATEGORIES.forEach(cat => {
-                const stimuli = sess.question.stimuliByCat[cat.id] || [];
-                const recs = sess.question.recordsByCat[cat.id] || {};
-                stimuli.forEach(s => {
-                    let sum = 0;
-                    let cnt = 0;
-                    sess.question.selectedRespondents.forEach(rId => {
-                        if (recs[rId] && recs[rId].ratings && recs[rId].ratings[s]) {
-                            sum += recs[rId].ratings[s];
-                            cnt++;
-                        }
-                    });
-                    if (cnt > 0) {
-                        const avg = Math.round((sum / cnt) * 10) / 10;
-                        if (avg >= 4.0) addEvidence(s, avg * 10, `질문하기(${cat.short} 평균 ${avg}점)`);
-                    }
-                });
-            });
-
-            // 2. 관찰하기 집계
-            if (sess.observe && Array.isArray(sess.observe.items)) {
-                const sortedObs = [...sess.observe.items].filter(i => (i.elapsedSec || 0) > 0).sort((a, b) => b.elapsedSec - a.elapsedSec);
-                sortedObs.slice(0, 3).forEach((item, idx) => {
-                    addEvidence(item.name, (3 - idx) * 15, `관찰하기(${idx + 1}위 · ${formatSecToMinSec(item.elapsedSec)})`);
-                });
-            }
-
-            // 3. 시행 기반 평가 4종 집계
-            REINFORCER_CATEGORIES.forEach(cat => {
-                const tData = sess.trial.byCat[cat.id];
-                if (!tData) return;
-
-                // 단일 자극
-                tData.singleStimulus.items.forEach(name => {
-                    const trs = tData.singleStimulus.trials.filter(t => t.stimulus === name && t.selected !== null);
-                    if (trs.length > 0) {
-                        const rate = Math.round((trs.filter(t => t.selected === true).length / trs.length) * 100);
-                        if (rate >= 70) addEvidence(name, rate * 0.4, `단일 자극(${rate}%)`);
-                    }
-                });
-
-                // 짝 자극
-                tData.pairedStimulus.items.forEach((name, idx) => {
-                    const involved = tData.pairedStimulus.pairs.filter(p => p.leftIdx === idx || p.rightIdx === idx);
-                    const decided = involved.filter(p => p.winnerIdx !== null && p.winnerIdx !== undefined);
-                    if (decided.length > 0) {
-                        const wins = involved.filter(p => p.winnerIdx === idx).length;
-                        const pct = Math.round((wins / involved.length) * 100);
-                        if (pct >= 60) addEvidence(name, pct * 0.5, `짝 자극(${pct}%)`);
-                    }
-                });
-
-                // MSW
-                if (tData.msw.history.length > 0) {
-                    const counts = {};
-                    tData.msw.history.forEach(h => { counts[h.chosen] = (counts[h.chosen] || 0) + 1; });
-                    Object.entries(counts).forEach(([name, cnt]) => {
-                        addEvidence(name, cnt * 12, `MSW(${cnt}회 선택)`);
-                    });
-                }
-
-                // MSWO
-                if (tData.mswo.rounds.length > 0) {
-                    tData.mswo.baseItems.forEach(name => {
-                        const ranks = tData.mswo.rounds.map(r => r.order.indexOf(name) + 1).filter(x => x > 0);
-                        if (ranks.length > 0) {
-                            const avg = Math.round((ranks.reduce((a, b) => a + b, 0) / ranks.length) * 10) / 10;
-                            if (avg <= 2.5) addEvidence(name, (4 - avg) * 18, `MSWO(평균 ${avg}위)`);
-                        }
-                    });
-                }
-            });
-
-            return Object.values(map).sort((a, b) => b.score - a.score || b.evidences.length - a.evidences.length);
-        }
-
-        function renderReportTab() {
-            const stu = getCurrentStudent();
-            const sess = getCurrentSession(stu);
-            const rep = sess.report;
-
-            document.getElementById('report-session-badge').textContent = `기준 평가 회차: ${sess.date} (${sess.label || '평가'})`;
-            document.getElementById('report-cat-edible').value = rep.catEdible || '';
-            document.getElementById('report-cat-tangible').value = rep.catTangible || '';
-            document.getElementById('report-cat-social').value = rep.catSocial || '';
-            document.getElementById('report-cat-sensory').value = rep.catSensory || '';
-            document.getElementById('report-memo').value = rep.memo || '';
-
-            const topList = summarizeSessionTopStimuli(sess).slice(0, 6);
-            const topContainer = document.getElementById('report-top-stimuli-list');
-            if (topList.length === 0) {
-                topContainer.innerHTML = `<div class="md:col-span-2 text-center py-6 text-xs text-slate-400 bg-slate-50 rounded-xl border border-slate-200">아직 집계된 평가 데이터가 없습니다. 질문하기·관찰하기·시행 기반 평가를 기록하면 상위 잠재적 강화제가 자동 도출됩니다.</div>`;
-            } else {
-                topContainer.innerHTML = topList.map((item, idx) => `
-                    <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-extrabold flex items-center justify-center">${idx + 1}</span>
-                                <span class="font-extrabold text-slate-900 text-sm sm:text-base">${escapeHtml(item.name)}</span>
-                            </div>
-                            <span class="text-[11px] font-bold text-indigo-700">${item.evidences.length}개 평가 일치</span>
-                        </div>
-                        <div class="flex flex-wrap gap-1.5">
-                            ${item.evidences.map(ev => `<span class="px-2 py-0.5 rounded-md bg-white border border-indigo-200 text-[11px] font-bold text-slate-700">${escapeHtml(ev)}</span>`).join('')}
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            // 날짜별 재평가 변화 추이 비교 카드 렌더링
-            const allSessions = Object.values(stu.sessions);
-            document.getElementById('report-timeline-comparison').innerHTML = allSessions.map((sItem, idx) => {
-                const topItems = summarizeSessionTopStimuli(sItem).slice(0, 3);
-                const isCurrent = sItem.id === stu.currentSessionId;
-                return `
-                    <div onclick="switchDateSession('${sItem.id}')" class="p-4 rounded-2xl border-2 cursor-pointer transition ${isCurrent ? 'border-indigo-600 bg-indigo-50/40' : 'border-slate-200 bg-slate-50/50 hover:border-indigo-300'} space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs font-extrabold text-indigo-700">${idx + 1}차 평가 · ${escapeHtml(sItem.date)}</span>
-                            ${isCurrent ? '<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-indigo-600 text-white">현재 선택됨</span>' : '<span class="text-[10px] text-slate-400 font-bold">클릭해 보기</span>'}
-                        </div>
-                        <div class="space-y-1">
-                            ${topItems.length > 0 ? topItems.map((t, rIdx) => `
-                                <div class="text-xs font-bold text-slate-800 flex items-center justify-between">
-                                    <span>${rIdx + 1}위. ${escapeHtml(t.name)}</span>
-                                    <span class="text-[11px] text-slate-500">${t.evidences.length}개 평가 근거</span>
-                                </div>
-                            `).join('') : '<div class="text-xs text-slate-400">기록된 평가 결과 없음</div>'}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // =========================================================================
-        // 9. 예시 데이터 및 JSON 백업/복원
-        // =========================================================================
-        function loadSampleData() {
-            const sampleId = appState.currentStudentId || 'stu_default_1';
-            const stu = createEmptyStudent(sampleId, '신길동', '특수교사 신OO');
-            stu.meta.age = '2017.09.14 (만 9세)';
-            stu.factors = {
-                exp: '비눗방울, 과일 젤리, 하이파이브, 자석 블록',
-                req: '가정에서 간식 및 감각 놀잇감 제한 중으로 관심도 높음',
-                sus: '젤리는 소량 분할, 비눗방울은 15초 단위로 지속 제공 가능',
-                note: '구강 탐색 없음, 맑은 소리와 시각적 움직임·사회적 칭찬에 긍정 반응'
-            };
-
-            const sess1 = getCurrentSession(stu);
-            sess1.date = '2026-11-16';
-            sess1.question.baseDate = '2026-11-16';
-            sess1.question.activeCategory = 'sensory';
-            sess1.question.selectedRespondents = ['parent', 'teacher'];
-
-            sess1.question.recordsByCat.sensory.parent.ratings = { '비눗방울': 5, '촉각 탱탱볼': 3, '동요 멜로디': 4, '반짝이 팽이': 4, '모래/슬라임 촉감': 3, 'LED 라이트 볼': 4 };
-            sess1.question.recordsByCat.sensory.parent.openAnswer = '비눗방울 불어주기와 반짝이 팽이를 가장 좋아합니다.';
-            sess1.question.recordsByCat.sensory.teacher.ratings = { '비눗방울': 5, '촉각 탱탱볼': 4, '동요 멜로디': 3, '반짝이 팽이': 4, '모래/슬라임 촉감': 3, 'LED 라이트 볼': 3 };
-
-            sess1.question.recordsByCat.edible.parent.ratings = { '과일 젤리': 5, '미니 크래커': 4, '사과 주스': 3, '초코볼': 4, '요거트': 3, '건포도/과일칩': 2 };
-            sess1.question.recordsByCat.edible.teacher.ratings = { '과일 젤리': 5, '미니 크래커': 3, '사과 주스': 3, '초코볼': 3, '요거트': 3, '건포도/과일칩': 2 };
-
-            sess1.observe = {
-                date: '2026-11-16',
-                mode: 'contrived',
-                targetMin: 5,
-                items: [
-                    { id: 'obs_s1', name: '비눗방울', elapsedSec: 165, isRunning: false, lastTick: null },
-                    { id: 'obs_s2', name: '자석 블록', elapsedSec: 110, isRunning: false, lastTick: null },
-                    { id: 'obs_s3', name: '반짝이 팽이', elapsedSec: 85, isRunning: false, lastTick: null },
-                    { id: 'obs_s4', name: '과일 젤리', elapsedSec: 45, isRunning: false, lastTick: null },
-                    { id: 'obs_s5', name: '동요 멜로디', elapsedSec: 30, isRunning: false, lastTick: null }
-                ]
-            };
-
-            sess1.trial.activeCategory = 'sensory';
-            const sensTrial = sess1.trial.byCat.sensory;
-            sensTrial.singleStimulus.date = '2026-11-16';
-            sensTrial.singleStimulus.trials = [
-                { id: 'sst_1', trialNum: 1, stimulus: '비눗방울', selected: true, durationSec: 28 },
-                { id: 'sst_2', trialNum: 2, stimulus: '촉각 탱탱볼', selected: false, durationSec: 0 },
-                { id: 'sst_3', trialNum: 3, stimulus: '반짝이 팽이', selected: true, durationSec: 19 },
-                { id: 'sst_4', trialNum: 4, stimulus: '비눗방울', selected: true, durationSec: 30 }
-            ];
-            sensTrial.pairedStimulus.date = '2026-11-16';
-            sensTrial.pairedStimulus.pairs.forEach(p => {
-                if (p.leftIdx === 0 || p.rightIdx === 0) p.winnerIdx = 0;
-                else if (p.leftIdx === 3 || p.rightIdx === 3) p.winnerIdx = 3;
-                else p.winnerIdx = Math.min(p.leftIdx, p.rightIdx);
-            });
-            sensTrial.mswo.date = '2026-11-16';
-            sensTrial.mswo.rounds = [
-                { roundNum: 1, order: ['비눗방울', '반짝이 팽이', '동요 멜로디', 'LED 라이트 볼', '촉각 탱탱볼', '모래/슬라임 촉감'] },
-                { roundNum: 2, order: ['비눗방울', '동요 멜로디', '반짝이 팽이', 'LED 라이트 볼', '촉각 탱탱볼', '모래/슬라임 촉감'] }
-            ];
-
-            sess1.report = {
-                catEdible: '과일 젤리 (질문하기 평균 5.0점)',
-                catTangible: '자석 블록 (고안된 관찰하기 2위)',
-                catSocial: '하이파이브 및 밝은 언어적 칭찬',
-                catSensory: '비눗방울 (질문 · 관찰 · 단일 · 짝 자극 · MSWO 최상위)',
-                memo: '1차 평가에서 비눗방울과 과일 젤리가 최상위 잠재적 강화제로 확인됨. 시간과 동기에 따른 변화를 확인하기 위해 2차 재평가를 실시함.'
-            };
-
-            // 2차 재평가 회차 샘플 추가
-            const sess2Id = 'sess_2_' + Date.now();
-            const sess2 = createSessionPayload(sess2Id, '2026-11-22', '2차 재평가', '특수교사 신OO');
-            sess2.observe.items[0].elapsedSec = 95;
-            sess2.observe.items[1].elapsedSec = 175;
-            sess2.trial.byCat.sensory.mswo.rounds = [
-                { roundNum: 1, order: ['반짝이 팽이', '비눗방울', 'LED 라이트 볼', '동요 멜로디', '촉각 탱탱볼', '모래/슬라임 촉감'] }
-            ];
-            sess2.report = {
-                catEdible: '미니 크래커, 과일 젤리',
-                catTangible: '자석 블록 (관찰 몰두 1위 상승)',
-                catSocial: '하이파이브',
-                catSensory: '반짝이 팽이, 비눗방울',
-                memo: '2차 재평가 결과 비눗방울에 대한 포만이 일부 관찰되며 자석 블록과 반짝이 팽이의 선호 순위가 상승함.'
-            };
-            stu.sessions[sess2Id] = sess2;
-
-            appState.students[sampleId] = stu;
-            appState.currentStudentId = sampleId;
-            saveState();
-            renderAll();
-            showToast('신길동 학생의 1차·2차 날짜별 재평가 예시 데이터가 채워졌습니다.', 'success');
-        }
-
-        function updatePSItemName(idx, val) {
-            const ps = getActiveTrialCatData().pairedStimulus;
-            ps.items[idx] = val;
-            saveState();
-            renderPSTab();
         }
 
         function addPSItem() {
             const ps = getActiveTrialCatData().pairedStimulus;
             if (ps.items.length >= 10) {
-                showToast('짝 자극은 최대 10개까지 등록할 수 있습니다.', 'error');
+                showToast('짝 자극 평가는 최대 10개까지 등록할 수 있습니다.', 'error');
                 return;
             }
             ps.items.push(`강화제 ${ps.items.length + 1}`);
@@ -3234,10 +3042,19 @@
             renderPSTab();
         }
 
+        function renamePSItem(idx, newName) {
+            const trimmed = newName.trim();
+            if (!trimmed) return;
+            const ps = getActiveTrialCatData().pairedStimulus;
+            ps.items[idx] = trimmed;
+            saveState();
+            renderPSTab();
+        }
+
         function removePSItem(idx) {
             const ps = getActiveTrialCatData().pairedStimulus;
             if (ps.items.length <= 2) {
-                showToast('짝 자극 비교를 위해 최소 2개의 항목이 필요합니다.', 'error');
+                showToast('짝 자극 평가는 최소 2개 이상의 항목이 필요합니다.', 'error');
                 return;
             }
             ps.items.splice(idx, 1);
@@ -3247,20 +3064,17 @@
         }
 
         function importStimuliToPS() {
-            const stu = getCurrentStudent();
-            const sess = getCurrentSession(stu);
+            const sess = getCurrentSession();
             const catId = sess.trial.activeCategory || 'sensory';
-            const items = (sess.question.stimuliByCat[catId] || []).slice(0, 10);
-            if (items.length < 2) {
-                showToast('해당 유형의 질문하기 자극이 최소 2개 이상 필요합니다.', 'error');
-                return;
+            const ps = getActiveTrialCatData().pairedStimulus;
+            const list = (sess.question.stimuliByCat[catId] || []).slice(0, 8);
+            if (list.length >= 2) {
+                ps.items = [...list];
+                ps.pairs = buildPairsFromItems(ps.items, false);
+                saveState();
+                renderPSTab();
+                showToast('동일 유형의 질문하기 자극을 짝 자극 대진표에 반영했습니다.');
             }
-            const ps = getActiveTrialCatData(stu).pairedStimulus;
-            ps.items = [...items];
-            ps.pairs = buildPairsFromItems(items, false);
-            saveState();
-            renderPSTab();
-            showToast('동일 유형의 질문하기 자극 목록을 불러왔습니다.');
         }
 
         function generatePSPairs(shuffle) {
@@ -3268,14 +3082,13 @@
             ps.pairs = buildPairsFromItems(ps.items, shuffle);
             saveState();
             renderPSTab();
-            showToast(shuffle ? '대진 순서를 무작위로 섞었습니다.' : '순서대로 대진표를 초기화했습니다.');
         }
 
-        function selectPSWinner(pairId, chosenIdx) {
+        function selectPSWinner(pairIdx, chosenIdx) {
             const ps = getActiveTrialCatData().pairedStimulus;
-            const pair = ps.pairs.find(p => p.id === pairId);
+            const pair = ps.pairs[pairIdx];
             if (!pair) return;
-            pair.winnerIdx = (pair.winnerIdx === chosenIdx) ? null : chosenIdx;
+            pair.winnerIdx = pair.winnerIdx === chosenIdx ? null : chosenIdx;
             saveState();
             renderPSTab();
         }
@@ -3285,61 +3098,51 @@
             document.getElementById('ps-date').value = ps.date || getTodayStr();
 
             document.getElementById('ps-items-grid').innerHTML = ps.items.map((name, idx) => `
-                <div class="flex items-center gap-2 bg-white px-3 py-2 rounded-xl border border-slate-200">
-                    <span class="text-xs font-extrabold text-indigo-700 shrink-0">강화제 ${idx + 1}:</span>
-                    <input type="text" value="${escapeHtml(name)}" oninput="updatePSItemName(${idx}, this.value)" class="flex-1 min-w-0 text-xs sm:text-sm font-bold text-slate-800 focus:outline-hidden">
-                    <button onclick="removePSItem(${idx})" class="text-slate-400 hover:text-rose-600 font-bold text-xs no-print">&times;</button>
+                <div class="flex items-center gap-1.5 bg-white px-2.5 py-1.5 rounded-xl border border-slate-300">
+                    <span class="w-5 h-5 rounded-md bg-indigo-100 text-indigo-700 text-xs font-extrabold flex items-center justify-center shrink-0">${idx + 1}</span>
+                    <input type="text" value="${escapeHtml(name)}" oninput="renamePSItem(${idx}, this.value)" class="flex-1 text-xs font-bold text-slate-800 focus:outline-hidden">
+                    <button onclick="removePSItem(${idx})" class="text-slate-400 hover:text-rose-600 font-bold text-sm no-print">&times;</button>
                 </div>
             `).join('');
 
-            const completed = ps.pairs.filter(p => p.winnerIdx !== null && p.winnerIdx !== undefined).length;
-            document.getElementById('ps-progress-badge').textContent = `${completed} / ${ps.pairs.length} 완료`;
+            const doneCount = ps.pairs.filter(p => p.winnerIdx !== null).length;
+            document.getElementById('ps-progress-badge').textContent = `${doneCount} / ${ps.pairs.length} 완료`;
 
             document.getElementById('ps-pairs-list').innerHTML = ps.pairs.map((p, idx) => {
-                const leftName = ps.items[p.leftIdx] || `강화제 ${p.leftIdx + 1}`;
-                const rightName = ps.items[p.rightIdx] || `강화제 ${p.rightIdx + 1}`;
-                const leftWin = p.winnerIdx === p.leftIdx;
-                const rightWin = p.winnerIdx === p.rightIdx;
+                const leftName = ps.items[p.leftIdx] || `항목 ${p.leftIdx + 1}`;
+                const rightName = ps.items[p.rightIdx] || `항목 ${p.rightIdx + 1}`;
                 return `
-                    <div class="flex items-center gap-2 p-2 rounded-xl border border-slate-200 bg-slate-50/60">
+                    <div class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200">
                         <span class="text-xs font-extrabold text-slate-400 w-7 text-center">${idx + 1}</span>
-                        <button onclick="selectPSWinner('${p.id}', ${p.leftIdx})" class="flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-between ${leftWin ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'}">
-                            <span class="truncate">${p.leftIdx + 1}. ${escapeHtml(leftName)}</span>
-                            <span class="ml-1 font-mono">${leftWin ? '+' : '-'}</span>
+                        <button onclick="selectPSWinner(${idx}, ${p.leftIdx})" class="flex-1 py-2 px-3 rounded-xl text-xs font-extrabold border transition ${p.winnerIdx === p.leftIdx ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs' : 'bg-white text-slate-700 border-slate-300 hover:bg-indigo-50'}">
+                            ${p.leftIdx + 1}. ${escapeHtml(leftName)}
                         </button>
-                        <span class="text-[11px] font-bold text-slate-400">VS</span>
-                        <button onclick="selectPSWinner('${p.id}', ${p.rightIdx})" class="flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-between ${rightWin ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'}">
-                            <span class="truncate">${p.rightIdx + 1}. ${escapeHtml(rightName)}</span>
-                            <span class="ml-1 font-mono">${rightWin ? '+' : '-'}</span>
+                        <span class="text-[11px] font-black text-slate-400">VS</span>
+                        <button onclick="selectPSWinner(${idx}, ${p.rightIdx})" class="flex-1 py-2 px-3 rounded-xl text-xs font-extrabold border transition ${p.winnerIdx === p.rightIdx ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs' : 'bg-white text-slate-700 border-slate-300 hover:bg-indigo-50'}">
+                            ${p.rightIdx + 1}. ${escapeHtml(rightName)}
                         </button>
                     </div>
                 `;
             }).join('');
 
-            const stats = ps.items.map((name, idx) => {
-                const involved = ps.pairs.filter(p => p.leftIdx === idx || p.rightIdx === idx);
-                const total = involved.length;
-                const wins = involved.filter(p => p.winnerIdx === idx).length;
-                const pct = total > 0 ? Math.round((wins / total) * 100) : 0;
-                return { idx, name, wins, total, pct };
-            }).sort((a, b) => b.pct - a.pct || b.wins - a.wins);
+            const results = ps.items.map((name, idx) => {
+                const totalShown = ps.pairs.filter(p => p.leftIdx === idx || p.rightIdx === idx).length;
+                const won = ps.pairs.filter(p => p.winnerIdx === idx).length;
+                const pct = totalShown > 0 ? Math.round((won / totalShown) * 100) : 0;
+                return { idx, name, won, totalShown, pct };
+            }).sort((a, b) => b.pct - a.pct || b.won - a.won);
 
-            document.getElementById('ps-result-tbody').innerHTML = stats.map((st, rankIdx) => `
-                <tr class="${st.pct >= 75 ? 'bg-amber-50/70' : ''}">
+            document.getElementById('ps-result-tbody').innerHTML = results.map((r, rankIdx) => `
+                <tr class="${r.pct >= 75 ? 'bg-emerald-50/70' : ''}">
                     <td class="py-2 px-2 text-center font-extrabold text-indigo-700">${rankIdx + 1}위</td>
-                    <td class="py-2 px-2 font-bold text-slate-800">
-                        ${st.idx + 1}번 (${escapeHtml(st.name)})
-                        ${st.pct >= 75 ? '<span class="ml-1 px-1.5 py-0.5 rounded-sm bg-amber-500 text-white text-[10px] font-extrabold">고선호</span>' : ''}
-                    </td>
-                    <td class="py-2 px-2 text-center font-semibold text-slate-600">${st.total}회 중 ${st.wins}회</td>
-                    <td class="py-2 px-2 text-center font-extrabold ${st.pct >= 75 ? 'text-amber-700' : 'text-slate-800'}">${st.pct}%</td>
+                    <td class="py-2 px-2 font-bold text-slate-800">${r.idx + 1}. ${escapeHtml(r.name)}</td>
+                    <td class="py-2 px-2 text-center font-semibold text-slate-600">${r.won} / ${r.totalShown}</td>
+                    <td class="py-2 px-2 text-center font-extrabold ${r.pct >= 75 ? 'text-emerald-700' : 'text-slate-700'}">${r.pct}%</td>
                 </tr>
             `).join('');
         }
 
-        // =========================================================================
-        // 8-1. 탭 3-3 & 3-4: MSW & MSWO
-        // =========================================================================
+        // [3-3] 자극 대체 있는 중다 자극 제시 선택 (MSW)
         function updateMSWDate(val) {
             getActiveTrialCatData().msw.date = val;
             saveState();
@@ -3358,9 +3161,9 @@
             const msw = getActiveTrialCatData().msw;
             if (!msw.pool.includes(name)) {
                 msw.pool.push(name);
-                if (msw.currentArray.length < msw.arraySize) {
+                if (msw.currentArray.length < (msw.arraySize || 3)) {
                     msw.currentArray.push(name);
-                    msw.poolCursor = msw.currentArray.length;
+                    msw.poolCursor = msw.pool.length;
                 }
                 saveState();
                 renderMSWTab();
@@ -3394,14 +3197,15 @@
         }
 
         function importStimuliToMSW() {
-            const stu = getCurrentStudent();
-            const sess = getCurrentSession(stu);
+            const sess = getCurrentSession();
             const catId = sess.trial.activeCategory || 'sensory';
-            const msw = getActiveTrialCatData(stu).msw;
-            const existing = new Set(msw.pool);
-            (sess.question.stimuliByCat[catId] || []).forEach(s => { if (!existing.has(s)) msw.pool.push(s); });
+            const msw = getActiveTrialCatData().msw;
+            const list = sess.question.stimuliByCat[catId] || [];
+            list.forEach(item => {
+                if (!msw.pool.includes(item)) msw.pool.push(item);
+            });
             resetMSWSession();
-            showToast('동일 유형의 질문하기 자극 목록을 MSW 풀에 반영했습니다.');
+            showToast('동일 유형의 질문하기 자극을 MSW 예비 풀에 추가했습니다.');
         }
 
         function resetMSWSession() {
@@ -3416,19 +3220,21 @@
 
         function pickMSWStimulus(chosenName) {
             const msw = getActiveTrialCatData().msw;
-            const presented = [...msw.currentArray];
+            const size = msw.arraySize || 3;
+            const prevChosen = msw.history.length > 0 ? msw.history[msw.history.length - 1].chosen : null;
+
             msw.history.push({
                 trialNum: msw.history.length + 1,
-                presented,
-                chosen: chosenName
+                presented: [...msw.currentArray],
+                chosen: chosenName,
+                retainedFromPrev: prevChosen === chosenName
             });
 
-            const size = msw.arraySize || 3;
             const nextArray = [chosenName];
-            for (let i = 1; i < size; i++) {
-                if (msw.poolCursor < msw.pool.length) {
-                    nextArray.push(msw.pool[msw.poolCursor]);
-                    msw.poolCursor++;
+            while (nextArray.length < size && msw.poolCursor < msw.pool.length) {
+                const candidate = msw.pool[msw.poolCursor++];
+                if (!nextArray.includes(candidate)) {
+                    nextArray.push(candidate);
                 }
             }
             msw.currentArray = nextArray;
@@ -3441,16 +3247,14 @@
             if (msw.history.length === 0) return;
             const last = msw.history.pop();
             msw.currentArray = [...last.presented];
-            const replacedCount = Math.max(0, last.presented.length - 1);
-            msw.poolCursor = Math.max(msw.currentArray.length, msw.poolCursor - replacedCount);
             saveState();
             renderMSWTab();
         }
 
-        function changeMSWHistoryChoice(trialIdx, newChosen) {
+        function updateMSWHistoryChoice(histIdx, newChosen) {
             const msw = getActiveTrialCatData().msw;
-            if (!msw.history[trialIdx]) return;
-            msw.history[trialIdx].chosen = newChosen;
+            if (!msw.history[histIdx]) return;
+            msw.history[histIdx].chosen = newChosen;
             saveState();
             renderMSWTab();
         }
@@ -3462,49 +3266,47 @@
 
             document.getElementById('msw-pool-tags').innerHTML = msw.pool.map((s, idx) => `
                 <div class="inline-flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700">
-                    <input type="text" value="${escapeHtml(s)}" onchange="renameMSWPoolItem(${idx}, this.value)" class="bg-transparent w-24 focus:outline-hidden focus:text-emerald-700">
+                    <input type="text" value="${escapeHtml(s)}" onchange="renameMSWPoolItem(${idx}, this.value)" class="bg-transparent w-28 focus:outline-hidden focus:text-emerald-700">
                     <button onclick="removeMSWPoolItem(${idx})" class="text-slate-400 hover:text-rose-600 font-bold">&times;</button>
                 </div>
             `).join('');
 
-            const remaining = Math.max(0, msw.pool.length - msw.poolCursor);
+            const remaining = Math.max(0, msw.pool.length - (msw.poolCursor || 0));
             document.getElementById('msw-trial-badge').textContent = `${msw.history.length + 1}회기 제시 중`;
             document.getElementById('msw-remaining-pool-badge').textContent = `남은 대체 예비 항목: ${remaining}개`;
             document.getElementById('btn-msw-undo').disabled = msw.history.length === 0;
 
             const prevChosen = msw.history.length > 0 ? msw.history[msw.history.length - 1].chosen : null;
             document.getElementById('msw-current-cards').innerHTML = msw.currentArray.map(item => {
-                const isCarried = item === prevChosen;
+                const isRetained = prevChosen === item;
                 return `
-                    <button onclick="pickMSWStimulus('${escapeHtml(item)}')" class="p-4 rounded-2xl bg-white border-2 ${isCarried ? 'border-indigo-400' : 'border-slate-200'} hover:border-indigo-600 hover:bg-indigo-50 text-center shadow-xs transition space-y-1">
-                        <div class="text-[11px] font-extrabold ${isCarried ? 'text-indigo-600' : 'text-emerald-600'}">
-                            ${isCarried ? '직전 회기 유지 항목' : '새 대체 자극'}
+                    <button onclick="pickMSWStimulus('${escapeHtml(item)}')" class="p-4 rounded-2xl bg-white border-2 ${isRetained ? 'border-emerald-500' : 'border-indigo-200'} hover:border-indigo-600 hover:bg-indigo-50 text-center shadow-xs transition space-y-1">
+                        <div>
+                            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${isRetained ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'}">
+                                ${isRetained ? '직전 선택 유지 항목' : '새 대체 자극'}
+                            </span>
                         </div>
-                        <div class="text-base font-extrabold text-slate-800">${escapeHtml(item)}</div>
+                        <div class="text-sm sm:text-base font-extrabold text-slate-800">${escapeHtml(item)}</div>
                     </button>
                 `;
             }).join('');
 
-            const histEl = document.getElementById('msw-history-list');
-            if (msw.history.length === 0) {
-                histEl.innerHTML = `<div class="text-xs text-slate-400 py-3">아직 완료된 MSW 시행 기록이 없습니다.</div>`;
-            } else {
-                histEl.innerHTML = msw.history.map((h, tIdx) => `
-                    <div class="flex flex-wrap items-center justify-between gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
-                        <span class="font-extrabold text-indigo-700">${h.trialNum}회기 제시:</span>
-                        <div class="flex flex-wrap gap-1.5 flex-1">
-                            ${h.presented.map(pItem => `
-                                <button onclick="changeMSWHistoryChoice(${tIdx}, '${escapeHtml(pItem)}')" class="px-2.5 py-1 rounded-lg font-bold transition ${pItem === h.chosen ? 'bg-indigo-600 text-white' : 'bg-white border border-slate-300 text-slate-600 hover:bg-indigo-50'}">
-                                    ${escapeHtml(pItem)} ${pItem === h.chosen ? '(선택됨)' : ''}
-                                </button>
-                            `).join('')}
-                        </div>
+            document.getElementById('msw-history-list').innerHTML = msw.history.map((h, idx) => `
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <span class="font-extrabold text-indigo-700">${h.trialNum}회기:</span>
+                        ${h.presented.map(p => `
+                            <button onclick="updateMSWHistoryChoice(${idx}, '${escapeHtml(p)}')" class="px-2.5 py-1 rounded-lg border font-bold transition ${h.chosen === p ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-600 border-slate-300 hover:bg-emerald-50'}">
+                                ${escapeHtml(p)} ${h.chosen === p ? '✓' : ''}
+                            </button>
+                        `).join('')}
                     </div>
-                `).join('');
-            }
+                    <span class="font-extrabold text-emerald-700">선택: ${escapeHtml(h.chosen)}</span>
+                </div>
+            `).join('');
         }
 
-        // MSWO (자극 대체 없는 중다 자극 제시 선택)
+        // [3-4] 자극 대체 없는 중다 자극 제시 선택 (MSWO)
         function updateMSWODate(val) {
             getActiveTrialCatData().mswo.date = val;
             saveState();
@@ -3552,22 +3354,15 @@
         }
 
         function importStimuliToMSWO() {
-            const stu = getCurrentStudent();
-            const sess = getCurrentSession(stu);
+            const sess = getCurrentSession();
             const catId = sess.trial.activeCategory || 'sensory';
-            const mswo = getActiveTrialCatData(stu).mswo;
+            const mswo = getActiveTrialCatData().mswo;
             mswo.baseItems = [...(sess.question.stimuliByCat[catId] || [])];
-            startNewMSWORound();
-            showToast('동일 유형의 질문하기 자극 목록을 MSWO에 불러왔습니다.');
-        }
-
-        function shuffleArray(arr) {
-            const copy = [...arr];
-            for (let i = copy.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [copy[i], copy[j]] = [copy[j], copy[i]];
-            }
-            return copy;
+            mswo.activeArray = shuffleArray(mswo.baseItems);
+            mswo.currentPicks = [];
+            saveState();
+            renderMSWOTab();
+            showToast('동일 유형의 질문하기 자극을 MSWO 항목에 불러왔습니다.');
         }
 
         function startNewMSWORound() {
@@ -3578,20 +3373,23 @@
             renderMSWOTab();
         }
 
-        function pickMSWOStimulus(chosenName) {
+        function pickMSWOStimulus(item) {
             const mswo = getActiveTrialCatData().mswo;
-            mswo.currentPicks.push(chosenName);
-            const remaining = mswo.activeArray.filter(x => x !== chosenName);
-            if (remaining.length === 0) {
+            mswo.currentPicks.push(item);
+            const remaining = mswo.activeArray.filter(x => x !== item);
+            mswo.activeArray = shuffleArray(remaining);
+
+            if (mswo.activeArray.length <= 1) {
+                if (mswo.activeArray.length === 1) {
+                    mswo.currentPicks.push(mswo.activeArray[0]);
+                }
                 mswo.rounds.push({
                     roundNum: mswo.rounds.length + 1,
                     order: [...mswo.currentPicks]
                 });
-                mswo.activeArray = [];
+                mswo.activeArray = shuffleArray(mswo.baseItems);
                 mswo.currentPicks = [];
-                showToast(`라운드 ${mswo.rounds.length} 순위 기록이 완료되었습니다!`, 'success');
-            } else {
-                mswo.activeArray = shuffleArray(remaining);
+                showToast(`${mswo.rounds.length}라운드 순위 기록이 완료되었습니다!`, 'success');
             }
             saveState();
             renderMSWOTab();
@@ -3600,21 +3398,8 @@
         function undoLastMSWOPick() {
             const mswo = getActiveTrialCatData().mswo;
             if (mswo.currentPicks.length === 0) return;
-            const last = mswo.currentPicks.pop();
-            mswo.activeArray = shuffleArray([...mswo.activeArray, last]);
-            saveState();
-            renderMSWOTab();
-        }
-
-        function updateMSWORoundRank(roundIdx, itemName, newRankStr) {
-            const mswo = getActiveTrialCatData().mswo;
-            const round = mswo.rounds[roundIdx];
-            if (!round) return;
-            const targetPos = Math.max(0, Math.min(round.order.length - 1, (parseInt(newRankStr, 10) || 1) - 1));
-            const curPos = round.order.indexOf(itemName);
-            if (curPos < 0) return;
-            round.order.splice(curPos, 1);
-            round.order.splice(targetPos, 0, itemName);
+            const restored = mswo.currentPicks.pop();
+            mswo.activeArray.push(restored);
             saveState();
             renderMSWOTab();
         }
@@ -3622,7 +3407,24 @@
         function clearMSWORounds() {
             const mswo = getActiveTrialCatData().mswo;
             mswo.rounds = [];
-            startNewMSWORound();
+            mswo.activeArray = shuffleArray(mswo.baseItems);
+            mswo.currentPicks = [];
+            saveState();
+            renderMSWOTab();
+        }
+
+        function updateMSWORoundRank(roundIdx, posIdx, newStim) {
+            const mswo = getActiveTrialCatData().mswo;
+            const round = mswo.rounds[roundIdx];
+            if (!round) return;
+            const oldStim = round.order[posIdx];
+            const swapIdx = round.order.indexOf(newStim);
+            if (swapIdx >= 0) {
+                round.order[swapIdx] = oldStim;
+            }
+            round.order[posIdx] = newStim;
+            saveState();
+            renderMSWOTab();
         }
 
         function renderMSWOTab() {
@@ -3631,35 +3433,33 @@
 
             document.getElementById('mswo-base-tags').innerHTML = mswo.baseItems.map((s, idx) => `
                 <div class="inline-flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700">
-                    <input type="text" value="${escapeHtml(s)}" onchange="renameMSWOItem(${idx}, this.value)" class="bg-transparent w-24 focus:outline-hidden focus:text-indigo-700">
+                    <input type="text" value="${escapeHtml(s)}" onchange="renameMSWOItem(${idx}, this.value)" class="bg-transparent w-24 focus:outline-hidden focus:text-amber-700">
                     <button onclick="removeMSWOItem(${idx})" class="text-slate-400 hover:text-rose-600 font-bold">&times;</button>
                 </div>
             `).join('');
 
-            document.getElementById('mswo-step-badge').textContent = mswo.activeArray.length > 0
-                ? `라운드 ${mswo.rounds.length + 1} 진행 중 (${mswo.currentPicks.length + 1}순위 선택)`
-                : `라운드 ${mswo.rounds.length} 완료 · '새 라운드 시작' 가능`;
+            document.getElementById('mswo-step-badge').textContent = `${mswo.rounds.length + 1}라운드 진행 중 (${mswo.currentPicks.length + 1}순위 선택 차례)`;
             document.getElementById('btn-mswo-undo').disabled = mswo.currentPicks.length === 0;
             document.getElementById('mswo-picked-order').textContent = mswo.currentPicks.length > 0
-                ? `현재 선택 순서: ${mswo.currentPicks.map((p, i) => `${i + 1}위 ${p}`).join(' → ')}`
+                ? `현재 선택 순서: ${mswo.currentPicks.map((p, i) => `${i + 1}.${p}`).join(' → ')}`
                 : '현재 선택 순서: 없음';
 
             document.getElementById('mswo-active-cards').innerHTML = mswo.activeArray.map((item, idx) => `
-                <button onclick="pickMSWOStimulus('${escapeHtml(item)}')" class="p-4 rounded-2xl bg-white border-2 border-amber-300 hover:border-amber-600 hover:bg-amber-100/60 text-center shadow-xs transition">
-                    <div class="text-[11px] font-bold text-amber-700 mb-1">배치 위치 ${idx + 1}</div>
-                    <div class="text-sm sm:text-base font-extrabold text-slate-800">${escapeHtml(item)}</div>
+                <button onclick="pickMSWOStimulus('${escapeHtml(item)}')" class="p-4 rounded-2xl bg-white border-2 border-amber-300 hover:border-amber-600 hover:bg-amber-50 text-center shadow-xs transition space-y-1">
+                    <div class="text-[11px] font-extrabold text-amber-700">위치 ${idx + 1}</div>
+                    <div class="text-sm font-extrabold text-slate-800">${escapeHtml(item)}</div>
                 </button>
             `).join('');
 
             document.getElementById('mswo-rounds-list').innerHTML = mswo.rounds.map((r, rIdx) => `
                 <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex flex-wrap items-center gap-2 text-xs">
-                    <span class="font-extrabold text-indigo-700">라운드 ${r.roundNum}:</span>
-                    ${r.order.map((item, pos) => `
-                        <div class="inline-flex items-center gap-1 bg-white px-2.5 py-1 rounded-lg border border-slate-300">
-                            <select onchange="updateMSWORoundRank(${rIdx}, '${escapeHtml(item)}', this.value)" class="font-extrabold text-amber-700 bg-transparent">
-                                ${r.order.map((_, optIdx) => `<option value="${optIdx + 1}" ${optIdx === pos ? 'selected' : ''}>${optIdx + 1}위</option>`).join('')}
+                    <span class="font-extrabold text-amber-800">${r.roundNum}라운드:</span>
+                    ${r.order.map((item, posIdx) => `
+                        <div class="inline-flex items-center gap-1 bg-white px-2 py-1 rounded-lg border border-slate-300">
+                            <span class="font-extrabold text-indigo-700">${posIdx + 1}위</span>
+                            <select onchange="updateMSWORoundRank(${rIdx}, ${posIdx}, this.value)" class="font-bold text-slate-800 bg-transparent focus:outline-hidden">
+                                ${mswo.baseItems.map(opt => `<option value="${escapeHtml(opt)}" ${opt === item ? 'selected' : ''}>${escapeHtml(opt)}</option>`).join('')}
                             </select>
-                            <span class="font-bold text-slate-800">${escapeHtml(item)}</span>
                         </div>
                     `).join('')}
                 </div>
@@ -3667,19 +3467,167 @@
 
             const stats = mswo.baseItems.map(item => {
                 const ranks = mswo.rounds.map(r => r.order.indexOf(item) + 1).filter(x => x > 0);
-                const avg = ranks.length > 0 ? Math.round((ranks.reduce((a, b) => a + b, 0) / ranks.length) * 10) / 10 : 999;
+                const avg = ranks.length > 0 ? (ranks.reduce((a, b) => a + b, 0) / ranks.length) : 999;
                 const firstCount = ranks.filter(x => x === 1).length;
                 return { item, avg, firstCount, hasData: ranks.length > 0 };
-            }).sort((a, b) => a.avg - b.avg);
+            }).sort((a, b) => a.avg - b.avg || b.firstCount - a.firstCount);
 
             document.getElementById('mswo-summary-tbody').innerHTML = stats.map((st, idx) => `
                 <tr>
                     <td class="py-2 px-3 text-center font-extrabold text-indigo-700">${st.hasData ? `${idx + 1}위` : '-'}</td>
                     <td class="py-2 px-3 font-bold text-slate-800">${escapeHtml(st.item)}</td>
-                    <td class="py-2 px-3 text-center font-extrabold text-amber-700">${st.hasData ? `평균 ${st.avg}위` : '기록 없음'}</td>
-                    <td class="py-2 px-3 text-center font-semibold text-slate-600">${st.firstCount}회</td>
+                    <td class="py-2 px-3 text-center font-extrabold text-amber-700">${st.hasData ? `${st.avg.toFixed(2)}위` : '-'}</td>
+                    <td class="py-2 px-3 text-center font-bold text-slate-700">${st.firstCount}회</td>
                 </tr>
             `).join('');
+        }
+
+        // =========================================================================
+        // 7. 탭 4: 종합 분석 리포트 및 JSON 내보내기/불러오기
+        // =========================================================================
+        function updateReportField(field, val) {
+            getCurrentSession().report[field] = val;
+            saveState();
+        }
+
+        function computeSessionTopStimuli(sess) {
+            const scoreMap = {};
+            const addEvidence = (name, pts, sourceLabel) => {
+                const clean = (name || '').trim();
+                if (!clean) return;
+                if (!scoreMap[clean]) {
+                    scoreMap[clean] = { name: clean, score: 0, sources: new Set() };
+                }
+                scoreMap[clean].score += pts;
+                scoreMap[clean].sources.add(sourceLabel);
+            };
+
+            // 1. 질문하기 근거
+            REINFORCER_CATEGORIES.forEach(cat => {
+                const recs = sess.question.recordsByCat[cat.id] || {};
+                (sess.question.selectedRespondents || []).forEach(respId => {
+                    const r = recs[respId];
+                    if (!r) return;
+                    Object.entries(r.ratings || {}).forEach(([stim, val]) => {
+                        if (val >= 4) addEvidence(stim, val, `질문하기(${cat.short})`);
+                    });
+                    if (r.ranks?.r1) addEvidence(r.ranks.r1, 5, `질문하기 1순위(${cat.short})`);
+                    if (r.ranks?.r2) addEvidence(r.ranks.r2, 3, `질문하기 2순위(${cat.short})`);
+                });
+            });
+
+            // 2. 관찰하기 근거
+            const obsItems = [...(sess.observe?.items || [])].sort((a, b) => (b.elapsedSec || 0) - (a.elapsedSec || 0));
+            obsItems.forEach((item, idx) => {
+                if ((item.elapsedSec || 0) > 0) {
+                    const pts = idx === 0 ? 6 : (idx === 1 ? 4 : 2);
+                    addEvidence(item.name, pts, `자유작동관찰(${formatSecToMinSec(item.elapsedSec)})`);
+                }
+            });
+
+            // 3. 시행 기반 평가 근거
+            REINFORCER_CATEGORIES.forEach(cat => {
+                const tData = sess.trial.byCat[cat.id];
+                if (!tData) return;
+
+                // 짝 자극
+                const ps = tData.pairedStimulus;
+                if (ps && ps.pairs.some(p => p.winnerIdx !== null)) {
+                    ps.items.forEach((name, idx) => {
+                        const shown = ps.pairs.filter(p => p.leftIdx === idx || p.rightIdx === idx).length;
+                        const won = ps.pairs.filter(p => p.winnerIdx === idx).length;
+                        const pct = shown > 0 ? Math.round((won / shown) * 100) : 0;
+                        if (pct >= 60) addEvidence(name, Math.round(pct / 15), `짝자극(${pct}%)`);
+                    });
+                }
+
+                // MSWO
+                const mswo = tData.mswo;
+                if (mswo && mswo.rounds.length > 0) {
+                    mswo.baseItems.forEach(name => {
+                        const ranks = mswo.rounds.map(r => r.order.indexOf(name) + 1).filter(x => x > 0);
+                        if (ranks.length > 0) {
+                            const avg = ranks.reduce((a, b) => a + b, 0) / ranks.length;
+                            if (avg <= 2.5) addEvidence(name, Math.round((4 - avg) * 3), `MSWO(평균 ${avg.toFixed(1)}위)`);
+                        }
+                    });
+                }
+
+                // MSW
+                const msw = tData.msw;
+                if (msw && msw.history.length > 0) {
+                    const counts = {};
+                    msw.history.forEach(h => { counts[h.chosen] = (counts[h.chosen] || 0) + 1; });
+                    Object.entries(counts).forEach(([name, cnt]) => {
+                        addEvidence(name, cnt * 2, `MSW(${cnt}회 선택)`);
+                    });
+                }
+            });
+
+            return Object.values(scoreMap)
+                .map(x => ({ ...x, sources: Array.from(x.sources) }))
+                .sort((a, b) => b.score - a.score);
+        }
+
+        function renderReportTab() {
+            const stu = getCurrentStudent();
+            const sess = getCurrentSession(stu);
+            const sessions = Object.values(stu.sessions);
+            const sessIdx = sessions.findIndex(s => s.id === sess.id);
+
+            const badge = document.getElementById('report-session-badge');
+            if (badge) badge.textContent = `${sessIdx + 1}차 평가 (${sess.date})`;
+
+            const topList = computeSessionTopStimuli(sess).slice(0, 6);
+            const topContainer = document.getElementById('report-top-stimuli-list');
+            if (topContainer) {
+                if (topList.length === 0) {
+                    topContainer.innerHTML = `<div class="col-span-full py-6 text-center text-xs text-slate-400">아직 기록된 평가 점수가 없습니다. 질문하기·관찰하기·시행 기반 평가를 먼저 진행해 주세요.</div>`;
+                } else {
+                    topContainer.innerHTML = topList.map((item, idx) => `
+                        <div class="p-3.5 rounded-2xl border ${idx === 0 ? 'bg-indigo-50/80 border-indigo-300' : 'bg-slate-50 border-slate-200'} space-y-1.5">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2 py-0.5 rounded-lg ${idx === 0 ? 'bg-indigo-600 text-white' : 'bg-slate-700 text-white'} text-xs font-extrabold">${idx + 1}순위</span>
+                                    <span class="text-sm font-black text-slate-900">${escapeHtml(item.name)}</span>
+                                </div>
+                                <span class="text-xs font-extrabold text-indigo-700">종합점수 ${item.score}점</span>
+                            </div>
+                            <div class="flex flex-wrap gap-1 pt-0.5">
+                                ${item.sources.map(src => `<span class="text-[11px] font-bold px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-600">${escapeHtml(src)}</span>`).join('')}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            }
+
+            const timelineEl = document.getElementById('report-timeline-comparison');
+            if (timelineEl) {
+                timelineEl.innerHTML = sessions.map((s, idx) => {
+                    const top3 = computeSessionTopStimuli(s).slice(0, 3);
+                    const isCurrent = s.id === sess.id;
+                    return `
+                        <div class="p-4 rounded-2xl border ${isCurrent ? 'border-indigo-500 bg-indigo-50/40' : 'border-slate-200 bg-slate-50'} space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-extrabold text-indigo-800">${idx + 1}차 (${escapeHtml(s.date)})</span>
+                                ${isCurrent ? '<span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-indigo-600 text-white">현재 조회중</span>' : ''}
+                            </div>
+                            <div class="space-y-1 text-xs">
+                                ${top3.length > 0
+                                    ? top3.map((t, ti) => `<div class="font-bold text-slate-800">${ti + 1}위: ${escapeHtml(t.name)} <span class="text-slate-400 font-normal">(${t.sources[0] || ''})</span></div>`).join('')
+                                    : '<div class="text-slate-400">기록된 상위 자극 없음</div>'
+                                }
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            document.getElementById('report-cat-edible').value = sess.report.catEdible || '';
+            document.getElementById('report-cat-tangible').value = sess.report.catTangible || '';
+            document.getElementById('report-cat-social').value = sess.report.catSocial || '';
+            document.getElementById('report-cat-sensory').value = sess.report.catSensory || '';
+            document.getElementById('report-memo').value = sess.report.memo || '';
         }
 
         function exportStudentJSON() {
