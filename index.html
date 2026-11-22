@@ -353,7 +353,60 @@
     <!-- 메인 컨텐츠 영역 -->
     <main class="max-w-7xl w-full mx-auto px-4 py-5 flex-1 space-y-5">
 
-        <!-- 날짜별 평가 회차(재평가 이력) 관리 바 -->
+        <!-- 대상 학생 기본 정보 & 개별 고려 요인 카드 (상단 배치 및 전체 접기/펼치기 지원) -->
+        <section class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 print-card">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+                    <h2 class="font-extrabold text-slate-800 text-base">대상 학생 기본 정보 및 개별 고려 요인</h2>
+                    <span id="student-info-summary-badge" class="hidden text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                        신길동
+                    </span>
+                </div>
+                <button onclick="toggleStudentInfoCard()" id="toggle-student-info-btn" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-700 border border-slate-200 text-xs font-extrabold flex items-center gap-1.5 transition no-print">
+                    <span id="toggle-student-info-label">학생 정보 접기</span>
+                    <i id="toggle-student-info-icon" data-lucide="chevron-up" class="w-4 h-4 transition-transform"></i>
+                </button>
+            </div>
+
+            <div id="student-info-body" class="mt-4 pt-4 border-t border-slate-100 space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">학생 이름</label>
+                        <input type="text" id="meta-name" oninput="updateStudentMeta('name', this.value)" placeholder="예: 신길동" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-bold focus:outline-hidden focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">생년월일 / 연령</label>
+                        <input type="text" id="meta-age" oninput="updateStudentMeta('age', this.value)" placeholder="예: 만 9세 (초3)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-semibold focus:outline-hidden focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">주 평가자 (교사/치료사)</label>
+                        <input type="text" id="meta-evaluator" oninput="updateStudentMeta('evaluator', this.value)" placeholder="예: 특수교사 신OO" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-bold focus:outline-hidden focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                </div>
+
+                <div id="factor-panel" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 border-t border-slate-100">
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <label class="block text-xs font-bold text-indigo-700 mb-1">① 이전 강화 경험</label>
+                        <input type="text" id="factor-exp" oninput="updateStudentFactor('exp', this.value)" placeholder="기존에 효과 있었던 자극" class="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <label class="block text-xs font-bold text-indigo-700 mb-1">② 현재 요구 및 결핍 상태</label>
+                        <input type="text" id="factor-req" oninput="updateStudentFactor('req', this.value)" placeholder="원하지만 평소 접하기 어려운 것" class="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <label class="block text-xs font-bold text-indigo-700 mb-1">③ 제공 지속성 및 가치</label>
+                        <input type="text" id="factor-sus" oninput="updateStudentFactor('sus', this.value)" placeholder="지속 제공 가능 여부, 포만감 주의" class="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <label class="block text-xs font-bold text-indigo-700 mb-1">④ 연령 적합성 및 특이사항</label>
+                        <input type="text" id="factor-note" oninput="updateStudentFactor('note', this.value)" placeholder="구강 탐색, 감각 과민 등 주의점" class="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 날짜별 평가 회차(재평가 이력) 관리 바 (대상 학생 기본 정보 아래 배치) -->
         <section class="bg-indigo-50/90 rounded-2xl p-4 shadow-xs border border-indigo-200/90 flex flex-wrap items-center justify-between gap-3 no-print">
             <div class="flex flex-wrap items-center gap-2.5">
                 <div class="flex items-center gap-1.5 text-indigo-900 font-extrabold text-xs sm:text-sm">
@@ -374,55 +427,6 @@
                 <button onclick="confirmDeleteCurrentSession()" title="현재 회차 삭제" class="p-2 rounded-xl bg-white border border-rose-200 text-rose-600 hover:bg-rose-50 transition">
                     <i data-lucide="trash" class="w-3.5 h-3.5"></i>
                 </button>
-            </div>
-        </section>
-
-        <!-- 대상 학생 기본 정보 & 개별 고려 요인 카드 -->
-        <section class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 print-card">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
-                    <h2 class="font-extrabold text-slate-800 text-base">대상 학생 기본 정보 및 개별 고려 요인</h2>
-                    <span class="text-xs text-slate-400 font-medium hidden md:inline">(각 평가별 날짜는 해당 평가 탭에서 개별 기록)</span>
-                </div>
-                <button onclick="toggleFactorPanel()" id="toggle-factor-btn" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 no-print">
-                    <span>개별 고려 요인 접기/펼치기</span>
-                    <i data-lucide="chevron-up" class="w-4 h-4"></i>
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 mb-1">학생 이름</label>
-                    <input type="text" id="meta-name" oninput="updateStudentMeta('name', this.value)" placeholder="예: 신길동" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-bold focus:outline-hidden focus:ring-2 focus:ring-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 mb-1">생년월일 / 연령</label>
-                    <input type="text" id="meta-age" oninput="updateStudentMeta('age', this.value)" placeholder="예: 만 9세 (초3)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-semibold focus:outline-hidden focus:ring-2 focus:ring-indigo-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 mb-1">주 평가자 (교사/치료사)</label>
-                    <input type="text" id="meta-evaluator" oninput="updateStudentMeta('evaluator', this.value)" placeholder="예: 특수교사 신OO" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-bold focus:outline-hidden focus:ring-2 focus:ring-indigo-500">
-                </div>
-            </div>
-
-            <div id="factor-panel" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 border-t border-slate-100">
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                    <label class="block text-xs font-bold text-indigo-700 mb-1">① 이전 강화 경험</label>
-                    <input type="text" id="factor-exp" oninput="updateStudentFactor('exp', this.value)" placeholder="기존에 효과 있었던 자극" class="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
-                </div>
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                    <label class="block text-xs font-bold text-indigo-700 mb-1">② 현재 요구 및 결핍 상태</label>
-                    <input type="text" id="factor-req" oninput="updateStudentFactor('req', this.value)" placeholder="원하지만 평소 접하기 어려운 것" class="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
-                </div>
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                    <label class="block text-xs font-bold text-indigo-700 mb-1">③ 제공 지속성 및 가치</label>
-                    <input type="text" id="factor-sus" oninput="updateStudentFactor('sus', this.value)" placeholder="지속 제공 가능 여부, 포만감 주의" class="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
-                </div>
-                <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-                    <label class="block text-xs font-bold text-indigo-700 mb-1">④ 연령 적합성 및 특이사항</label>
-                    <input type="text" id="factor-note" oninput="updateStudentFactor('note', this.value)" placeholder="구강 탐색, 감각 과민 등 주의점" class="w-full bg-white px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
-                </div>
             </div>
         </section>
 
@@ -1294,7 +1298,7 @@
         let obsTickInterval = null;
         let ssTickInterval = null;
         let activeSSTrialTimerId = null;
-        let factorExpanded = true;
+        let studentInfoExpanded = true;
         let cloudSaveTimer = null;
 
         function getTodayStr() {
@@ -1962,6 +1966,7 @@
             const stu = getCurrentStudent();
             stu.meta[field] = val;
             saveState();
+            updateStudentSummaryBadge();
             if (field === 'name') {
                 renderStudentSelector();
                 const disp = document.getElementById('raisd-disp-name');
@@ -1974,10 +1979,29 @@
             saveState();
         }
 
-        function toggleFactorPanel() {
-            factorExpanded = !factorExpanded;
-            const panel = document.getElementById('factor-panel');
-            if (panel) panel.classList.toggle('hidden', !factorExpanded);
+        function updateStudentSummaryBadge() {
+            const stu = getCurrentStudent();
+            const badge = document.getElementById('student-info-summary-badge');
+            if (!badge) return;
+            const namePart = stu.meta.name || '이름 미입력';
+            const agePart = stu.meta.age ? ` · ${stu.meta.age}` : '';
+            badge.textContent = `${namePart}${agePart}`;
+        }
+
+        function toggleStudentInfoCard() {
+            studentInfoExpanded = !studentInfoExpanded;
+            const body = document.getElementById('student-info-body');
+            const label = document.getElementById('toggle-student-info-label');
+            const icon = document.getElementById('toggle-student-info-icon');
+            const badge = document.getElementById('student-info-summary-badge');
+
+            if (body) body.classList.toggle('hidden', !studentInfoExpanded);
+            if (label) label.textContent = studentInfoExpanded ? '학생 정보 접기' : '학생 정보 펼치기';
+            if (icon) icon.style.transform = studentInfoExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+            if (badge) {
+                updateStudentSummaryBadge();
+                badge.classList.toggle('hidden', studentInfoExpanded);
+            }
         }
 
         function switchMainTab(tabId) {
@@ -3553,6 +3577,7 @@
             document.getElementById('factor-req').value = stu.factors.req || '';
             document.getElementById('factor-sus').value = stu.factors.sus || '';
             document.getElementById('factor-note').value = stu.factors.note || '';
+            updateStudentSummaryBadge();
 
             updateWelcomeLoginUI();
 
