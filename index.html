@@ -8,13 +8,13 @@
     <meta name="apple-mobile-web-app-title" content="원스톱으로 기록하는 자극 선호도 평가">
     <title>ABA Special Edu Lab - 원스톱으로 기록하는 자극 선호도 평가</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%238b78d6'/%3E%3Ctext x='50' y='64' font-family='sans-serif' font-weight='900' font-size='34' fill='white' text-anchor='middle'%3EABA%3C/text%3E%3C/svg%3E">
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22%EC%9E%90%EA%B7%B9%EC%84%A0%ED%98%B8%EB%8F%84%20%ED%8F%89%EA%B0%80%20%EA%B8%B0%EB%A1%9D%20%EC%95%B1%22%2C%22short_name%22%3A%22%EC%9E%90%EA%B7%B9%EC%84%A0%ED%98%B8%EB%8F%84%20%ED%8F%89%EA%B0%80%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f8fafc%22%2C%22theme_color%22%3A%22%238b78d6%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2520viewBox%3D%270%25200%2520512%2520512%27%253E%253Crect%2520width%3D%27512%27%2520height%3D%27512%27%2520rx%3D%27110%27%2520fill%3D%27%25238b78d6%27%2F%253E%253Ctext%2520x%3D%27256%27%2520y%3D%27320%27%2520font-family%3D%27sans-serif%27%2520font-weight%3D%27900%27%2520font-size%3D%27170%27%2520fill%3D%27white%27%2520text-anchor%3D%27middle%27%253EABA%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+    <link rel="manifest" href="./manifest.json">
     <script>
-        // 엣지(Edge) / 크롬 PWA 설치 조건 충족을 위한 서비스 워커 등록 시도
+        // 정식 PWA(WebAPK) 설치 및 크롬 배지 제거를 위한 정적 서비스 워커 등록
         if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
-            const swCode = "self.addEventListener('fetch', function(e) {});";
-            const swBlob = new Blob([swCode], { type: 'application/javascript' });
-            navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(function() {});
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./sw.js').catch(function() {});
+            });
         }
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -245,8 +245,8 @@
             <!-- 순차 안내: STEP 1 Google 로그인 → STEP 2 시작하기 -->
             <div class="pt-1 space-y-2.5">
                 <div class="bg-indigo-50/80 border border-indigo-200/80 rounded-2xl p-3 space-y-2.5">
-                    <div class="text-[11px] sm:text-xs font-extrabold text-indigo-900 flex items-center justify-center gap-1.5">
-                        <span class="px-2 py-0.5 rounded-full bg-indigo-600 text-white text-[10px]">이용 순서</span>
+                    <div class="text-[11px] sm:text-xs font-extrabold text-indigo-900 flex items-center justify-center gap-2 text-left sm:text-center">
+                        <span class="px-2.5 py-1 rounded-xl sm:rounded-full bg-indigo-600 text-white text-[10px] leading-tight shrink-0 text-center">이용<br class="sm:hidden"> 순서</span>
                         <span>① Google 로그인 후 ② 시작하기 버튼을 눌러주세요</span>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
