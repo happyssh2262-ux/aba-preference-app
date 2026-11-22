@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#8b78d6">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="원스톱으로 기록하는 자극 선호도 평가">
+    <meta name="apple-mobile-web-app-title" content="원스톱으로 기록하는&#10;자극 선호도 평가">
     <title>ABA Special Edu Lab - 원스톱으로 기록하는 자극 선호도 평가</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%238b78d6'/%3E%3Ctext x='50' y='64' font-family='sans-serif' font-weight='900' font-size='34' fill='white' text-anchor='middle'%3EABA%3C/text%3E%3C/svg%3E">
     <link id="pwa-manifest-link" rel="manifest" href="">
@@ -72,7 +72,7 @@
             }
 
             const manifestObj = {
-                name: '원스톱으로 기록하는 자극 선호도 평가',
+                name: '원스톱으로 기록하는\n자극 선호도 평가',
                 short_name: '자극 선호도 평가',
                 id: window.location.pathname || '/',
                 start_url: window.location.origin + window.location.pathname,
@@ -112,6 +112,8 @@
             font-family: 'Noto Sans KR', sans-serif;
             background-color: #f8fafc;
             color: #1e293b;
+            word-break: keep-all;
+            overflow-wrap: break-word;
             -webkit-tap-highlight-color: transparent;
         }
         @media print {
@@ -618,13 +620,13 @@
         <section id="tab-question" class="tab-content hidden space-y-5">
             <!-- 질문하기 유형 전환 서브 바 -->
             <div class="bg-white rounded-2xl p-3 shadow-xs border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-2 no-print">
-                <button onclick="switchQuestionSubMode('general')" id="btn-qmode-general" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-xs">
-                    <i data-lucide="users" class="w-4 h-4"></i>
-                    <span>질문하기 (학생 · 부모 · 교사 · 의미 있는 타인)</span>
+                <button onclick="switchQuestionSubMode('general')" id="btn-qmode-general" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-xs text-center leading-snug">
+                    <i data-lucide="users" class="w-4 h-4 shrink-0"></i>
+                    <span>질문하기<br class="sm:hidden"><span class="hidden sm:inline"> </span>(학생 · 부모 · 교사 · 의미 있는 타인)</span>
                 </button>
-                <button onclick="switchQuestionSubMode('raisd')" id="btn-qmode-raisd" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200">
-                    <i data-lucide="clipboard-list" class="w-4 h-4"></i>
-                    <span>중도 장애인을 위한 강화제 평가 (RAISD)</span>
+                <button onclick="switchQuestionSubMode('raisd')" id="btn-qmode-raisd" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 text-center leading-snug">
+                    <i data-lucide="clipboard-list" class="w-4 h-4 shrink-0"></i>
+                    <span>중도 장애인을 위한 강화제 평가<br class="sm:hidden"><span class="hidden sm:inline"> </span>(RAISD)</span>
                 </button>
             </div>
 
@@ -2321,14 +2323,14 @@
             if (mode === 'raisd') {
                 genEl.classList.add('hidden');
                 raisdEl.classList.remove('hidden');
-                btnRaisd.className = 'py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-purple-700 text-white shadow-xs';
-                btnGen.className = 'py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200';
+                btnRaisd.className = 'py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-purple-700 text-white shadow-xs text-center leading-snug';
+                btnGen.className = 'py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 text-center leading-snug';
                 renderRaisdTab();
             } else {
                 raisdEl.classList.add('hidden');
                 genEl.classList.remove('hidden');
-                btnGen.className = 'py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-xs';
-                btnRaisd.className = 'py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200';
+                btnGen.className = 'py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-xs text-center leading-snug';
+                btnRaisd.className = 'py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-slate-100 text-slate-600 hover:bg-slate-200 text-center leading-snug';
                 renderQuestionTab();
             }
         }
