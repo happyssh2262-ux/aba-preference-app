@@ -10,7 +10,6 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%238b78d6'/%3E%3Ctext x='50' y='64' font-family='sans-serif' font-weight='900' font-size='34' fill='white' text-anchor='middle'%3EABA%3C/text%3E%3C/svg%3E">
     <link id="pwa-manifest-link" rel="manifest" href="">
     <script>
-        // 안드로이드 크롬 및 모든 모바일 브라우저가 정식 설치형 앱(PWA)으로 인식하도록 실제 192x192 & 512x512 PNG 아이콘을 자동 생성해 매니페스트에 연결
         (function() {
             function createPngIconDataUrl(size) {
                 const canvas = document.createElement('canvas');
@@ -19,7 +18,6 @@
                 const ctx = canvas.getContext('2d');
                 if (!ctx) return '';
 
-                // 보라색 둥근 사각형 배경
                 const radius = size * 0.22;
                 ctx.fillStyle = '#8b78d6';
                 ctx.beginPath();
@@ -35,7 +33,6 @@
                 ctx.closePath();
                 ctx.fill();
 
-                // 상단 무지개 포인트 아치
                 const colors = ['#ee837e', '#f5a855', '#f9d478', '#85cc96', '#7da4f2'];
                 colors.forEach((col, i) => {
                     ctx.strokeStyle = col;
@@ -45,14 +42,12 @@
                     ctx.stroke();
                 });
 
-                // 중앙 ABA 볼드 텍스트
                 ctx.fillStyle = '#ffffff';
                 ctx.font = `900 ${Math.round(size * 0.31)}px sans-serif`;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText('ABA', size / 2, size * 0.56);
 
-                // 하단 서브 라벨
                 ctx.fillStyle = '#ede9fe';
                 ctx.font = `700 ${Math.round(size * 0.10)}px sans-serif`;
                 ctx.fillText('선호도 평가', size / 2, size * 0.78);
@@ -63,7 +58,6 @@
             const png192 = createPngIconDataUrl(192);
             const png512 = createPngIconDataUrl(512);
 
-            // 애플 터치 아이콘(아이폰 사파리)에도 PNG 연결
             if (png192) {
                 const appleIcon = document.createElement('link');
                 appleIcon.rel = 'apple-touch-icon';
@@ -174,7 +168,7 @@
     <!-- 첫 화면 (랜딩 / 시작하기 화면) -->
     <div id="welcome-screen" class="fixed inset-0 z-40 bg-slate-50 flex flex-col items-center justify-start sm:justify-center p-3 sm:p-5 overflow-y-auto no-print">
         <div class="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-8 shadow-xl border border-slate-200/90 text-center space-y-5 my-auto">
-            <!-- 상단 ABA Special Edu Lab by 신 로고 (캡처 이미지와 동일한 비율 및 곡선 리본·아이들 일러스트) -->
+            <!-- 상단 ABA Special Edu Lab by 신 로고 -->
             <div class="mx-auto w-44 h-44 rounded-[30px] overflow-hidden shadow-md border-[6px] border-[#ece6f8] bg-[#d9caf2] flex items-center justify-center">
                 <svg viewBox="0 0 400 400" class="w-full h-full block" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -183,24 +177,20 @@
                             <stop offset="55%" stop-color="#d8c6f2"/>
                             <stop offset="100%" stop-color="#ccb6eb"/>
                         </linearGradient>
-                        <!-- Special Edu Lab 곡선 텍스트 경로 -->
                         <path id="ribbonTextArc" d="M 96 303 Q 200 282 324 302" />
                         <path id="ribbonUnderlineArc" d="M 118 310 Q 200 295 306 309" />
                     </defs>
                     <rect width="400" height="400" fill="url(#pastelPurpleBg)"/>
 
-                    <!-- 무지개 (5중 아치) -->
                     <path d="M 120 92 A 80 74 0 0 1 280 92" fill="none" stroke="#ee837e" stroke-width="7.2" stroke-linecap="round"/>
                     <path d="M 127 92 A 73 67 0 0 1 273 92" fill="none" stroke="#f5a855" stroke-width="7.2" stroke-linecap="round"/>
                     <path d="M 134 92 A 66 60 0 0 1 266 92" fill="none" stroke="#f9d478" stroke-width="7.2" stroke-linecap="round"/>
                     <path d="M 141 92 A 59 53 0 0 1 259 92" fill="none" stroke="#85cc96" stroke-width="7.2" stroke-linecap="round"/>
                     <path d="M 148 92 A 52 46 0 0 1 252 92" fill="none" stroke="#7da4f2" stroke-width="7.2" stroke-linecap="round"/>
 
-                    <!-- 왼쪽 남자아이 (가로로 통통한 둥근 얼굴형) -->
                     <circle cx="95" cy="145" r="8.5" fill="#f3c1a2"/>
                     <circle cx="185" cy="145" r="8.5" fill="#f3c1a2"/>
                     <ellipse cx="140" cy="144" rx="41" ry="34" fill="#f6ccb0"/>
-                    <!-- 남자아이 앞머리 -->
                     <path d="M 99 138 C 103 111, 177 111, 181 138 C 170 130, 159 138, 149 132 C 141 138, 131 131, 119 137 C 110 132, 104 135, 99 138 Z" fill="#7a4925"/>
                     <circle cx="125" cy="144" r="4" fill="#472a16"/>
                     <circle cx="155" cy="144" r="4" fill="#472a16"/>
@@ -209,13 +199,11 @@
                     <path d="M 130 156 Q 140 165 150 156" fill="none" stroke="#472a16" stroke-width="3.2" stroke-linecap="round"/>
                     <path d="M 105 178 Q 140 168 175 178 L 175 196 L 105 196 Z" fill="#239688"/>
 
-                    <!-- 오른쪽 여자아이 (가로로 통통한 둥근 얼굴형 및 양갈래 묶음머리) -->
                     <circle cx="209" cy="166" r="14" fill="#7a4925"/>
                     <circle cx="311" cy="166" r="14" fill="#7a4925"/>
                     <circle cx="215" cy="145" r="8.5" fill="#f3c1a2"/>
                     <circle cx="305" cy="145" r="8.5" fill="#f3c1a2"/>
                     <ellipse cx="260" cy="144" rx="41" ry="34" fill="#f6ccb0"/>
-                    <!-- 여자아이 가르마 앞머리 -->
                     <path d="M 219 138 C 223 111, 297 111, 301 138 C 284 126, 269 133, 260 134 C 251 133, 236 126, 219 138 Z" fill="#7a4925"/>
                     <circle cx="245" cy="144" r="4" fill="#472a16"/>
                     <circle cx="275" cy="144" r="4" fill="#472a16"/>
@@ -224,7 +212,6 @@
                     <path d="M 250 156 Q 260 165 270 156" fill="none" stroke="#472a16" stroke-width="3.2" stroke-linecap="round"/>
                     <path d="M 225 178 Q 260 168 295 178 L 295 196 L 225 196 Z" fill="#ee7b68"/>
 
-                    <!-- 양쪽 뭉게구름 -->
                     <g fill="#aef0f7">
                         <circle cx="109" cy="95" r="14"/><circle cx="126" cy="86" r="18"/><circle cx="144" cy="88" r="16"/><circle cx="159" cy="96" r="13"/>
                         <rect x="109" y="91" width="50" height="16" rx="8"/>
@@ -232,7 +219,6 @@
                         <rect x="241" y="91" width="50" height="16" rx="8"/>
                     </g>
 
-                    <!-- 상단 양옆 노란 강조선 -->
                     <g stroke="#f6b324" stroke-width="5.5" stroke-linecap="round">
                         <line x1="54" y1="112" x2="77" y2="121"/>
                         <line x1="49" y1="134" x2="75" y2="137"/>
@@ -240,26 +226,21 @@
                         <line x1="351" y1="134" x2="325" y2="137"/>
                     </g>
 
-                    <!-- 펼쳐진 큰 책 -->
                     <path d="M 74 188 Q 142 177 200 194 Q 258 177 326 188 L 340 282 Q 264 271 200 288 Q 136 271 60 282 Z" fill="#fdfbf2" stroke="#6c7ae0" stroke-width="4.8" stroke-linejoin="round"/>
                     <line x1="200" y1="194" x2="200" y2="288" stroke="#c3cbf5" stroke-width="3"/>
 
-                    <!-- 책 윗변을 잡은 아이들의 둥근 손 4개 -->
                     <rect x="112" y="177" width="18" height="15" rx="7.5" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
                     <rect x="148" y="177" width="18" height="15" rx="7.5" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
                     <rect x="234" y="177" width="18" height="15" rx="7.5" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
                     <rect x="270" y="177" width="18" height="15" rx="7.5" fill="#f6ccb0" stroke="#d49b7b" stroke-width="1.5"/>
 
-                    <!-- 왼쪽 파란색 직소 퍼즐 조각 -->
                     <g transform="translate(56, 244) rotate(-14)">
                         <path d="M -22 -22 L -6 -22 A 6.5 6.5 0 1 1 6 -22 L 22 -22 L 22 -6 A 6.5 6.5 0 1 1 22 6 L 22 22 L 6 22 A 6.5 6.5 0 1 0 -6 22 L -22 22 L -22 6 A 6.5 6.5 0 1 0 -22 -6 Z" fill="#3b9ae1"/>
                     </g>
-                    <!-- 오른쪽 초록색 직소 퍼즐 조각 -->
                     <g transform="translate(344, 244) rotate(12)">
                         <path d="M -22 -22 L -6 -22 A 6.5 6.5 0 1 1 6 -22 L 22 -22 L 22 -6 A 6.5 6.5 0 1 0 22 6 L 22 22 L 6 22 A 6.5 6.5 0 1 1 -6 22 L -22 22 L -22 6 A 6.5 6.5 0 1 1 -22 -6 Z" fill="#67be60"/>
                     </g>
 
-                    <!-- A B A 알파벳 -->
                     <text x="126" y="261" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="900" font-size="68" fill="#1796a6" text-anchor="middle">A</text>
                     <text x="200" y="261" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="900" font-size="68" fill="#f6ae22" text-anchor="middle">B</text>
                     <text x="274" y="261" font-family="Arial Rounded MT Bold, Nunito, sans-serif" font-weight="900" font-size="68" fill="#ef6837" text-anchor="middle">A</text>
@@ -268,19 +249,15 @@
                         <line x1="297" y1="207" x2="310" y2="201"/>
                     </g>
 
-                    <!-- 위로 살짝 휘어진 곡선 리본 배너 (Special Edu Lab) -->
                     <path d="M 65 278 Q 200 255 335 278 A 25 25 0 0 1 335 328 Q 200 305 65 328 A 25 25 0 0 1 65 278 Z" fill="#fdfbf2" stroke="#7b68ee" stroke-width="4.5" stroke-linejoin="round"/>
-                    <!-- 리본 왼쪽 새싹 -->
                     <path d="M 73 314 Q 73 297 84 293" fill="none" stroke="#52b788" stroke-width="3.5" stroke-linecap="round"/>
                     <ellipse cx="64" cy="296" rx="10" ry="6" transform="rotate(24 64 296)" fill="#74c69d"/>
                     <ellipse cx="85" cy="294" rx="10" ry="6" transform="rotate(-24 85 294)" fill="#52b788"/>
-                    <!-- 곡선을 따라 휘어진 Special Edu Lab 텍스트 및 노란 밑줄 -->
                     <text font-family="'Fredoka', 'Nunito', sans-serif" font-weight="700" font-size="25" letter-spacing="0.4" fill="#214696">
                         <textPath href="#ribbonTextArc" startOffset="50%" text-anchor="middle">Special Edu Lab</textPath>
                     </text>
                     <use href="#ribbonUnderlineArc" fill="none" stroke="#f6b324" stroke-width="3" stroke-linecap="round"/>
 
-                    <!-- 하단 슬로건 및 by 신 배지 -->
                     <line x1="48" y1="348" x2="74" y2="348" stroke="#6c5b8c" stroke-width="1.8" stroke-linecap="round"/>
                     <text x="200" y="352" font-family="Noto Sans KR, sans-serif" font-weight="700" font-size="13" fill="#463766" text-anchor="middle">ABA 기반의 특수교육 지원 플랫폼</text>
                     <line x1="326" y1="348" x2="352" y2="348" stroke="#6c5b8c" stroke-width="1.8" stroke-linecap="round"/>
@@ -312,7 +289,7 @@
                 </div>
             </div>
 
-            <!-- 핵심 안내 (모바일 가독성을 고려한 글머리표·의미 단위 배치) -->
+            <!-- 핵심 안내 -->
             <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 sm:p-5 text-left space-y-2.5 text-xs sm:text-sm text-slate-700 font-medium leading-relaxed break-keep">
                 <div class="flex items-start gap-2">
                     <span class="text-indigo-600 font-black mt-0.5">•</span>
@@ -461,7 +438,7 @@
     <!-- 메인 컨텐츠 영역 -->
     <main class="max-w-7xl w-full mx-auto px-4 py-5 flex-1 space-y-5">
 
-        <!-- 대상 학생 기본 정보 & 개별 고려 요인 카드 (상단 배치 및 전체 접기/펼치기 지원) -->
+        <!-- 대상 학생 기본 정보 & 개별 고려 요인 카드 -->
         <section class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 print-card">
             <div class="flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5">
@@ -514,7 +491,7 @@
             </div>
         </section>
 
-        <!-- 날짜별 평가 회차(재평가 이력) 관리 바 (대상 학생 기본 정보 아래 배치) -->
+        <!-- 날짜별 평가 회차(재평가 이력) 관리 바 -->
         <section class="bg-indigo-50/90 rounded-2xl p-4 shadow-xs border border-indigo-200/90 flex flex-wrap items-center justify-between gap-3 no-print">
             <div class="flex flex-wrap items-center gap-2.5">
                 <div class="flex items-center gap-1.5 text-indigo-900 font-extrabold text-xs sm:text-sm">
@@ -539,7 +516,7 @@
             </div>
         </section>
 
-        <!-- 평가 방식 선택 허브 (초기 선택 화면 & 뒤로가기 복귀 화면) -->
+        <!-- 평가 방식 선택 허브 -->
         <section id="method-hub-screen" class="bg-white rounded-3xl p-5 sm:p-7 shadow-xs border border-slate-200 space-y-5 no-print">
             <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
                 <div>
@@ -597,17 +574,17 @@
             </div>
         </section>
 
-        <!-- 활성화된 평가 상단 뒤로가기 / 빠른 전환 바 -->
-        <nav id="active-method-topbar" class="hidden bg-white p-2.5 rounded-2xl shadow-xs border border-slate-200 flex-wrap items-center justify-between gap-2 no-print">
-            <button onclick="returnToMethodHub()" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i>
-                <span>평가 방식 다시 선택</span>
+        <!-- 활성화된 평가 상단 뒤로가기 / 빠른 전환 바 (평가 방식 다시 선택 강조) -->
+        <nav id="active-method-topbar" class="hidden bg-indigo-50/95 p-3 rounded-2xl shadow-sm border-2 border-indigo-200 flex-wrap items-center justify-between gap-2 no-print">
+            <button onclick="returnToMethodHub()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white text-xs sm:text-sm font-black shadow-md ring-2 ring-indigo-300/70 flex items-center gap-2 transition">
+                <i data-lucide="arrow-left-circle" class="w-4 h-4"></i>
+                <span>← 평가 방식 다시 선택</span>
             </button>
-            <div class="flex flex-wrap items-center gap-1.5">
-                <span id="active-method-title-badge" class="px-3 py-1.5 rounded-xl bg-indigo-50 text-indigo-800 border border-indigo-200 text-xs sm:text-sm font-black">
+            <div class="flex flex-wrap items-center gap-2">
+                <span id="active-method-title-badge" class="px-3.5 py-2 rounded-xl bg-white text-indigo-900 border border-indigo-200 text-xs sm:text-sm font-black shadow-2xs">
                     질문하기 진행 중
                 </span>
-                <button onclick="selectEvaluationMethod('tab-report')" id="btn-quick-report" class="px-3.5 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition">
+                <button onclick="selectEvaluationMethod('tab-report')" id="btn-quick-report" class="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 shadow-xs transition">
                     <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
                     <span>종합 결과 리포트 보기</span>
                 </button>
@@ -618,7 +595,6 @@
         <!-- 탭 1: 질문하기 & 중도 장애인을 위한 강화제 평가 (RAISD)                   -->
         <!-- ===================================================================== -->
         <section id="tab-question" class="tab-content hidden space-y-5">
-            <!-- 서브 모드 전환 바 -->
             <div class="bg-white rounded-2xl p-2 shadow-xs border border-slate-200 grid grid-cols-2 gap-2 no-print">
                 <button onclick="switchQuestionSubMode('general')" id="btn-qmode-general" class="py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-xs text-center leading-snug">
                     <span>질문하기<span class="block sm:inline sm:ml-1 font-bold opacity-90">(학생 · 부모 · 교사 · 의미 있는 타인)</span></span>
@@ -642,13 +618,11 @@
                         </div>
                     </div>
 
-                    <!-- 강화제 유형 선택 -->
                     <div>
                         <label class="block text-xs font-bold text-slate-500 mb-1.5">1. 강화제 유형 선택</label>
                         <div id="q-category-selector" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
                     </div>
 
-                    <!-- 질문 대상자 선택 -->
                     <div class="space-y-2">
                         <label class="block text-xs font-bold text-slate-500">2. 면담(질문) 대상자 선택 (복수 선택 가능)</label>
                         <div id="q-respondent-toggles" class="grid grid-cols-2 sm:grid-cols-4 gap-2"></div>
@@ -657,7 +631,6 @@
                         </div>
                     </div>
 
-                    <!-- 평가 자극 목록 관리 -->
                     <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200 space-y-2.5">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <span id="q-stimuli-list-title" class="text-xs font-extrabold text-slate-700">평가 자극 목록</span>
@@ -670,7 +643,6 @@
                     </div>
                 </div>
 
-                <!-- 선택된 응답자별 면담 카드 -->
                 <div id="q-respondent-cards" class="space-y-4"></div>
             </div>
 
@@ -687,7 +659,6 @@
                     </button>
                 </div>
 
-                <!-- 기본 인적사항 -->
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 bg-purple-50/50 p-3.5 rounded-xl border border-purple-100 text-xs">
                     <div>
                         <span class="block font-bold text-slate-500 mb-1">대상 학생</span>
@@ -707,13 +678,11 @@
                     </div>
                 </div>
 
-                <!-- Ⅰ. 감각 및 활동 영역별 10개 문항 -->
                 <div class="space-y-2">
                     <h4 class="font-extrabold text-purple-900 text-sm">Ⅰ. 감각 및 활동 영역별 선호 자극 탐색</h4>
                     <div id="raisd-questions-list" class="divide-y divide-slate-200 border border-slate-300 rounded-xl overflow-hidden"></div>
                 </div>
 
-                <!-- Ⅱ. 자극 제시 조건 및 환경적 고려사항 -->
                 <div class="space-y-2.5 bg-slate-50 p-4 rounded-xl border border-slate-200">
                     <h4 class="font-extrabold text-purple-900 text-sm">Ⅱ. 자극 제시 조건 및 환경적 고려사항</h4>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
@@ -732,15 +701,12 @@
                     </div>
                 </div>
 
-                <!-- Ⅲ. 우선순위 선정 및 선호도 평가 진행 여부 -->
                 <div class="space-y-2.5">
                     <div class="flex items-center justify-between">
                         <h4 class="font-extrabold text-purple-900 text-sm">Ⅲ. 선호 자극 우선순위 및 후속 선호도 평가 진행 여부</h4>
                         <button onclick="addRaisdRankRow()" class="px-3 py-1.5 rounded-lg bg-purple-100 text-purple-800 hover:bg-purple-200 text-xs font-extrabold no-print">+ 순위 행 추가</button>
                     </div>
-                    <!-- 모바일 카드형 레이아웃 -->
                     <div id="raisd-ranks-mobile-list" class="sm:hidden space-y-2.5"></div>
-                    <!-- PC / 인쇄용 가로 표 -->
                     <table class="hidden sm:table w-full border-collapse border border-slate-400 text-xs">
                         <thead class="bg-purple-50 text-purple-950 font-extrabold">
                             <tr>
@@ -765,7 +731,7 @@
                 <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
                     <div>
                         <h3 class="font-extrabold text-slate-800 text-base">관찰하기 (자유 작동 환경 지속시간 측정)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">학생이 자발적으로 다가가 조작하거나 몰두하는 시간을 자극별 타이머로 동시에 기록합니다.</p>
+                        <p class="text-xs text-slate-500 mt-0.5">학생이 자발적으로 다가가 조작하거나 몰두하는 시간을 자극별 타이머(측정 시작 · 일시정지 · 이어서 측정 · 종료)로 기록합니다.</p>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-xs font-bold text-slate-500">관찰 일자:</span>
@@ -773,7 +739,6 @@
                     </div>
                 </div>
 
-                <!-- 관찰 환경 유형 선택 -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <button onclick="setObserveMode('contrived')" id="btn-obs-contrived" class="p-3 rounded-xl border-2 border-emerald-600 bg-emerald-50 text-emerald-950 text-left transition">
                         <div class="text-xs sm:text-sm font-extrabold">① 고안된 자유 작동 관찰 (Contrived Free Operant)</div>
@@ -785,7 +750,6 @@
                     </button>
                 </div>
 
-                <!-- 목표 관찰 시간 및 자극 추가 바 -->
                 <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200 no-print">
                     <div class="flex flex-wrap items-center gap-2">
                         <span class="text-xs font-extrabold text-slate-700">총 관찰 시간(분):</span>
@@ -805,10 +769,8 @@
                 </div>
             </div>
 
-            <!-- 자극별 동시 스톱워치 카드 그리드 -->
             <div id="obs-items-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
-            <!-- 관찰 지속시간 순위 요약표 -->
             <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-3 print-card">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                     <h4 class="font-extrabold text-slate-800 text-sm">자극별 몰두 지속시간 및 비율 요약 (기준 관찰 시간: <span id="obs-summary-target-label" class="text-emerald-700">5분</span>)</h4>
@@ -868,7 +830,7 @@
                 <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
                     <div>
                         <h3 class="font-extrabold text-slate-800 text-base">단일 자극 제시 선택 (Single Stimulus Preference Assessment)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">한 번에 한 가지 자극만 제시하고 접근(O)/비접근(X) 여부 및 상호작용 지속시간(초)을 기록합니다.</p>
+                        <p class="text-xs text-slate-500 mt-0.5">한 번에 한 가지 자극만 제시하고 접근(O)/비접근(X) 여부 및 상호작용 지속시간(초)을 기록합니다. (접근 X 선택 시 시간 측정 비활성화)</p>
                     </div>
                     <div class="flex items-center gap-2">
                         <input type="date" id="ss-date" onchange="updateSSDate(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-extrabold">
@@ -900,10 +862,10 @@
                             <table class="w-full text-xs border-collapse">
                                 <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold sticky top-0">
                                     <tr>
-                                        <th class="py-2 px-3 w-14">회기</th>
-                                        <th class="py-2 px-3 text-left">제시 자극</th>
-                                        <th class="py-2 px-3 w-28">접근 여부</th>
-                                        <th class="py-2 px-3 w-24">시간(초)</th>
+                                        <th class="py-2 px-2 w-12">회기</th>
+                                        <th class="py-2 px-2 text-left">제시 자극</th>
+                                        <th class="py-2 px-2 w-24">접근 여부</th>
+                                        <th class="py-2 px-2 w-44">시간 측정 (초)</th>
                                     </tr>
                                 </thead>
                                 <tbody id="ss-trials-tbody" class="divide-y divide-slate-100"></tbody>
@@ -992,6 +954,7 @@
                             <option value="3" selected>동시 3개 제시</option>
                             <option value="4">동시 4개 제시</option>
                             <option value="5">동시 5개 제시</option>
+                            <option value="6">동시 6개 제시</option>
                         </select>
                         <button onclick="resetMSWSession()" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold">회기 초기화</button>
                     </div>
@@ -1031,10 +994,16 @@
                 <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
                     <div>
                         <h3 class="font-extrabold text-slate-800 text-base">자극 대체 없는 중다 자극 제시 선택 (MSWO)</h3>
-                        <p class="text-xs text-slate-500 mt-0.5">선택된 자극을 배열에서 제거하고 남은 자극들의 위치를 재배열하여 1순위부터 마지막 순위까지 연속으로 도출합니다.</p>
+                        <p class="text-xs text-slate-500 mt-0.5">동시 제시 개수(3~6개)를 선택하고, 선택된 자극을 배열에서 제거하며 1순위부터 마지막 순위까지 도출합니다.</p>
                     </div>
                     <div class="flex flex-wrap items-center gap-2">
                         <input type="date" id="mswo-date" onchange="updateMSWODate(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-extrabold">
+                        <select id="mswo-array-size" onchange="updateMSWOArraySize(this.value)" class="px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-bold">
+                            <option value="3">동시 3개 제시</option>
+                            <option value="4">동시 4개 제시</option>
+                            <option value="5">동시 5개 제시</option>
+                            <option value="6" selected>동시 6개 제시</option>
+                        </select>
                         <button onclick="startNewMSWORound()" class="px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold">새 라운드 시작</button>
                         <button onclick="clearMSWORounds()" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold">전체 라운드 초기화</button>
                     </div>
@@ -1042,7 +1011,7 @@
 
                 <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 no-print">
                     <div class="flex flex-wrap items-center justify-between gap-2">
-                        <span class="text-xs font-extrabold text-slate-700">평가 자극 배열 항목 (클릭하여 이름 수정 가능)</span>
+                        <span class="text-xs font-extrabold text-slate-700">평가 자극 배열 항목 (앞에서부터 선택한 동시 제시 개수만큼 라운드에 반영)</span>
                         <div class="flex items-center gap-1.5">
                             <input type="text" id="mswo-new-item" onkeydown="if(event.key==='Enter') addMSWOItem()" placeholder="새 자극 추가" class="px-2.5 py-1 rounded-lg border border-slate-300 text-xs font-bold bg-white">
                             <button onclick="addMSWOItem()" class="px-2.5 py-1 rounded-lg bg-slate-800 text-white text-xs font-bold">추가</button>
@@ -1111,6 +1080,15 @@
                     <span id="report-session-badge" class="text-xs font-extrabold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200"></span>
                 </div>
                 <div id="report-top-stimuli-list" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            </div>
+
+            <!-- 강화제 유형별 직관적 평가 결과 요약 -->
+            <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-3 print-card">
+                <div class="border-b border-slate-100 pb-2.5">
+                    <h3 class="font-extrabold text-slate-800 text-base">강화제 유형별 평가 결과 한눈에 보기</h3>
+                    <p class="text-xs text-slate-500 mt-0.5">음식 · 유형 및 활동 · 사회적 · 감각 강화제 영역별로 질문하기 및 시행 기반 평가에서 가장 높게 나타난 결과를 직관적으로 비교합니다.</p>
+                </div>
+                <div id="report-by-category-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
             </div>
 
             <!-- 날짜별 재평가 변화 추이 비교 카드 -->
@@ -1207,7 +1185,6 @@
             auth = getAuth(fbApp);
             db = getFirestore(fbApp);
 
-            // 초기 토큰이 제공된 환경이면 우선 자동 인증
             if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                 signInWithCustomToken(auth, __initial_auth_token).catch(() => {});
             }
@@ -1239,7 +1216,6 @@
             });
         }
 
-        // 본인 UID 전용 경로(/artifacts/{appId}/users/{userId}/students)만 실시간 구독
         function subscribePrivateUserStudents(uid) {
             if (!db || !uid) return;
             if (unsubscribeUserDocs) unsubscribeUserDocs();
@@ -1260,7 +1236,6 @@
             });
         }
 
-        // 전역 창 객체에 클라우드 로그인/로그아웃/저장 브리지 연결
         window.cloudAuthBridge = {
             isConfigured: () => Boolean(auth && db),
             signInWithGoogle: async () => {
@@ -1271,7 +1246,6 @@
                     const result = await signInWithPopup(auth, provider);
                     return result.user;
                 } catch (err) {
-                    // 팝업 차단 또는 iframe 제한 환경일 경우 익명 보안 세션 폴백 지원
                     if (err && (err.code === 'auth/popup-blocked' || err.code === 'auth/operation-not-supported-in-this-environment' || err.code === 'auth/unauthorized-domain')) {
                         const anon = await signInAnonymously(auth);
                         return anon.user;
@@ -1285,7 +1259,6 @@
             saveStudentToCloud: async (uid, studentObj) => {
                 if (!db || !uid || !studentObj || !studentObj.id) return;
                 const ref = doc(db, 'artifacts', appId, 'users', uid, 'students', studentObj.id);
-                // merge: true를 쓰면 삭제된 날짜 회차 키가 클라우드에 남아 되살아나므로 전체 덮어쓰기로 저장
                 await setDoc(ref, JSON.parse(JSON.stringify(studentObj)));
             }
         };
@@ -1457,6 +1430,7 @@
                     name,
                     elapsedSec: 0,
                     isRunning: false,
+                    status: 'idle',
                     lastTick: null
                 }))
             };
@@ -1479,7 +1453,7 @@
 
         function createCategoryTrialData(catId, today) {
             const meta = getCategoryMeta(catId);
-            const items = [...meta.defaults]; // 기본 6개 항목
+            const items = [...meta.defaults];
             return {
                 singleStimulus: {
                     date: today,
@@ -1502,6 +1476,7 @@
                 },
                 mswo: {
                     date: today,
+                    arraySize: 6,
                     baseItems: [...items],
                     activeArray: [...items],
                     currentPicks: [],
@@ -1680,7 +1655,7 @@
         }
 
         // =========================================================================
-        // 2. 저장/불러오기, 모달, 토스트, 화면 전환 (클라우드 개인 격리 동기화)
+        // 2. 저장/불러오기, 모달, 토스트, 화면 전환
         // =========================================================================
         function loadState() {
             const defaultId = 'stu_default_1';
@@ -1717,7 +1692,6 @@
             if (isLocalDeletingSession) return;
             const keys = Object.keys(cloudStudentsMap || {});
             if (keys.length === 0) {
-                // 첫 로그인 사용자의 경우 기본 학생 템플릿을 본인 클라우드 경로에 초기 생성
                 const defaultId = 'stu_default_1';
                 const initStu = createEmptyStudent(
                     defaultId,
@@ -1791,11 +1765,9 @@
                 if (window.cloudAuthBridge && window.cloudAuthBridge.isConfigured()) {
                     const user = await window.cloudAuthBridge.signInWithGoogle();
                     if (user) {
-                        const displayName = user.displayName || user.email || '특수교사 계정';
                         showToast(`로그인 완료! 이제 ② 시작하기 버튼을 눌러 평가를 시작하세요.`, 'success');
                     }
                 } else {
-                    // 클라우드 설정 전 단독 실행 환경 폴백
                     const stu = getCurrentStudent();
                     const evaluatorName = stu.meta.evaluator || '특수교사 신OO';
                     window.onCloudAuthSuccess({
@@ -2050,10 +2022,10 @@
 
             sess.observe.targetMin = 5;
             sess.observe.items = [
-                { id: 'obs_s1', name: '비눗방울', elapsedSec: 135, isRunning: false, lastTick: null },
-                { id: 'obs_s2', name: '동요 멜로디', elapsedSec: 82, isRunning: false, lastTick: null },
-                { id: 'obs_s3', name: 'LED 라이트 볼', elapsedSec: 54, isRunning: false, lastTick: null },
-                { id: 'obs_s4', name: '자석 블록', elapsedSec: 21, isRunning: false, lastTick: null }
+                { id: 'obs_s1', name: '비눗방울', elapsedSec: 135, isRunning: false, status: 'paused', lastTick: null },
+                { id: 'obs_s2', name: '동요 멜로디', elapsedSec: 82, isRunning: false, status: 'paused', lastTick: null },
+                { id: 'obs_s3', name: 'LED 라이트 볼', elapsedSec: 54, isRunning: false, status: 'paused', lastTick: null },
+                { id: 'obs_s4', name: '자석 블록', elapsedSec: 21, isRunning: false, status: 'paused', lastTick: null }
             ];
 
             const mswo = sess.trial.byCat.sensory.mswo;
@@ -2116,6 +2088,7 @@
                 delBtn.classList.toggle('hidden', sessions.length <= 1);
             }
         }
+
         function confirmDeleteSessionById(sessionId) {
             const stu = getCurrentStudent();
             const ids = Object.keys(stu.sessions);
@@ -2143,6 +2116,7 @@
             const stu = getCurrentStudent();
             confirmDeleteSessionById(stu.currentSessionId);
         }
+
         function selectEvaluationMethod(tabId) {
             activeMainTab = tabId;
             const hub = document.getElementById('method-hub-screen');
@@ -2545,7 +2519,7 @@
         }
 
         // =========================================================================
-        // 5. 탭 2: 관찰하기 (자유 작동 관찰 스톱워치)
+        // 5. 탭 2: 관찰하기 (측정 시작 · 일시정지 · 이어서 측정 · 종료)
         // =========================================================================
         function updateObsField(field, val) {
             getActiveObsData()[field] = val;
@@ -2575,6 +2549,7 @@
                 name,
                 elapsedSec: 0,
                 isRunning: false,
+                status: 'idle',
                 lastTick: null
             });
             input.value = '';
@@ -2602,6 +2577,7 @@
                             name,
                             elapsedSec: 0,
                             isRunning: false,
+                            status: 'idle',
                             lastTick: null
                         });
                     }
@@ -2635,23 +2611,59 @@
             }, 500);
         }
 
+        function startOrResumeObsTimer(itemId) {
+            const obs = getActiveObsData();
+            const target = obs.items.find(x => x.id === itemId);
+            if (!target) return;
+            if (target.status === 'ended') {
+                target.elapsedSec = 0;
+            }
+            target.isRunning = true;
+            target.status = 'running';
+            target.lastTick = Date.now();
+            ensureObsTicker();
+            saveState();
+            renderObserveTab();
+        }
+
+        function pauseObsTimer(itemId) {
+            const obs = getActiveObsData();
+            const target = obs.items.find(x => x.id === itemId);
+            if (!target || !target.isRunning) return;
+            if (target.lastTick) {
+                target.elapsedSec += (Date.now() - target.lastTick) / 1000;
+            }
+            target.isRunning = false;
+            target.status = 'paused';
+            target.lastTick = null;
+            saveState();
+            renderObserveTab();
+        }
+
+        function endObsTimer(itemId) {
+            const obs = getActiveObsData();
+            const target = obs.items.find(x => x.id === itemId);
+            if (!target) return;
+            if (target.isRunning && target.lastTick) {
+                target.elapsedSec += (Date.now() - target.lastTick) / 1000;
+            }
+            target.isRunning = false;
+            target.status = 'ended';
+            target.lastTick = null;
+            saveState();
+            renderObserveTab();
+            showToast(`[${target.name}] 측정이 종료되었습니다 (${formatSecToMinSec(target.elapsedSec)}).`);
+        }
+
         function toggleObsTimer(itemId) {
             const obs = getActiveObsData();
             const target = obs.items.find(x => x.id === itemId);
             if (!target) return;
             if (target.isRunning) {
-                if (target.lastTick) {
-                    target.elapsedSec += (Date.now() - target.lastTick) / 1000;
-                }
-                target.isRunning = false;
-                target.lastTick = null;
+                pauseObsTimer(itemId);
             } else {
-                target.isRunning = true;
-                target.lastTick = Date.now();
-                ensureObsTicker();
+                startOrResumeObsTimer(itemId);
             }
-            saveState();
-            renderObserveTab();
         }
 
         function resetObsTimer(itemId) {
@@ -2660,6 +2672,7 @@
             if (!target) return;
             target.elapsedSec = 0;
             target.isRunning = false;
+            target.status = 'idle';
             target.lastTick = null;
             saveState();
             renderObserveTab();
@@ -2672,6 +2685,7 @@
                 if (item.isRunning) {
                     if (item.lastTick) item.elapsedSec += (now - item.lastTick) / 1000;
                     item.isRunning = false;
+                    item.status = 'paused';
                     item.lastTick = null;
                 }
             });
@@ -2714,28 +2728,82 @@
 
             const grid = document.getElementById('obs-items-grid');
             if (grid) {
-                grid.innerHTML = obs.items.map(item => `
-                    <div class="bg-white rounded-2xl p-4 shadow-xs border-2 transition ${item.isRunning ? 'border-emerald-500 pulse-ring' : 'border-slate-200'}">
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="font-extrabold text-slate-800 text-sm truncate">${escapeHtml(item.name)}</span>
-                            <button onclick="removeObsItem('${item.id}')" class="text-slate-400 hover:text-rose-600 text-sm font-bold no-print">&times;</button>
-                        </div>
-                        <div class="text-center py-3 rounded-xl bg-slate-50 border border-slate-100 mb-3">
-                            <div class="text-2xl font-black font-mono ${item.isRunning ? 'text-emerald-600' : 'text-slate-800'}">
-                                ${formatSecToMinSec(item.elapsedSec)}
+                grid.innerHTML = obs.items.map(item => {
+                    const status = item.status || (item.isRunning ? 'running' : ((item.elapsedSec || 0) > 0 ? 'paused' : 'idle'));
+                    const statusBadge = status === 'running'
+                        ? '<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-extrabold">측정 중</span>'
+                        : (status === 'paused'
+                            ? '<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-extrabold">일시정지</span>'
+                            : (status === 'ended'
+                                ? '<span class="px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 text-[10px] font-extrabold">측정 종료</span>'
+                                : '<span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold">대기</span>'));
+
+                    let controlsHtml = '';
+                    if (status === 'running') {
+                        controlsHtml = `
+                            <div class="grid grid-cols-2 gap-1.5 no-print">
+                                <button onclick="pauseObsTimer('${item.id}')" class="py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-extrabold transition">
+                                    ⏸ 일시정지
+                                </button>
+                                <button onclick="endObsTimer('${item.id}')" class="py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold transition">
+                                    ⏹ 종료
+                                </button>
                             </div>
-                            <div class="text-[11px] font-bold text-slate-400 mt-0.5">${Math.floor(item.elapsedSec)}초 누적</div>
+                        `;
+                    } else if (status === 'paused') {
+                        controlsHtml = `
+                            <div class="grid grid-cols-2 gap-1.5 no-print">
+                                <button onclick="startOrResumeObsTimer('${item.id}')" class="py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-extrabold transition">
+                                    ▶ 이어서 측정
+                                </button>
+                                <button onclick="endObsTimer('${item.id}')" class="py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold transition">
+                                    ⏹ 종료
+                                </button>
+                            </div>
+                        `;
+                    } else if (status === 'ended') {
+                        controlsHtml = `
+                            <div class="grid grid-cols-2 gap-1.5 no-print">
+                                <button onclick="startOrResumeObsTimer('${item.id}')" class="py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold transition">
+                                    ▶ 새로 측정 시작
+                                </button>
+                                <button onclick="resetObsTimer('${item.id}')" class="py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
+                                    초기화
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        controlsHtml = `
+                            <div class="grid grid-cols-3 gap-1.5 no-print">
+                                <button onclick="startOrResumeObsTimer('${item.id}')" class="col-span-2 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold transition">
+                                    ▶ 측정 시작
+                                </button>
+                                <button onclick="resetObsTimer('${item.id}')" class="py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
+                                    초기화
+                                </button>
+                            </div>
+                        `;
+                    }
+
+                    return `
+                        <div class="bg-white rounded-2xl p-4 shadow-xs border-2 transition ${status === 'running' ? 'border-emerald-500 pulse-ring' : (status === 'paused' ? 'border-amber-400' : 'border-slate-200')}">
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <div class="flex items-center gap-1.5 min-w-0">
+                                    <span class="font-extrabold text-slate-800 text-sm truncate">${escapeHtml(item.name)}</span>
+                                    ${statusBadge}
+                                </div>
+                                <button onclick="removeObsItem('${item.id}')" class="text-slate-400 hover:text-rose-600 text-sm font-bold no-print shrink-0">&times;</button>
+                            </div>
+                            <div class="text-center py-3 rounded-xl bg-slate-50 border border-slate-100 mb-3">
+                                <div class="text-2xl font-black font-mono ${status === 'running' ? 'text-emerald-600' : (status === 'paused' ? 'text-amber-600' : 'text-slate-800')}">
+                                    ${formatSecToMinSec(item.elapsedSec)}
+                                </div>
+                                <div class="text-[11px] font-bold text-slate-400 mt-0.5">${Math.floor(item.elapsedSec)}초 누적</div>
+                            </div>
+                            ${controlsHtml}
                         </div>
-                        <div class="grid grid-cols-3 gap-1.5 no-print">
-                            <button onclick="toggleObsTimer('${item.id}')" class="col-span-2 py-2 rounded-xl text-xs font-extrabold text-white transition ${item.isRunning ? 'bg-amber-500 hover:bg-amber-600' : 'bg-emerald-600 hover:bg-emerald-700'}">
-                                ${item.isRunning ? '⏸ 일시정지' : '▶ 측정 시작'}
-                            </button>
-                            <button onclick="resetObsTimer('${item.id}')" class="py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
-                                초기화
-                            </button>
-                        </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
 
             const totalTargetSec = targetMin * 60;
@@ -2769,6 +2837,7 @@
         // 6. 탭 3: 시행 기반 평가 (단일 자극 · 짝 자극 · MSW · MSWO)
         // =========================================================================
         function setTrialCategory(catId) {
+            stopSSTrialTimer();
             getCurrentSession().trial.activeCategory = catId;
             saveState();
             renderTrialCategorySelector();
@@ -2783,7 +2852,7 @@
             renderCategoryButtons('trial-category-selector', activeCatId, 'setTrialCategory');
         }
 
-        // [3-1] 단일 자극 제시 선택 (Single Stimulus)
+        // [3-1] 단일 자극 제시 선택 (Single Stimulus + 실시간 초 측정 + X 비활성화)
         function updateSSDate(val) {
             getActiveTrialCatData().singleStimulus.date = val;
             saveState();
@@ -2837,6 +2906,7 @@
         }
 
         function generateSSTrials() {
+            stopSSTrialTimer();
             const ss = getActiveTrialCatData().singleStimulus;
             const pool = [];
             const repeat = ss.repeatCount || 3;
@@ -2849,7 +2919,8 @@
                 trialNum: idx + 1,
                 item,
                 contact: null,
-                durationSec: 0
+                durationSec: 0,
+                timerEnded: false
             }));
             saveState();
             renderSSTab();
@@ -2858,15 +2929,70 @@
 
         function setSSTrialContact(trialIdx, val) {
             const ss = getActiveTrialCatData().singleStimulus;
-            if (!ss.trials[trialIdx]) return;
-            ss.trials[trialIdx].contact = ss.trials[trialIdx].contact === val ? null : val;
+            const trial = ss.trials[trialIdx];
+            if (!trial) return;
+            const nextContact = trial.contact === val ? null : val;
+            trial.contact = nextContact;
+            if (nextContact === 'X') {
+                if (activeSSTrialTimerId === trial.id) {
+                    stopSSTrialTimer();
+                }
+                trial.durationSec = 0;
+                trial.timerEnded = false;
+            }
             saveState();
             renderSSTab();
         }
 
+        function startSSTrialTimer(trialIdx) {
+            const ss = getActiveTrialCatData().singleStimulus;
+            const trial = ss.trials[trialIdx];
+            if (!trial || trial.contact === 'X') return;
+
+            if (activeSSTrialTimerId === trial.id) return;
+
+            stopSSTrialTimer();
+            if (!trial.contact) {
+                trial.contact = 'O';
+            }
+            if (trial.timerEnded) {
+                trial.durationSec = 0;
+                trial.timerEnded = false;
+            }
+            activeSSTrialTimerId = trial.id;
+            ssTickInterval = setInterval(() => {
+                const curSS = getActiveTrialCatData().singleStimulus;
+                const curTrial = curSS.trials.find(t => t.id === activeSSTrialTimerId);
+                if (!curTrial || curTrial.contact === 'X') {
+                    stopSSTrialTimer();
+                    renderSSTab();
+                    return;
+                }
+                curTrial.durationSec = (curTrial.durationSec || 0) + 1;
+                if (activeMainTab === 'tab-trial' && activeTrialSubTab === 'sub-single') {
+                    renderSSTab();
+                }
+            }, 1000);
+            saveState();
+            renderSSTab();
+        }
+
+        function endSSTrialTimer(trialIdx) {
+            const ss = getActiveTrialCatData().singleStimulus;
+            const trial = ss.trials[trialIdx];
+            if (!trial) return;
+            if (activeSSTrialTimerId === trial.id) {
+                stopSSTrialTimer();
+            }
+            trial.timerEnded = true;
+            saveState();
+            renderSSTab();
+            showToast(`${trial.trialNum}회기 [${trial.item}] 측정 종료 (${trial.durationSec || 0}초)`);
+        }
+
         function setSSTrialDuration(trialIdx, val) {
             const ss = getActiveTrialCatData().singleStimulus;
-            if (!ss.trials[trialIdx]) return;
+            if (!ss.trials[trialIdx] || ss.trials[trialIdx].contact === 'X') return;
             ss.trials[trialIdx].durationSec = Math.max(0, parseInt(val, 10) || 0);
             saveState();
             renderSSSummary();
@@ -2888,12 +3014,12 @@
             if (tbody) {
                 tbody.innerHTML = stats.map((st, idx) => `
                     <tr>
-                        <td class="py-2 px-3 text-center font-extrabold text-indigo-700">${st.total > 0 ? `${idx + 1}위` : '-'}</td>
-                        <td class="py-2 px-3 font-bold text-slate-800">${escapeHtml(st.item)}</td>
-                        <td class="py-2 px-3 text-center text-slate-600 font-semibold">${st.total}회</td>
-                        <td class="py-2 px-3 text-center font-extrabold text-emerald-700">${st.pct}%</td>
-                        <td class="py-2 px-3 text-center font-bold text-slate-700">${st.avgDur}초</td>
-                        <td class="py-2 px-3 text-center font-bold text-slate-700">${st.totalDur}초</td>
+                        <td class="py-2 px-2 text-center font-extrabold text-indigo-700">${st.total > 0 ? `${idx + 1}위` : '-'}</td>
+                        <td class="py-2 px-2 font-bold text-slate-800">${escapeHtml(st.item)}</td>
+                        <td class="py-2 px-2 text-center text-slate-600 font-semibold">${st.total}회</td>
+                        <td class="py-2 px-2 text-center font-extrabold text-emerald-700">${st.pct}%</td>
+                        <td class="py-2 px-2 text-center font-bold text-slate-700">${st.avgDur}초</td>
+                        <td class="py-2 px-2 text-center font-bold text-slate-700">${st.totalDur}초</td>
                     </tr>
                 `).join('');
             }
@@ -2915,21 +3041,37 @@
             if (ss.trials.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="4" class="py-6 text-center text-xs text-slate-400">상단의 [무작위 시행표 생성] 버튼을 눌러 회기를 시작하세요.</td></tr>`;
             } else {
-                tbody.innerHTML = ss.trials.map((t, idx) => `
-                    <tr>
-                        <td class="py-2 px-3 text-center font-extrabold text-slate-500">${t.trialNum}</td>
-                        <td class="py-2 px-3 font-bold text-slate-800">${escapeHtml(t.item)}</td>
-                        <td class="py-2 px-3 text-center">
-                            <div class="inline-flex gap-1.5">
-                                <button onclick="setSSTrialContact(${idx}, 'O')" class="w-9 h-8 rounded-lg text-xs font-extrabold border transition ${t.contact === 'O' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-600 border-slate-300 hover:bg-emerald-50'}">O</button>
-                                <button onclick="setSSTrialContact(${idx}, 'X')" class="w-9 h-8 rounded-lg text-xs font-extrabold border transition ${t.contact === 'X' ? 'bg-rose-600 text-white border-rose-600' : 'bg-white text-slate-600 border-slate-300 hover:bg-rose-50'}">X</button>
-                            </div>
-                        </td>
-                        <td class="py-2 px-3 text-center">
-                            <input type="number" min="0" value="${t.durationSec || 0}" oninput="setSSTrialDuration(${idx}, this.value)" class="w-20 px-2 py-1 rounded-lg border border-slate-300 text-center text-xs font-bold">
-                        </td>
-                    </tr>
-                `).join('');
+                tbody.innerHTML = ss.trials.map((t, idx) => {
+                    const isDisabled = t.contact === 'X';
+                    const isMeasuring = activeSSTrialTimerId === t.id && !isDisabled;
+                    const isEnded = Boolean(t.timerEnded) && !isMeasuring && !isDisabled;
+                    return `
+                        <tr class="${isDisabled ? 'bg-slate-50/80' : (isMeasuring ? 'bg-emerald-50/50' : '')}">
+                            <td class="py-2 px-2 text-center font-extrabold text-slate-500">${t.trialNum}</td>
+                            <td class="py-2 px-2 font-bold ${isDisabled ? 'text-slate-400 line-through' : 'text-slate-800'}">
+                                <div>${escapeHtml(t.item)}</div>
+                                ${isMeasuring ? '<span class="inline-block mt-0.5 text-[10px] font-extrabold text-emerald-700">● 측정 중...</span>' : (isEnded ? '<span class="inline-block mt-0.5 text-[10px] font-bold text-slate-500">측정 종료됨</span>' : '')}
+                            </td>
+                            <td class="py-2 px-2 text-center">
+                                <div class="inline-flex gap-1">
+                                    <button onclick="setSSTrialContact(${idx}, 'O')" class="w-8 h-8 rounded-lg text-xs font-extrabold border transition ${t.contact === 'O' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-slate-600 border-slate-300 hover:bg-emerald-50'}">O</button>
+                                    <button onclick="setSSTrialContact(${idx}, 'X')" class="w-8 h-8 rounded-lg text-xs font-extrabold border transition ${t.contact === 'X' ? 'bg-rose-600 text-white border-rose-600' : 'bg-white text-slate-600 border-slate-300 hover:bg-rose-50'}">X</button>
+                                </div>
+                            </td>
+                            <td class="py-2 px-2 text-center">
+                                <div class="inline-flex items-center justify-center gap-1">
+                                    <button onclick="startSSTrialTimer(${idx})" ${isDisabled || isMeasuring ? 'disabled' : ''} class="px-2 py-1.5 rounded-lg text-[11px] font-extrabold transition ${isDisabled ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : (isMeasuring ? 'bg-emerald-100 text-emerald-700 border border-emerald-300 cursor-default' : 'bg-emerald-600 hover:bg-emerald-700 text-white')}">
+                                        ${isMeasuring ? '측정중' : (isEnded ? '재측정' : '측정')}
+                                    </button>
+                                    <button onclick="endSSTrialTimer(${idx})" ${isDisabled || !isMeasuring ? 'disabled' : ''} class="px-2 py-1.5 rounded-lg text-[11px] font-extrabold transition ${isDisabled || !isMeasuring ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-rose-600 hover:bg-rose-700 text-white'}">
+                                        종료
+                                    </button>
+                                    <input type="number" min="0" value="${isDisabled ? 0 : (t.durationSec || 0)}" ${isDisabled ? 'disabled' : ''} oninput="setSSTrialDuration(${idx}, this.value)" class="w-12 px-1 py-1 rounded-lg border text-center text-xs font-bold ${isDisabled ? 'bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed' : 'bg-white border-slate-300 text-slate-800'}">
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
             }
             renderSSSummary();
         }
@@ -3052,7 +3194,7 @@
             `).join('');
         }
 
-        // [3-3] 자극 대체 있는 중다 자극 제시 선택 (MSW)
+        // [3-3] 자극 대체 있는 중다 자극 제시 선택 (MSW: 3~6개 선택 가능)
         function updateMSWDate(val) {
             getActiveTrialCatData().msw.date = val;
             saveState();
@@ -3060,7 +3202,7 @@
 
         function updateMSWArraySize(val) {
             const msw = getActiveTrialCatData().msw;
-            msw.arraySize = parseInt(val, 10) || 3;
+            msw.arraySize = Math.max(3, Math.min(6, parseInt(val, 10) || 3));
             resetMSWSession();
         }
 
@@ -3120,7 +3262,7 @@
 
         function resetMSWSession() {
             const msw = getActiveTrialCatData().msw;
-            const size = msw.arraySize || 3;
+            const size = Math.max(3, Math.min(6, parseInt(msw.arraySize, 10) || 3));
             msw.currentArray = msw.pool.slice(0, size);
             msw.poolCursor = msw.currentArray.length;
             msw.history = [];
@@ -3130,7 +3272,7 @@
 
         function pickMSWStimulus(chosenName) {
             const msw = getActiveTrialCatData().msw;
-            const size = msw.arraySize || 3;
+            const size = Math.max(3, Math.min(6, parseInt(msw.arraySize, 10) || 3));
             const prevChosen = msw.history.length > 0 ? msw.history[msw.history.length - 1].chosen : null;
 
             msw.history.push({
@@ -3182,7 +3324,7 @@
             `).join('');
 
             const remaining = Math.max(0, msw.pool.length - (msw.poolCursor || 0));
-            document.getElementById('msw-trial-badge').textContent = `${msw.history.length + 1}회기 제시 중`;
+            document.getElementById('msw-trial-badge').textContent = `${msw.history.length + 1}회기 제시 중 (동시 ${msw.currentArray.length}개)`;
             document.getElementById('msw-remaining-pool-badge').textContent = `남은 대체 예비 항목: ${remaining}개`;
             document.getElementById('btn-msw-undo').disabled = msw.history.length === 0;
 
@@ -3216,10 +3358,21 @@
             `).join('');
         }
 
-        // [3-4] 자극 대체 없는 중다 자극 제시 선택 (MSWO)
+        // [3-4] 자극 대체 없는 중다 자극 제시 선택 (MSWO: 3~6개 선택 가능)
         function updateMSWODate(val) {
             getActiveTrialCatData().mswo.date = val;
             saveState();
+        }
+
+        function updateMSWOArraySize(val) {
+            const mswo = getActiveTrialCatData().mswo;
+            mswo.arraySize = Math.max(3, Math.min(6, parseInt(val, 10) || 6));
+            startNewMSWORound();
+        }
+
+        function getMSWOTargetItems(mswo) {
+            const size = Math.max(3, Math.min(6, parseInt(mswo.arraySize, 10) || 6));
+            return (mswo.baseItems || []).slice(0, size);
         }
 
         function addMSWOItem() {
@@ -3229,7 +3382,7 @@
             const mswo = getActiveTrialCatData().mswo;
             if (!mswo.baseItems.includes(name)) {
                 mswo.baseItems.push(name);
-                mswo.activeArray = [...mswo.baseItems];
+                mswo.activeArray = shuffleArray(getMSWOTargetItems(mswo));
                 mswo.currentPicks = [];
                 saveState();
                 renderMSWOTab();
@@ -3255,10 +3408,9 @@
 
         function removeMSWOItem(idx) {
             const mswo = getActiveTrialCatData().mswo;
-            const target = mswo.baseItems[idx];
             mswo.baseItems.splice(idx, 1);
-            mswo.activeArray = mswo.activeArray.filter(x => x !== target);
-            mswo.currentPicks = mswo.currentPicks.filter(x => x !== target);
+            mswo.activeArray = shuffleArray(getMSWOTargetItems(mswo));
+            mswo.currentPicks = [];
             saveState();
             renderMSWOTab();
         }
@@ -3268,7 +3420,7 @@
             const catId = sess.trial.activeCategory || 'sensory';
             const mswo = getActiveTrialCatData().mswo;
             mswo.baseItems = [...(sess.question.stimuliByCat[catId] || [])];
-            mswo.activeArray = shuffleArray(mswo.baseItems);
+            mswo.activeArray = shuffleArray(getMSWOTargetItems(mswo));
             mswo.currentPicks = [];
             saveState();
             renderMSWOTab();
@@ -3277,7 +3429,7 @@
 
         function startNewMSWORound() {
             const mswo = getActiveTrialCatData().mswo;
-            mswo.activeArray = shuffleArray(mswo.baseItems);
+            mswo.activeArray = shuffleArray(getMSWOTargetItems(mswo));
             mswo.currentPicks = [];
             saveState();
             renderMSWOTab();
@@ -3297,7 +3449,7 @@
                     roundNum: mswo.rounds.length + 1,
                     order: [...mswo.currentPicks]
                 });
-                mswo.activeArray = shuffleArray(mswo.baseItems);
+                mswo.activeArray = shuffleArray(getMSWOTargetItems(mswo));
                 mswo.currentPicks = [];
                 showToast(`${mswo.rounds.length}라운드 순위 기록이 완료되었습니다!`, 'success');
             }
@@ -3317,7 +3469,7 @@
         function clearMSWORounds() {
             const mswo = getActiveTrialCatData().mswo;
             mswo.rounds = [];
-            mswo.activeArray = shuffleArray(mswo.baseItems);
+            mswo.activeArray = shuffleArray(getMSWOTargetItems(mswo));
             mswo.currentPicks = [];
             saveState();
             renderMSWOTab();
@@ -3340,15 +3492,23 @@
         function renderMSWOTab() {
             const mswo = getActiveTrialCatData().mswo;
             document.getElementById('mswo-date').value = mswo.date || getTodayStr();
+            const size = Math.max(3, Math.min(6, parseInt(mswo.arraySize, 10) || 6));
+            const sizeSel = document.getElementById('mswo-array-size');
+            if (sizeSel) sizeSel.value = String(size);
+
+            if (mswo.currentPicks.length === 0 && mswo.activeArray.length !== getMSWOTargetItems(mswo).length) {
+                mswo.activeArray = shuffleArray(getMSWOTargetItems(mswo));
+            }
 
             document.getElementById('mswo-base-tags').innerHTML = mswo.baseItems.map((s, idx) => `
-                <div class="inline-flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700">
+                <div class="inline-flex items-center gap-1.5 bg-white border ${idx < size ? 'border-amber-400' : 'border-slate-300 opacity-60'} rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700">
+                    <span class="text-[10px] font-black ${idx < size ? 'text-amber-700' : 'text-slate-400'}">${idx + 1}</span>
                     <input type="text" value="${escapeHtml(s)}" onchange="renameMSWOItem(${idx}, this.value)" class="bg-transparent w-24 focus:outline-hidden focus:text-amber-700">
                     <button onclick="removeMSWOItem(${idx})" class="text-slate-400 hover:text-rose-600 font-bold">&times;</button>
                 </div>
             `).join('');
 
-            document.getElementById('mswo-step-badge').textContent = `${mswo.rounds.length + 1}라운드 진행 중 (${mswo.currentPicks.length + 1}순위 선택 차례)`;
+            document.getElementById('mswo-step-badge').textContent = `${mswo.rounds.length + 1}라운드 진행 중 (동시 ${getMSWOTargetItems(mswo).length}개 제시 · ${mswo.currentPicks.length + 1}순위 선택 차례)`;
             document.getElementById('btn-mswo-undo').disabled = mswo.currentPicks.length === 0;
             document.getElementById('mswo-picked-order').textContent = mswo.currentPicks.length > 0
                 ? `현재 선택 순서: ${mswo.currentPicks.map((p, i) => `${i + 1}.${p}`).join(' → ')}`
@@ -3393,7 +3553,7 @@
         }
 
         // =========================================================================
-        // 7. 탭 4: 종합 분석 리포트 및 JSON 내보내기/불러오기
+        // 7. 탭 4: 종합 분석 리포트 (강화제 유형별 요약 포함)
         // =========================================================================
         function updateReportField(field, val) {
             getCurrentSession().report[field] = val;
@@ -3412,7 +3572,6 @@
                 scoreMap[clean].sources.add(sourceLabel);
             };
 
-            // 1. 질문하기 근거
             REINFORCER_CATEGORIES.forEach(cat => {
                 const recs = sess.question.recordsByCat[cat.id] || {};
                 (sess.question.selectedRespondents || []).forEach(respId => {
@@ -3426,7 +3585,6 @@
                 });
             });
 
-            // 2. 관찰하기 근거
             const obsItems = [...(sess.observe?.items || [])].sort((a, b) => (b.elapsedSec || 0) - (a.elapsedSec || 0));
             obsItems.forEach((item, idx) => {
                 if ((item.elapsedSec || 0) > 0) {
@@ -3435,12 +3593,22 @@
                 }
             });
 
-            // 3. 시행 기반 평가 근거
             REINFORCER_CATEGORIES.forEach(cat => {
                 const tData = sess.trial.byCat[cat.id];
                 if (!tData) return;
 
-                // 짝 자극
+                const ss = tData.singleStimulus;
+                if (ss && ss.trials.some(t => t.contact !== null)) {
+                    ss.items.forEach(name => {
+                        const matched = ss.trials.filter(t => t.item === name && t.contact !== null);
+                        if (matched.length > 0) {
+                            const yes = matched.filter(t => t.contact === 'O').length;
+                            const pct = Math.round((yes / matched.length) * 100);
+                            if (pct >= 60) addEvidence(name, Math.round(pct / 15), `단일자극(${pct}%)`);
+                        }
+                    });
+                }
+
                 const ps = tData.pairedStimulus;
                 if (ps && ps.pairs.some(p => p.winnerIdx !== null)) {
                     ps.items.forEach((name, idx) => {
@@ -3451,7 +3619,6 @@
                     });
                 }
 
-                // MSWO
                 const mswo = tData.mswo;
                 if (mswo && mswo.rounds.length > 0) {
                     mswo.baseItems.forEach(name => {
@@ -3463,7 +3630,6 @@
                     });
                 }
 
-                // MSW
                 const msw = tData.msw;
                 if (msw && msw.history.length > 0) {
                     const counts = {};
@@ -3477,6 +3643,156 @@
             return Object.values(scoreMap)
                 .map(x => ({ ...x, sources: Array.from(x.sources) }))
                 .sort((a, b) => b.score - a.score);
+        }
+
+        function renderReportCategoryCards(sess) {
+            const grid = document.getElementById('report-by-category-grid');
+            if (!grid) return;
+
+            const themeMap = {
+                edible: { border: 'border-rose-200', bg: 'bg-rose-50/50', badge: 'bg-rose-600 text-white', bar: 'bg-rose-500' },
+                tangible: { border: 'border-indigo-200', bg: 'bg-indigo-50/50', badge: 'bg-indigo-600 text-white', bar: 'bg-indigo-500' },
+                social: { border: 'border-amber-200', bg: 'bg-amber-50/50', badge: 'bg-amber-600 text-white', bar: 'bg-amber-500' },
+                sensory: { border: 'border-emerald-200', bg: 'bg-emerald-50/50', badge: 'bg-emerald-600 text-white', bar: 'bg-emerald-500' }
+            };
+
+            grid.innerHTML = REINFORCER_CATEGORIES.map(cat => {
+                const theme = themeMap[cat.id] || themeMap.sensory;
+                const stimScoreMap = {};
+                const ensureItem = (name) => {
+                    const clean = (name || '').trim();
+                    if (!clean) return null;
+                    if (!stimScoreMap[clean]) {
+                        stimScoreMap[clean] = { name: clean, score: 0, tags: [] };
+                    }
+                    return stimScoreMap[clean];
+                };
+
+                const recs = sess.question.recordsByCat[cat.id] || {};
+                (sess.question.selectedRespondents || []).forEach(respId => {
+                    const r = recs[respId];
+                    if (!r) return;
+                    Object.entries(r.ratings || {}).forEach(([stim, val]) => {
+                        if (val >= 4) {
+                            const entry = ensureItem(stim);
+                            if (entry) {
+                                entry.score += val * 10;
+                                if (!entry.tags.includes(`질문 ${val}점`)) entry.tags.push(`질문 ${val}점`);
+                            }
+                        }
+                    });
+                    if (r.ranks?.r1) {
+                        const entry = ensureItem(r.ranks.r1);
+                        if (entry) { entry.score += 30; if (!entry.tags.includes('질문 1순위')) entry.tags.push('질문 1순위'); }
+                    }
+                    if (r.ranks?.r2) {
+                        const entry = ensureItem(r.ranks.r2);
+                        if (entry) { entry.score += 20; if (!entry.tags.includes('질문 2순위')) entry.tags.push('질문 2순위'); }
+                    }
+                });
+
+                const tData = sess.trial.byCat[cat.id];
+                if (tData) {
+                    const ss = tData.singleStimulus;
+                    if (ss && ss.trials.some(t => t.contact !== null)) {
+                        ss.items.forEach(name => {
+                            const matched = ss.trials.filter(t => t.item === name && t.contact !== null);
+                            if (matched.length > 0) {
+                                const yes = matched.filter(t => t.contact === 'O').length;
+                                const pct = Math.round((yes / matched.length) * 100);
+                                const avgSec = Math.round(matched.reduce((a, b) => a + (b.durationSec || 0), 0) / matched.length);
+                                if (pct > 0) {
+                                    const entry = ensureItem(name);
+                                    if (entry) {
+                                        entry.score += pct;
+                                        entry.tags.push(`단일자극 ${pct}%(평균 ${avgSec}초)`);
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    const ps = tData.pairedStimulus;
+                    if (ps && ps.pairs.some(p => p.winnerIdx !== null)) {
+                        ps.items.forEach((name, idx) => {
+                            const shown = ps.pairs.filter(p => (p.leftIdx === idx || p.rightIdx === idx) && p.winnerIdx !== null).length;
+                            const won = ps.pairs.filter(p => p.winnerIdx === idx).length;
+                            if (shown > 0) {
+                                const pct = Math.round((won / shown) * 100);
+                                if (pct > 0) {
+                                    const entry = ensureItem(name);
+                                    if (entry) {
+                                        entry.score += pct;
+                                        entry.tags.push(`짝자극 ${pct}%`);
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+                    const msw = tData.msw;
+                    if (msw && msw.history.length > 0) {
+                        const counts = {};
+                        msw.history.forEach(h => { counts[h.chosen] = (counts[h.chosen] || 0) + 1; });
+                        Object.entries(counts).forEach(([name, cnt]) => {
+                            const pct = Math.round((cnt / msw.history.length) * 100);
+                            const entry = ensureItem(name);
+                            if (entry) {
+                                entry.score += pct;
+                                entry.tags.push(`MSW ${cnt}회(${pct}%)`);
+                            }
+                        });
+                    }
+
+                    const mswo = tData.mswo;
+                    if (mswo && mswo.rounds.length > 0) {
+                        mswo.baseItems.forEach(name => {
+                            const ranks = mswo.rounds.map(r => r.order.indexOf(name) + 1).filter(x => x > 0);
+                            if (ranks.length > 0) {
+                                const avg = ranks.reduce((a, b) => a + b, 0) / ranks.length;
+                                const entry = ensureItem(name);
+                                if (entry) {
+                                    entry.score += Math.max(10, Math.round((7 - avg) * 18));
+                                    entry.tags.push(`MSWO 평균 ${avg.toFixed(1)}위`);
+                                }
+                            }
+                        });
+                    }
+                }
+
+                const rankedItems = Object.values(stimScoreMap).sort((a, b) => b.score - a.score).slice(0, 4);
+                const maxScore = rankedItems.length > 0 ? Math.max(1, rankedItems[0].score) : 1;
+
+                return `
+                    <div class="p-4 rounded-2xl border ${theme.border} ${theme.bg} space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-black text-slate-900">${cat.label}</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${theme.badge}">
+                                ${rankedItems.length > 0 ? `1위: ${escapeHtml(rankedItems[0].name)}` : '미기록'}
+                            </span>
+                        </div>
+                        ${rankedItems.length === 0
+                            ? `<div class="py-4 text-center text-xs text-slate-400 bg-white/70 rounded-xl border border-slate-100">해당 강화제 유형의 평가 기록이 아직 없습니다.</div>`
+                            : `<div class="space-y-2.5">
+                                ${rankedItems.map((it, i) => {
+                                    const barWidth = Math.max(18, Math.round((it.score / maxScore) * 100));
+                                    return `
+                                        <div class="bg-white p-2.5 rounded-xl border border-slate-200/80 space-y-1.5">
+                                            <div class="flex items-center justify-between gap-2 text-xs">
+                                                <span class="font-extrabold text-slate-800">${i + 1}위. ${escapeHtml(it.name)}</span>
+                                                <span class="text-[11px] font-bold text-slate-500">${it.tags.join(' · ')}</span>
+                                            </div>
+                                            <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                <div class="h-full ${theme.bar} rounded-full transition-all" style="width: ${barWidth}%"></div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>`
+                        }
+                    </div>
+                `;
+            }).join('');
         }
 
         function renderReportTab() {
@@ -3510,6 +3826,8 @@
                     `).join('');
                 }
             }
+
+            renderReportCategoryCards(sess);
 
             const timelineEl = document.getElementById('report-timeline-comparison');
             if (timelineEl) {
