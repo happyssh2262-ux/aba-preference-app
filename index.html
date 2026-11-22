@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#8b78d6">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="원스톱으로 기록하는&#10;자극 선호도 평가">
-    <title>ABA Special Edu Lab - 원스톱으로 기록하는 자극 선호도 평가</title>
+    <title>원스톱으로 기록하는&#10;자극 선호도 평가</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%238b78d6'/%3E%3Ctext x='50' y='64' font-family='sans-serif' font-weight='900' font-size='34' fill='white' text-anchor='middle'%3EABA%3C/text%3E%3C/svg%3E">
     <link id="pwa-manifest-link" rel="manifest" href="">
     <script>
@@ -1387,7 +1387,8 @@
             saveStudentToCloud: async (uid, studentObj) => {
                 if (!db || !uid || !studentObj || !studentObj.id) return;
                 const ref = doc(db, 'artifacts', appId, 'users', uid, 'students', studentObj.id);
-                await setDoc(ref, JSON.parse(JSON.stringify(studentObj)), { merge: true });
+                // merge: true를 쓰면 삭제된 날짜 회차 키가 클라우드에 남아 되살아나므로 전체 덮어쓰기로 저장
+                await setDoc(ref, JSON.parse(JSON.stringify(studentObj)));
             }
         };
     </script>
@@ -1457,6 +1458,7 @@
         let studentInfoExpanded = true;
         let cloudSaveTimer = null;
         let isLocalDeletingSession = false;
+        let isAddingSessionLock = false;
         let deferredInstallPrompt = null;
 
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -2106,9 +2108,17 @@
         }
 
         function createNewDateSession() {
+            if (isAddingSessionLock) return;
+            isAddingSessionLock = true;
+            setTimeout(() => { isAddingSessionLock = false; }, 600);
+
             const stu = getCurrentStudent();
-            const nextNum = Object.keys(stu.sessions).length + 1;
-            const newId = `sess_${nextNum}_${Date.now()}`;
+            const existingNums = Object.values(stu.sessions).map(s => {
+                const m = String(s.label || '').match(/^(\d+)차/);
+                return m ? parseInt(m[1], 10) : 0;
+            });
+            const nextNum = Math.max(Object.keys(stu.sessions).length, ...existingNums) + 1;
+            const newId = `sess_${nextNum}_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
             const today = getTodayStr();
             stu.sessions[newId] = createSessionPayload(newId, today, `${nextNum}차 평가`, stu.meta.evaluator);
             stu.currentSessionId = newId;
