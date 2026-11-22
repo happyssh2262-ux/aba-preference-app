@@ -8,14 +8,36 @@
     <meta name="apple-mobile-web-app-title" content="원스톱으로 기록하는 자극 선호도 평가">
     <title>ABA Special Edu Lab - 원스톱으로 기록하는 자극 선호도 평가</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%238b78d6'/%3E%3Ctext x='50' y='64' font-family='sans-serif' font-weight='900' font-size='34' fill='white' text-anchor='middle'%3EABA%3C/text%3E%3C/svg%3E">
-    <link rel="manifest" href="./manifest.json">
+    <link id="pwa-manifest-link" rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%EC%9B%90%EC%8A%A4%ED%86%B1%EC%9C%BC%EB%A1%9C%20%EA%B8%B0%EB%A1%9D%ED%95%98%EB%8A%94%20%EC%9E%90%EA%B7%B9%20%EC%84%A0%ED%98%B8%EB%8F%84%20%ED%8F%89%EA%B0%80%22%2C%22short_name%22%3A%22%EC%9E%90%EA%B7%B9%20%EC%84%A0%ED%98%B8%EB%8F%84%20%ED%8F%89%EA%B0%80%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f8fafc%22%2C%22theme_color%22%3A%22%238b78d6%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%2520viewBox%3D'0%25200%2520512%2520512'%253E%253Crect%2520width%3D'512'%2520height%3D'512'%2520rx%3D'110'%2520fill%3D'%25238b78d6'%2F%253E%253Ctext%2520x%3D'256'%2520y%3D'315'%2520font-family%3D'sans-serif'%2520font-weight%3D'900'%2520font-size%3D'170'%2520fill%3D'white'%2520text-anchor%3D'middle'%253EABA%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
     <script>
-        // 정식 PWA(WebAPK) 설치 및 크롬 배지 제거를 위한 정적 서비스 워커 등록
-        if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('./sw.js').catch(function() {});
-            });
-        }
+        // 단일 HTML 파일 환경에서도 브라우저가 정식 설치형 앱(PWA)으로 인식하도록 동적 매니페스트 및 서비스 워커 등록
+        (function() {
+            const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#8b78d6"/><text x="256" y="315" font-family="sans-serif" font-weight="900" font-size="172" fill="white" text-anchor="middle">ABA</text></svg>`;
+            const iconUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgIcon);
+            const manifestObj = {
+                name: '원스톱으로 기록하는 자극 선호도 평가',
+                short_name: '자극 선호도 평가',
+                start_url: window.location.origin + window.location.pathname,
+                scope: window.location.origin + '/',
+                display: 'standalone',
+                background_color: '#f8fafc',
+                theme_color: '#8b78d6',
+                icons: [
+                    { src: iconUrl, sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable' },
+                    { src: iconUrl, sizes: '512x512', type: 'image/svg+xml', purpose: 'any maskable' }
+                ]
+            };
+            const manifestLink = document.getElementById('pwa-manifest-link');
+            if (manifestLink) {
+                manifestLink.setAttribute('href', 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifestObj)));
+            }
+            if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+                const swCode = "self.addEventListener('install', e => self.skipWaiting()); self.addEventListener('activate', e => e.waitUntil(clients.claim())); self.addEventListener('fetch', e => {});";
+                const swBlob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(swBlob);
+                navigator.serviceWorker.register(swUrl).catch(function() {});
+            }
+        })();
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
