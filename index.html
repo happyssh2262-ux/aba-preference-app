@@ -293,10 +293,16 @@
                     </div>
                 </div>
 
-                <button onclick="openQRModal()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-extrabold text-xs transition flex items-center justify-center gap-2">
-                    <i data-lucide="qr-code" class="w-4 h-4 text-indigo-600"></i>
-                    <span>QR 코드 공유</span>
-                </button>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <button onclick="triggerPwaInstall()" id="btn-pwa-install" class="w-full py-2.5 px-4 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 font-extrabold text-xs transition flex items-center justify-center gap-2">
+                        <i data-lucide="download-cloud" class="w-4 h-4 text-indigo-600"></i>
+                        <span>앱으로 설치</span>
+                    </button>
+                    <button onclick="openQRModal()" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 font-extrabold text-xs transition flex items-center justify-center gap-2">
+                        <i data-lucide="qr-code" class="w-4 h-4 text-indigo-600"></i>
+                        <span>QR 코드 공유</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1322,6 +1328,46 @@
         let activeSSTrialTimerId = null;
         let studentInfoExpanded = true;
         let cloudSaveTimer = null;
+        let deferredInstallPrompt = null;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+            const btn = document.getElementById('btn-pwa-install');
+            if (btn) {
+                btn.className = 'w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs font-extrabold text-xs transition flex items-center justify-center gap-2';
+            }
+        });
+
+        async function triggerPwaInstall() {
+            if (deferredInstallPrompt) {
+                deferredInstallPrompt.prompt();
+                const choice = await deferredInstallPrompt.userChoice;
+                if (choice && choice.outcome === 'accepted') {
+                    showToast('바탕화면에 앱 설치가 시작되었습니다!', 'success');
+                }
+                deferredInstallPrompt = null;
+                return;
+            }
+            const ua = navigator.userAgent || '';
+            const isInApp = /KAKAOTALK|NAVER|Instagram|FBAN|FBAV|Line/i.test(ua);
+            if (isInApp) {
+                openCustomModal(
+                    '외부 브라우저(크롬·사파리)에서 열어주세요',
+                    '현재 카카오톡/네이버 내부 창에서 열려 있어 설치 버튼이 제한됩니다. 오른쪽 위(또는 아래) 점 3개(⋮) 메뉴를 눌러 [다른 브라우저로 열기]를 선택한 뒤 다시 눌러주세요!'
+                );
+            } else if (/iPhone|iPad|iPod/i.test(ua)) {
+                openCustomModal(
+                    '아이폰 · 아이패드 앱 설치 방법',
+                    'Safari 화면 맨 아래 가운데 [공유(⬆️)] 버튼을 누른 뒤, 아래로 내려 [홈 화면에 추가]를 누르시면 단독 앱으로 설치됩니다.'
+                );
+            } else {
+                openCustomModal(
+                    '브라우저 메뉴에서 앱 설치하기',
+                    '브라우저 오른쪽 위 점 3개(⋮) 또는 줄 3개(≡) 메뉴를 누른 뒤 [앱 설치] 또는 [홈 화면에 추가]를 선택해 주세요.'
+                );
+            }
+        }
 
         function getTodayStr() {
             const d = new Date();
