@@ -8,29 +8,91 @@
     <meta name="apple-mobile-web-app-title" content="원스톱으로 기록하는 자극 선호도 평가">
     <title>ABA Special Edu Lab - 원스톱으로 기록하는 자극 선호도 평가</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%238b78d6'/%3E%3Ctext x='50' y='64' font-family='sans-serif' font-weight='900' font-size='34' fill='white' text-anchor='middle'%3EABA%3C/text%3E%3C/svg%3E">
-    <link id="pwa-manifest-link" rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22%EC%9B%90%EC%8A%A4%ED%86%B1%EC%9C%BC%EB%A1%9C%20%EA%B8%B0%EB%A1%9D%ED%95%98%EB%8A%94%20%EC%9E%90%EA%B7%B9%20%EC%84%A0%ED%98%B8%EB%8F%84%20%ED%8F%89%EA%B0%80%22%2C%22short_name%22%3A%22%EC%9E%90%EA%B7%B9%20%EC%84%A0%ED%98%B8%EB%8F%84%20%ED%8F%89%EA%B0%80%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f8fafc%22%2C%22theme_color%22%3A%22%238b78d6%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%2520viewBox%3D'0%25200%2520512%2520512'%253E%253Crect%2520width%3D'512'%2520height%3D'512'%2520rx%3D'110'%2520fill%3D'%25238b78d6'%2F%253E%253Ctext%2520x%3D'256'%2520y%3D'315'%2520font-family%3D'sans-serif'%2520font-weight%3D'900'%2520font-size%3D'170'%2520fill%3D'white'%2520text-anchor%3D'middle'%253EABA%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+    <link id="pwa-manifest-link" rel="manifest" href="">
     <script>
-        // 단일 HTML 파일 환경에서도 브라우저가 정식 설치형 앱(PWA)으로 인식하도록 동적 매니페스트 및 서비스 워커 등록
+        // 안드로이드 크롬 및 모든 모바일 브라우저가 정식 설치형 앱(PWA)으로 인식하도록 실제 192x192 & 512x512 PNG 아이콘을 자동 생성해 매니페스트에 연결
         (function() {
-            const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#8b78d6"/><text x="256" y="315" font-family="sans-serif" font-weight="900" font-size="172" fill="white" text-anchor="middle">ABA</text></svg>`;
-            const iconUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgIcon);
+            function createPngIconDataUrl(size) {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return '';
+
+                // 보라색 둥근 사각형 배경
+                const radius = size * 0.22;
+                ctx.fillStyle = '#8b78d6';
+                ctx.beginPath();
+                ctx.moveTo(radius, 0);
+                ctx.lineTo(size - radius, 0);
+                ctx.quadraticCurveTo(size, 0, size, radius);
+                ctx.lineTo(size, size - radius);
+                ctx.quadraticCurveTo(size, size, size - radius, size);
+                ctx.lineTo(radius, size);
+                ctx.quadraticCurveTo(0, size, 0, size - radius);
+                ctx.lineTo(0, radius);
+                ctx.quadraticCurveTo(0, 0, radius, 0);
+                ctx.closePath();
+                ctx.fill();
+
+                // 상단 무지개 포인트 아치
+                const colors = ['#ee837e', '#f5a855', '#f9d478', '#85cc96', '#7da4f2'];
+                colors.forEach((col, i) => {
+                    ctx.strokeStyle = col;
+                    ctx.lineWidth = size * 0.022;
+                    ctx.beginPath();
+                    ctx.arc(size / 2, size * 0.36, size * (0.24 - i * 0.025), Math.PI, 0);
+                    ctx.stroke();
+                });
+
+                // 중앙 ABA 볼드 텍스트
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `900 ${Math.round(size * 0.31)}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('ABA', size / 2, size * 0.56);
+
+                // 하단 서브 라벨
+                ctx.fillStyle = '#ede9fe';
+                ctx.font = `700 ${Math.round(size * 0.10)}px sans-serif`;
+                ctx.fillText('선호도 평가', size / 2, size * 0.78);
+
+                return canvas.toDataURL('image/png');
+            }
+
+            const png192 = createPngIconDataUrl(192);
+            const png512 = createPngIconDataUrl(512);
+
+            // 애플 터치 아이콘(아이폰 사파리)에도 PNG 연결
+            if (png192) {
+                const appleIcon = document.createElement('link');
+                appleIcon.rel = 'apple-touch-icon';
+                appleIcon.href = png192;
+                document.head.appendChild(appleIcon);
+            }
+
             const manifestObj = {
                 name: '원스톱으로 기록하는 자극 선호도 평가',
                 short_name: '자극 선호도 평가',
+                id: window.location.pathname || '/',
                 start_url: window.location.origin + window.location.pathname,
                 scope: window.location.origin + '/',
                 display: 'standalone',
+                orientation: 'any',
                 background_color: '#f8fafc',
                 theme_color: '#8b78d6',
                 icons: [
-                    { src: iconUrl, sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable' },
-                    { src: iconUrl, sizes: '512x512', type: 'image/svg+xml', purpose: 'any maskable' }
+                    { src: png192, sizes: '192x192', type: 'image/png', purpose: 'any' },
+                    { src: png512, sizes: '512x512', type: 'image/png', purpose: 'any' }
                 ]
             };
+
             const manifestLink = document.getElementById('pwa-manifest-link');
-            if (manifestLink) {
-                manifestLink.setAttribute('href', 'data:application/manifest+json;charset=utf-8,' + encodeURIComponent(JSON.stringify(manifestObj)));
+            if (manifestLink && png192 && png512) {
+                const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
+                manifestLink.setAttribute('href', URL.createObjectURL(manifestBlob));
             }
+
             if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
                 const swCode = "self.addEventListener('install', e => self.skipWaiting()); self.addEventListener('activate', e => e.waitUntil(clients.claim())); self.addEventListener('fetch', e => {});";
                 const swBlob = new Blob([swCode], { type: 'application/javascript' });
