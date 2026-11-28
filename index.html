@@ -574,14 +574,14 @@
             </div>
         </section>
 
-        <!-- 활성화된 평가 상단 뒤로가기 / 빠른 전환 바 (평가 방식 다시 선택 강조) -->
-        <nav id="active-method-topbar" class="hidden bg-indigo-50/95 p-3 rounded-2xl shadow-sm border-2 border-indigo-200 flex-wrap items-center justify-between gap-2 no-print">
-            <button onclick="returnToMethodHub()" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white text-xs sm:text-sm font-black shadow-md ring-2 ring-indigo-300/70 flex items-center gap-2 transition">
+        <!-- 활성화된 평가 상단 뒤로가기 / 빠른 전환 바 (평가 방식 다시 선택 초록색 강조) -->
+        <nav id="active-method-topbar" class="hidden bg-emerald-50/90 p-3 rounded-2xl shadow-sm border-2 border-emerald-200 flex-wrap items-center justify-between gap-2 no-print">
+            <button onclick="returnToMethodHub()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white text-xs sm:text-sm font-black shadow-md ring-2 ring-emerald-300/80 flex items-center gap-2 transition">
                 <i data-lucide="arrow-left-circle" class="w-4 h-4"></i>
                 <span>← 평가 방식 다시 선택</span>
             </button>
             <div class="flex flex-wrap items-center gap-2">
-                <span id="active-method-title-badge" class="px-3.5 py-2 rounded-xl bg-white text-indigo-900 border border-indigo-200 text-xs sm:text-sm font-black shadow-2xs">
+                <span id="active-method-title-badge" class="px-3.5 py-2 rounded-xl bg-white text-emerald-900 border border-emerald-200 text-xs sm:text-sm font-black shadow-2xs">
                     질문하기 진행 중
                 </span>
                 <button onclick="selectEvaluationMethod('tab-report')" id="btn-quick-report" class="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-extrabold flex items-center gap-1.5 shadow-xs transition">
@@ -1086,7 +1086,7 @@
             <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200 space-y-3 print-card">
                 <div class="border-b border-slate-100 pb-2.5">
                     <h3 class="font-extrabold text-slate-800 text-base">강화제 유형별 평가 결과 한눈에 보기</h3>
-                    <p class="text-xs text-slate-500 mt-0.5">음식 · 유형 및 활동 · 사회적 · 감각 강화제 영역별로 질문하기 및 시행 기반 평가에서 가장 높게 나타난 결과를 직관적으로 비교합니다.</p>
+                    <p class="text-xs text-slate-500 mt-0.5">음식 · 유형(감각 사물 포함) · 사회적 · 활동 강화제 영역별로 질문하기 및 시행 기반 평가에서 가장 높게 나타난 결과를 직관적으로 비교합니다.</p>
                 </div>
                 <div id="report-by-category-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
             </div>
@@ -1115,16 +1115,16 @@
                         <input type="text" id="report-cat-edible" oninput="updateReportField('catEdible', this.value)" placeholder="예: 과일 젤리, 미니 크래커" class="w-full px-3 py-2 rounded-lg border border-rose-300 bg-white text-sm font-bold">
                     </div>
                     <div class="bg-indigo-50/60 border border-indigo-200 rounded-xl p-3.5">
-                        <label class="block text-xs font-extrabold text-indigo-900 mb-1.5">🧩 유형 및 활동 강화제 상위 잠재적 강화제</label>
-                        <input type="text" id="report-cat-tangible" oninput="updateReportField('catTangible', this.value)" placeholder="예: 자석 블록, 스티커북" class="w-full px-3 py-2 rounded-lg border border-indigo-300 bg-white text-sm font-bold">
+                        <label class="block text-xs font-extrabold text-indigo-900 mb-1.5">🧩 유형 강화제 (감각 사물 포함) 상위 잠재적 강화제</label>
+                        <input type="text" id="report-cat-tangible" oninput="updateReportField('catTangible', this.value)" placeholder="예: 비눗방울, 촉각 탱탱볼, 자석 블록" class="w-full px-3 py-2 rounded-lg border border-indigo-300 bg-white text-sm font-bold">
                     </div>
                     <div class="bg-amber-50/60 border border-amber-200 rounded-xl p-3.5">
                         <label class="block text-xs font-extrabold text-amber-900 mb-1.5">👏 사회적 강화제 상위 잠재적 강화제</label>
                         <input type="text" id="report-cat-social" oninput="updateReportField('catSocial', this.value)" placeholder="예: 하이파이브, 밝은 칭찬과 미소" class="w-full px-3 py-2 rounded-lg border border-amber-300 bg-white text-sm font-bold">
                     </div>
                     <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-3.5">
-                        <label class="block text-xs font-extrabold text-emerald-900 mb-1.5">✨ 감각 강화제 상위 잠재적 강화제</label>
-                        <input type="text" id="report-cat-sensory" oninput="updateReportField('catSensory', this.value)" placeholder="예: 비눗방울, 촉각 탱탱볼" class="w-full px-3 py-2 rounded-lg border border-emerald-300 bg-white text-sm font-bold">
+                        <label class="block text-xs font-extrabold text-emerald-900 mb-1.5">🏃 활동 강화제 상위 잠재적 강화제</label>
+                        <input type="text" id="report-cat-activity" oninput="updateReportField('catActivity', this.value)" placeholder="예: 동요 듣기, 그네 타기, 퍼즐 맞추기" class="w-full px-3 py-2 rounded-lg border border-emerald-300 bg-white text-sm font-bold">
                     </div>
                 </div>
 
@@ -1277,9 +1277,9 @@
             },
             {
                 id: 'tangible',
-                label: '🧩 유형 및 활동 강화제',
-                short: '유형·활동',
-                defaults: ['자석 블록', '스티커북', '퍼즐 맞추기', '미니 자동차', '색칠놀이', '그림책 보기']
+                label: '🧩 유형 강화제',
+                short: '유형(사물·감각)',
+                defaults: ['비눗방울', '촉각 탱탱볼', '자석 블록', 'LED 라이트 볼', '반짝이 팽이', '스티커북']
             },
             {
                 id: 'social',
@@ -1288,10 +1288,10 @@
                 defaults: ['하이파이브', '밝은 언어적 칭찬', '엄지척·미소', '간지럼 놀이', '함께 박수치기', '어깨 토닥이기']
             },
             {
-                id: 'sensory',
-                label: '✨ 감각 강화제',
-                short: '감각',
-                defaults: ['비눗방울', '촉각 탱탱볼', '동요 멜로디', '반짝이 팽이', '모래/슬라임 촉감', 'LED 라이트 볼']
+                id: 'activity',
+                label: '🏃 활동 강화제',
+                short: '활동',
+                defaults: ['동요 멜로디 듣기', '퍼즐 맞추기', '그림책 보기', '트램펄린/그네 타기', '색칠놀이', '산책하기']
             }
         ];
 
@@ -1407,7 +1407,7 @@
         }
 
         function getCategoryMeta(catId) {
-            return REINFORCER_CATEGORIES.find(c => c.id === catId) || REINFORCER_CATEGORIES[3];
+            return REINFORCER_CATEGORIES.find(c => c.id === catId) || REINFORCER_CATEGORIES[1];
         }
 
         function createDefaultRespondentRecord(today) {
@@ -1512,7 +1512,7 @@
                 label: label || '1차 평가',
                 question: {
                     baseDate: today,
-                    activeCategory: 'sensory',
+                    activeCategory: 'tangible',
                     selectedRespondents: ['parent', 'teacher'],
                     otherRelationLabel: '',
                     stimuliByCat,
@@ -1520,14 +1520,14 @@
                 },
                 observe: createUnifiedObserveData(today),
                 trial: {
-                    activeCategory: 'sensory',
+                    activeCategory: 'tangible',
                     byCat: trialByCat
                 },
                 report: {
                     catEdible: '',
                     catTangible: '',
                     catSocial: '',
-                    catSensory: '',
+                    catActivity: '',
                     memo: ''
                 },
                 raisd: {
@@ -1604,7 +1604,11 @@
 
         function getActiveQCatData(stu = getCurrentStudent()) {
             const sess = getCurrentSession(stu);
-            const catId = sess.question.activeCategory || 'sensory';
+            let catId = sess.question.activeCategory || 'tangible';
+            if (catId === 'sensory') {
+                catId = 'tangible';
+                sess.question.activeCategory = 'tangible';
+            }
             if (!sess.question.stimuliByCat[catId]) {
                 sess.question.stimuliByCat[catId] = [...getCategoryMeta(catId).defaults];
             }
@@ -1634,7 +1638,11 @@
 
         function getActiveTrialCatData(stu = getCurrentStudent()) {
             const sess = getCurrentSession(stu);
-            const catId = sess.trial.activeCategory || 'sensory';
+            let catId = sess.trial.activeCategory || 'tangible';
+            if (catId === 'sensory') {
+                catId = 'tangible';
+                sess.trial.activeCategory = 'tangible';
+            }
             if (!sess.trial.byCat[catId]) {
                 sess.trial.byCat[catId] = createCategoryTrialData(catId, sess.date || getTodayStr());
             }
@@ -1823,37 +1831,37 @@
             if (!urlInput) return;
             urlInput.select();
             urlInput.setSelectionRange(0, 99999);
-            try {
-                document.execCommand('copy');
-                showToast('접속 링크가 클립보드에 복사되었습니다!', 'success');
-            } catch (err) {
-                showToast('링크 복사에 실패했습니다. 주소창을 직접 복사해 주세요.', 'error');
+            const qCat = sess.question.recordsByCat.tangible;
+            if (qCat && qCat.parent && qCat.teacher) {
+                qCat.parent.openAnswer = '집에서 비눗방울 불어주기와 촉각 탱탱볼을 가지고 10분 이상 즐겁게 놉니다.';
+                qCat.parent.ratings = { '비눗방울': 5, '촉각 탱탱볼': 4, '자석 블록': 4, 'LED 라이트 볼': 4, '반짝이 팽이': 3, '스티커북': 3 };
+                qCat.parent.ranks = { r1: '비눗방울', r2: '촉각 탱탱볼', r3: '자석 블록', r4: '', r5: '' };
+
+                qCat.teacher.openAnswer = '쉬는 시간에 비눗방울과 LED 라이트 볼을 가장 먼저 집어 들고 시선을 고정합니다.';
+                qCat.teacher.ratings = { '비눗방울': 5, '촉각 탱탱볼': 3, '자석 블록': 4, 'LED 라이트 볼': 5, '반짝이 팽이': 4, '스티커북': 3 };
+                qCat.teacher.ranks = { r1: '비눗방울', r2: 'LED 라이트 볼', r3: '자석 블록', r4: '', r5: '' };
             }
-        }
 
-        function showToast(msg, type = 'info') {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-            const toast = document.createElement('div');
-            const colorClass = type === 'error'
-                ? 'bg-rose-600 text-white'
-                : (type === 'success' ? 'bg-emerald-600 text-white' : 'bg-slate-900 text-white');
-            toast.className = `${colorClass} px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-bold transition transform translate-y-0 opacity-100`;
-            toast.textContent = msg;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.classList.add('opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 2600);
-        }
+            sess.observe.targetMin = 5;
+            sess.observe.items = [
+                { id: 'obs_s1', name: '비눗방울', elapsedSec: 135, isRunning: false, status: 'paused', lastTick: null },
+                { id: 'obs_s2', name: '동요 멜로디 듣기', elapsedSec: 82, isRunning: false, status: 'paused', lastTick: null },
+                { id: 'obs_s3', name: 'LED 라이트 볼', elapsedSec: 54, isRunning: false, status: 'paused', lastTick: null },
+                { id: 'obs_s4', name: '자석 블록', elapsedSec: 21, isRunning: false, status: 'paused', lastTick: null }
+            ];
 
-        function openCustomModal(title, message, onConfirm) {
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-message').textContent = message;
-            const confirmBtn = document.getElementById('modal-confirm-btn');
-            confirmBtn.onclick = () => {
-                closeCustomModal();
-                if (onConfirm) onConfirm();
+            const mswo = sess.trial.byCat.tangible.mswo;
+            mswo.rounds = [
+                { roundNum: 1, order: ['비눗방울', 'LED 라이트 볼', '자석 블록', '촉각 탱탱볼', '반짝이 팽이', '스티커북'] },
+                { roundNum: 2, order: ['비눗방울', '자석 블록', 'LED 라이트 볼', '반짝이 팽이', '촉각 탱탱볼', '스티커북'] }
+            ];
+
+            sess.report = {
+                catEdible: '과일 젤리, 미니 크래커',
+                catTangible: '비눗방울, LED 라이트 볼, 자석 블록',
+                catSocial: '하이파이브, 밝은 언어적 칭찬',
+                catActivity: '동요 멜로디 듣기, 퍼즐 맞추기',
+                memo: '1순위 잠재적 강화제인 [비눗방울]과 [동요 멜로디 듣기]를 과제 완료 직후 15초간 제공하여 표적행동(착석 및 과제 수행) 빈도가 실제로 증가하는지 강화제 평가를 진행함.'
             };
             const modal = document.getElementById('custom-modal');
             modal.classList.remove('hidden');
@@ -2848,7 +2856,7 @@
         }
 
         function renderTrialCategorySelector() {
-            const activeCatId = getCurrentSession().trial.activeCategory || 'sensory';
+            const activeCatId = getCurrentSession().trial.activeCategory || 'tangible';
             renderCategoryButtons('trial-category-selector', activeCatId, 'setTrialCategory');
         }
 
@@ -2897,7 +2905,7 @@
 
         function importStimuliToSS() {
             const sess = getCurrentSession();
-            const catId = sess.trial.activeCategory || 'sensory';
+            const catId = sess.trial.activeCategory || 'tangible';
             const ss = getActiveTrialCatData().singleStimulus;
             ss.items = [...(sess.question.stimuliByCat[catId] || [])];
             saveState();
@@ -3117,7 +3125,7 @@
 
         function importStimuliToPS() {
             const sess = getCurrentSession();
-            const catId = sess.trial.activeCategory || 'sensory';
+            const catId = sess.trial.activeCategory || 'tangible';
             const ps = getActiveTrialCatData().pairedStimulus;
             const list = (sess.question.stimuliByCat[catId] || []).slice(0, 8);
             if (list.length >= 2) {
@@ -3250,7 +3258,7 @@
 
         function importStimuliToMSW() {
             const sess = getCurrentSession();
-            const catId = sess.trial.activeCategory || 'sensory';
+            const catId = sess.trial.activeCategory || 'tangible';
             const msw = getActiveTrialCatData().msw;
             const list = sess.question.stimuliByCat[catId] || [];
             list.forEach(item => {
@@ -3417,7 +3425,7 @@
 
         function importStimuliToMSWO() {
             const sess = getCurrentSession();
-            const catId = sess.trial.activeCategory || 'sensory';
+            const catId = sess.trial.activeCategory || 'tangible';
             const mswo = getActiveTrialCatData().mswo;
             mswo.baseItems = [...(sess.question.stimuliByCat[catId] || [])];
             mswo.activeArray = shuffleArray(getMSWOTargetItems(mswo));
@@ -3653,11 +3661,11 @@
                 edible: { border: 'border-rose-200', bg: 'bg-rose-50/50', badge: 'bg-rose-600 text-white', bar: 'bg-rose-500' },
                 tangible: { border: 'border-indigo-200', bg: 'bg-indigo-50/50', badge: 'bg-indigo-600 text-white', bar: 'bg-indigo-500' },
                 social: { border: 'border-amber-200', bg: 'bg-amber-50/50', badge: 'bg-amber-600 text-white', bar: 'bg-amber-500' },
-                sensory: { border: 'border-emerald-200', bg: 'bg-emerald-50/50', badge: 'bg-emerald-600 text-white', bar: 'bg-emerald-500' }
+                activity: { border: 'border-emerald-200', bg: 'bg-emerald-50/50', badge: 'bg-emerald-600 text-white', bar: 'bg-emerald-500' }
             };
 
             grid.innerHTML = REINFORCER_CATEGORIES.map(cat => {
-                const theme = themeMap[cat.id] || themeMap.sensory;
+                const theme = themeMap[cat.id] || themeMap.tangible;
                 const stimScoreMap = {};
                 const ensureItem = (name) => {
                     const clean = (name || '').trim();
@@ -3854,7 +3862,7 @@
             document.getElementById('report-cat-edible').value = sess.report.catEdible || '';
             document.getElementById('report-cat-tangible').value = sess.report.catTangible || '';
             document.getElementById('report-cat-social').value = sess.report.catSocial || '';
-            document.getElementById('report-cat-sensory').value = sess.report.catSensory || '';
+            document.getElementById('report-cat-activity').value = sess.report.catActivity || sess.report.catSensory || '';
             document.getElementById('report-memo').value = sess.report.memo || '';
         }
 
